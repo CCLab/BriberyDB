@@ -1,0 +1,19 @@
+{% load i18n %}<? xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="{% trans "pl" %}">
+  <head>
+    <title>{% trans "Afery korupcyjne w Polsce" %}</title>
+    <!-- YUI -->
+    <link rel="stylesheet" type="text/css"
+      href="http://yui.yahooapis.com/2.9.0/build/reset-fonts-grids/reset-fonts-grids.css" />
+    <link rel="stylesheet" type="text/css"
+      href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css" />
+    <link rel="stylesheet" type="text/css"
+      href="http://yui.yahooapis.com/2.9.0/build/fonts/fonts-min.css">
+    <!-- local CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  </head>
+  <body>{% block body %}{% endblock body %}
+  </body>
+</html>
