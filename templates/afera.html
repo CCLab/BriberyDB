@@ -1,0 +1,38 @@
+{% extends "body.html" %}{% block content %}
+        <div id="jedna-afera">
+	  <h2>glowna nazwa</h2>
+	  <h3>reszta nazw</h3>
+	  <p id="opis"> opis afery </p>
+          <p id="kontekst"> kontekst afery </p>
+          <div class="wydarzen">wydarzen: 000</div>
+          <div id="ujawnienie">
+            <a id="ujawnienie-more" href=""><h4>Ujawnienie afery
+              <span class="data">20.07.2000</span></h4>
+              <h5>tytul wydarzenia</h5>
+              <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
+                <ul><li>imie nazwisko</li></ul>[pokaz wszystkich]
+              </div><!-- koniec wydarzenie-aktorzy -->
+              <p class="wydarzenie-tekst">tekst ujawnienia lorem ipsum</p>
+            </a>
+          </div><!-- koniec ujawnienie -->
+          <div class="wydarzenie">
+            <a class="wydarzenie-more" href="">
+              <h4>Tytul
+                <span class="data">20.07.2000</span>
+              </h4>
+              <h5>tytul wydarzenia</h5>
+              <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
+                <ul><li>imie nazwisko</li></ul>[pokaz wszystkich]
+              </div><!-- koniec wydarzenie-aktorzy -->
+              <p class="wydarzenie-tekst">tekst wydarzenia lorem ipsum</p>
+            </a>          
+          </div><!-- koniec wydarzenie -->
+          <div id="jedna-afera-aktorzy">
+            <p>Wszyscy aktorzy  afery:</p>
+            <ul>
+	      <li>aktor1</li>
+	      <li>aktor2</li>
+	    </ul>
+	  </div><!-- koniec jedna-afera-aktorzy -->
+	</div><!-- koniec jedna-afera -->
+{% endblock content %}

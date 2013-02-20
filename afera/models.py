@@ -12,7 +12,7 @@ class Type (models.Model):
 
 class Scandal (models.Model):
 
-  type = models.ForeignKey(Type)
+  type = models.ForeignKey(Type, related_name='scandal_type')
   subtype = models.ForeignKey(Type)
   consequence = models.CharField (max_length=128)
   description = models.TextField ()
@@ -38,12 +38,14 @@ class Tag (models.Model):
   def __unicode__ (self):
     return self.tag
 
-
+class EventType (models.Model):
+  pass
+  
 class Event (models.Model):
 
   scandal          = models.ForeignKey (Scandal)
-  type             = models.ForeignKey (EventType)
+  etype             = models.ForeignKey (EventType)
   title            = models.CharField (max_length=128)
-  date             = models.DateField (auto_add=False)
+  date             = models.DateField ()
   publication_date = models.DateField ()
   description      = models.TextField ()

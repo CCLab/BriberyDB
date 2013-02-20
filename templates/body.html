@@ -1,0 +1,25 @@
+{% extends "xhtml.html" %}{% block body %}
+    <div id="wrapper">
+      <div id="header" class="group">
+	<a href="/">
+        <div id="logo">
+          <h1>Baza skandali korupcyjnych</h1>
+        </div><!-- koniec logo -->
+	</a>
+        <div id="navi-top">
+          <ul>
+            <li><a class="active" href="">afery</a></li>
+            <li><a href="">aktorzy</a></li>
+            <li><a href="">instytucje</a></li>
+            <li><a href="">o stronie</a></li>
+            <li><a href="">kontakt</a></li>
+          </ul>
+        </div><!-- koniec navi-top -->
+      </div><!-- koniec header -->
+      <div id="kontent" class="group">{% block content %}{% endblock content %}
+      </div><!-- koniec kontent -->      
+      <div id="footer" class="group">
+      stopka and stuff
+      </div><!-- koniec footer -->      
+    </div><!-- koniec wrapper --> 
+{% endblock body %}

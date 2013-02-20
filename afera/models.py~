@@ -38,12 +38,14 @@ class Tag (models.Model):
   def __unicode__ (self):
     return self.tag
 
-
+class EventType (models.Model):
+  pass
+  
 class Event (models.Model):
 
   scandal          = models.ForeignKey (Scandal)
+  etype             = models.ForeignKey (EventType)
   title            = models.CharField (max_length=128)
-  date             = models.DateField (auto_add=False)
-  publication_date = models.DateField()
-  type             = models.ForeignKey (EventType)
+  date             = models.DateField ()
+  publication_date = models.DateField ()
   description      = models.TextField ()
