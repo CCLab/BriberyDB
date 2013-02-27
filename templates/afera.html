@@ -1,20 +1,22 @@
 {% extends "body.html" %}{% block content %}
         <div id="jedna-afera">
-	  <h2>glowna nazwa</h2>
-	  <h3>reszta nazw</h3>
-	  <p id="opis"> opis afery </p>
+	  <h2>{{ name }}</h2>
+	  <h3>{% for n in names %}{{ n }}{% endfor %}</h3>
+	  <p id="opis">{{ description }}</p>
           <p id="kontekst"> kontekst afery </p>
-          <div class="wydarzen">wydarzen: 000</div>
+          <div class="wydarzen">wydarzen: {{ num_events }}</div>          
           <div id="ujawnienie">
             <a id="ujawnienie-more" href=""><h4>Ujawnienie afery
-              <span class="data">20.07.2000</span></h4>
-              <h5>tytul wydarzenia</h5>
+              <span class="data">{{ event_leak.0.1 }}</span></h4>
+              <h5>{{ event_leak.0.10 }}</h5>
               <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
-                <ul><li>imie nazwisko</li></ul>[pokaz wszystkich]
+                <ul>{% for actor in event_leak.1 %}
+              <li>{{ actor.0 }}</li>{% endfor %}</ul>[pokaz wszystkich]
               </div><!-- koniec wydarzenie-aktorzy -->
-              <p class="wydarzenie-tekst">tekst ujawnienia lorem ipsum</p>
+              <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
             </a>
           </div><!-- koniec ujawnienie -->
+          
           <div class="wydarzenie">
             <a class="wydarzenie-more" href="">
               <h4>Tytul
