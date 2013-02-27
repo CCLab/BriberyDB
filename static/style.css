@@ -1,0 +1,153 @@
+* { margin:0; padding:0; text-indent:0; border:0; }
+
+a { text-decoration: none; color: black;}
+a:hover,span:hover {
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        -moz-transition: all 0.1s;
+}
+
+html, body {
+	font-family: 'Titillium Web', sans-serif;
+}
+
+/* 300 400 600 700
+#1a1a1a czarny
+#3e606f niebieski ciemny
+#8ba0a9 niebieski sredni
+#b2c0c5 niebieski jasny
+
+#91aa9d zielony ciemny
+#a7bbb1 zielony 
+#c8d4ce zielony jasny
+
+#d1dbbd zielony
+#dee5e2 zielony
+#e8edde zielony
+
+#f1f4eb tlo
+
+
+*/
+
+/********** clearfix ************/
+
+.group:before,
+.group:after {
+	content: "";
+	display: table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+/********** clearfix end ************/
+
+/********** header ************/
+
+#header {
+	background-color: #3e606f;
+}
+#header a #logo {
+	display:block;
+}
+#header a #logo h1 {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 200;
+	font-size: 60px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+#header #navi-top {
+}
+#header #navi-top ul {
+	list-style:none;
+	background-color: #1a1a1a;
+	height:5ex;
+	border-bottom: 2ex solid #a7bbb1;
+	text-transform: uppercase;
+}
+#header #navi-top ul li {
+	padding-top:1ex;
+	list-style-type: none;
+	display:block;
+	margin-right:30px;
+	float:left;
+}
+#header #navi-top ul li a {
+	color: #fff;
+        border-bottom: 2ex solid #a7bbb1 ;
+}
+#header #navi-top ul li a:hover {
+border-bottom: 2ex solid black;
+}
+#header #navi-top ul li a:active {}
+
+/********** end header ************/
+
+#wrapper {
+	background-color: #3e606f ;
+}
+#kontent {
+	border-top: 3ex solid #d1dbbd ;
+        background-color: #f1f4eb ;
+}
+
+/********** jedna-afera ************/
+
+#jedna-afera {
+	width: 50%; margin: 0 auto;
+	padding: 10px;}
+#jedna-afera h2 {}
+#jedna-afera h3 {}
+
+#jedna-afera p#opis {}
+#jedna-afera p#kontekst {}
+
+#jedna-afera #wydarzen {}
+
+#jedna-afera #ujawnienie {}
+#jedna-afera #ujawnienie #ujawnienie-more {}
+
+#jedna-afera #ujawnienie h4 {}
+#jedna-afera #ujawnienie h4 span.data {}
+
+#jedna-afera #ujawnienie h5 {}
+#jedna-afera #ujawnienie .wydarzenie-aktorzy {}
+#jedna-afera #ujawnienie .wydarzenie-aktorzy ul {}
+#jedna-afera #ujawnienie .wydarzenie-aktorzy li {}
+
+#jedna-afera #ujawnienie .wydarzenie-tekst {}
+
+#jedna-afera #wydarzenie {}
+#jedna-afera #wydarzenie a#wydarzenie-more {}
+
+#jedna-afera #wydarzenie h4 {}
+#jedna-afera #wydarzenie h4 span.data {}
+
+#jedna-afera #wydarzenie h5 {}
+#jedna-afera #wydarzenie .wydarzenie-aktorzy {}
+#jedna-afera #wydarzenie .wydarzenie-aktorzy ul {}
+#jedna-afera #wydarzenie .wydarzenie-aktorzy li {}
+
+#jedna-afera #wydarzenie .wydarzenie-tekst {}
+
+#jedna-afera-aktorzy {}
+#jedna-afera-aktorzy p {}
+#jedna-afera-aktorzy ul {}
+#jedna-afera-aktorzy ul li {}
+
+/********** end jedna-afera ************/
+
+/********** footer ************/
+
+#footer {
+}
+
+
+/********** end footer ************/
+
