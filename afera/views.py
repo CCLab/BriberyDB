@@ -46,10 +46,11 @@ def case (request, object_id):
 
 #  print events[0]
 
-  ujawnienie = (events[0], get_event_actors(events[0][0]))
+  if events:
+    ujawnienie = (events[0], get_event_actors(events[0][0]))
 
-  print ujawnienie
-
+  else:
+    ujawnienie = (None, None)
     
   result = {} 
   
@@ -58,8 +59,10 @@ def case (request, object_id):
   result['description'] = scandal [0][1]  
   result['num_events'] = len(events)
   result['event_leak'] = ujawnienie
-  result['events'] = events[1:]
+  result['events'] = [ (e, get_event_actors(e[0])) for e in events[1:]]
    
+  print result['events']
+  
   template = loader.get_template ('afera.html')
 
   return HTTPResponse (template.render(Context(result))  )
