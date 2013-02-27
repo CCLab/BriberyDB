@@ -11,6 +11,8 @@ html, body {
 	font-family: 'Titillium Web', sans-serif;
 }
 
+h2, h3, h4, h5, h6 { font-weight: 400; }
+
 /* 300 400 600 700
 #1a1a1a czarny
 #3e606f niebieski ciemny
@@ -60,6 +62,7 @@ html, body {
 	font-size: 60px;
 	text-transform: uppercase;
 	color: #fff;
+	padding-left:150px;
 }
 
 #header #navi-top {
@@ -70,6 +73,7 @@ html, body {
 	height:5ex;
 	border-bottom: 2ex solid #a7bbb1;
 	text-transform: uppercase;
+        padding-left:150px;
 }
 #header #navi-top ul li {
 	padding-top:1ex;
@@ -81,11 +85,11 @@ html, body {
 #header #navi-top ul li a {
 	color: #fff;
         border-bottom: 2ex solid #a7bbb1 ;
+	padding-bottom:8px;
 }
-#header #navi-top ul li a:hover {
-border-bottom: 2ex solid black;
+#header #navi-top ul li a:hover, #header #navi-top ul li a#active {
+	border-bottom: 2ex solid #1a1a1a;
 }
-#header #navi-top ul li a:active {}
 
 /********** end header ************/
 
@@ -101,45 +105,155 @@ border-bottom: 2ex solid black;
 
 #jedna-afera {
 	width: 50%; margin: 0 auto;
-	padding: 10px;}
-#jedna-afera h2 {}
-#jedna-afera h3 {}
+	padding: 0;
+}
+#jedna-afera h2 {
+        padding: 5px 10px;
+	font-weight: 400;
+	font-size: 30px;
+	text-transform:uppercase;
+	background-color: #91aa9d;
+	line-height:2ex;
+}
+#jedna-afera h3 {
+        padding: 4px 10px;
+	font-weight: 600;
+	font-size: 17px;
+	text-transform:uppercase;
+	background-color: #a7bbb1;
+	border-bottom: 10px solid #c8d4ce;
+}
 
-#jedna-afera p#opis {}
-#jedna-afera p#kontekst {}
+#jedna-afera p#opis {
+	font-size: small;
+        padding: 4px 10px;
+	background-color: #dee5e2 ;
+}
+#jedna-afera p#kontekst {
+	font-size: small;
+        padding: 4px 10px;
+	background-color: #e8edde;
+	border-bottom: 10px solid #3e606f ;
+}
 
-#jedna-afera #wydarzen {}
+#jedna-afera .wydarzen {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: small;
+	width:40%;
+	color: #fff;
+        background-color: #3e606f;
+	padding-bottom:5px;
+	margin-bottom: 20px;
+}
 
-#jedna-afera #ujawnienie {}
-#jedna-afera #ujawnienie #ujawnienie-more {}
+#jedna-afera #ujawnienie { background-color: #a7bbb1; }
 
-#jedna-afera #ujawnienie h4 {}
-#jedna-afera #ujawnienie h4 span.data {}
+#jedna-afera .glowka {
+        background-color: #91aa9d;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 
-#jedna-afera #ujawnienie h5 {}
-#jedna-afera #ujawnienie .wydarzenie-aktorzy {}
-#jedna-afera #ujawnienie .wydarzenie-aktorzy ul {}
-#jedna-afera #ujawnienie .wydarzenie-aktorzy li {}
+#jedna-afera h4 {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: small;
+	width:40%;
+	color: #fff;
+        background-color: #3e606f;
+	padding: 5px 5px;
+	margin-bottom: 4px;
 
-#jedna-afera #ujawnienie .wydarzenie-tekst {}
+}
+#jedna-afera .ramka {
+	padding: 0 20px 0px 20px;
+	margin-bottom: 40px;
+}
+#jedna-afera div.data {
+	font-weight:600;
+	color: red;
+	text-align: center;
+	background-color: #f1f4eb;
+}
 
-#jedna-afera #wydarzenie {}
-#jedna-afera #wydarzenie a#wydarzenie-more {}
+#jedna-afera h5 {
+	font-size: 24px;
+	font-weight: 700;
+	margin-top:10px;
+	margin-bottom:10px;
+	color: #1a1a1a;
+	line-height:2ex;
+}
 
-#jedna-afera #wydarzenie h4 {}
-#jedna-afera #wydarzenie h4 span.data {}
+#jedna-afera .wydarzenie-aktorzy {
+	font-size: small;
+	text-transform: uppercase;
+}
+#jedna-afera .wydarzenie-aktorzy ul {
+        text-transform: none;
+	list-style-position:inside;
+}
+#jedna-afera .wydarzenie-aktorzy li {
+	float: left;
+	margin-right: 1em;
+}
 
-#jedna-afera #wydarzenie h5 {}
-#jedna-afera #wydarzenie .wydarzenie-aktorzy {}
-#jedna-afera #wydarzenie .wydarzenie-aktorzy ul {}
-#jedna-afera #wydarzenie .wydarzenie-aktorzy li {}
+#jedna-afera .wydarzenie-tekst {
+	margin-top:10px;
+	font-weight: 400;
+}
 
-#jedna-afera #wydarzenie .wydarzenie-tekst {}
+#jedna-afera .more {
+        text-transform: uppercase;
+	font-size: x-small;
+        margin-top:20px;
+	background-color: #dee5e2;
+	padding: 3px 10px;
+	width:20%;
+}
 
-#jedna-afera-aktorzy {}
-#jedna-afera-aktorzy p {}
-#jedna-afera-aktorzy ul {}
-#jedna-afera-aktorzy ul li {}
+
+
+#jedna-afera .pokaz {
+	display:inline-block;
+	background-color: #f1f4eb;
+	padding: 0 5px;
+	font-size: x-small;
+	cursor: pointer;
+}
+
+#jedna-afera .pokaz:hover, #jedna-afera .more:hover {
+	background-color: #e8edde ;
+}
+
+#jedna-afera .wydarzenie { background-color: #b2c0c5; }
+#jedna-afera .wydarzenie .glowka { background-color: #8ba0a9; }
+
+#jedna-afera-aktorzy {
+	border-top: 10px solid #3e606f;
+	padding: 0 20px 10px 20px;
+	background-color: #91aa9d;
+}
+#jedna-afera-aktorzy h4 {
+	padding-top: 0;
+}
+#jedna-afera-aktorzy ul {
+	list-style-position: inside;
+	font-size: x-small;
+}
+#jedna-afera-aktorzy ul li {
+	float: left;
+	margin-right: 1em;
+}
+
+#jedna-afera-aktorzy ul:after {
+        content: "";
+        display: table;
+        clear:both;
+}
 
 /********** end jedna-afera ************/
 

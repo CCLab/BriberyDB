@@ -4,32 +4,39 @@
 	  <h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
 	  <p id="opis">{{ description }}</p>
           <p id="kontekst"> kontekst afery </p>
-          <div class="wydarzen">wydarzen: {{ num_events }}</div>          
+          <div class="wydarzen">wydarzen: {{ num_events }}</div>
           <div id="ujawnienie">
-            <a id="ujawnienie-more" href=""><h4>Ujawnienie afery
-              <span class="data">{{ event_leak.0.1 }}</span></h4>
-              <h5>{{ event_leak.0.10 }}</h5>
-              <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
-                <ul>{% for actor in event_leak.1 %}
-              <li>{{ actor.0 }}</li>{% endfor %}</ul>[pokaz wszystkich]
-              </div><!-- koniec wydarzenie-aktorzy -->
-              <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
-            </a>
+              <div class="data">{{ event_leak.0.1 }}</div>
+              <div class="glowka">
+                  <h4>Ujawnienie afery</h4>
+              </div>
+              <div class="ramka">
+                  <h5>tytul wydarzenia tytul wydarzenia tytul wydarzenia tytul wydarzenia tytul wydarzenia tytul wydarzenia </h5>
+                  <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
+                      <ul>{% for actor in event_leak.1 %}
+                          <li>{{ actor.0 }}</li>{% endfor %}            
+                      </ul> <span class="pokaz">pokaz wszystkich (00)</span>
+                  </div><!-- koniec wydarzenie-aktorzy -->
+                  <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
+                  <p class="more"><a href="">czytaj wiecej</a></p>
+              </div><!-- koniec ramka -->
           </div><!-- koniec ujawnienie -->{% for event in events %}
           <div class="wydarzenie">
-            <a class="wydarzenie-more" href="">
-              <h4>Tytul
-                <span class="data">{{ event.0.1 }}</span>
-              </h4>
-              <h5>{{ event.0.10 }} tytuł</h5>
+              <div class="data">{{ event.0.1 }}</div>
+              <div class="glowka">
+              <h4>Tytul (wszczecie itp)</h4>
+              </div>
+              <div class="ramka">
+              <h5>tytul wydarzenia</h5>
               <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
-                <ul>{% for actor in event.1 %}<li>{{ actor.0 }}</li>{% endfor %}</ul>[pokaz wszystkich]
+                <ul>{% for actor in event.1 %}<li>{{ actor.0 }}</li>{% endfor %} <span class="pokaz">pokaz wszystkich (00)</span>
               </div><!-- koniec wydarzenie-aktorzy -->
               <p class="wydarzenie-tekst">{{ event.0.2 }}</p>
-            </a>          
+              <p class="more"><a href="">czytaj wiecej</a></p>
+              </div><!-- koniec ramka -->
           </div><!-- koniec wydarzenie -->{% endfor %}
           <div id="jedna-afera-aktorzy">
-            <p>Wszyscy aktorzy  afery:</p>
+            <h4>Wszyscy aktorzy  afery</h4>
             <ul>
 	      <li>aktor1</li>
 	      <li>aktor2</li>
