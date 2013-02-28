@@ -2,9 +2,9 @@
         <div id="jedna-afera">
 	  <h2>{{ name }}</h2>
 	  <h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-	  <p id="opis">{{ description }}</p>
-          <p id="kontekst"> kontekst afery </p>
-          <div class="wydarzen">wydarzen: {{ num_events }}</div>
+	  <p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p>
+          <p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p>
+          <div class="wydarzen">wydarzeń: {{ num_events }}</div>
           <div id="ujawnienie">
               <div class="data">{{ event_leak.0.1 }}</div>
               <div class="glowka">
@@ -39,9 +39,8 @@
           </div><!-- koniec wydarzenie -->{% endfor %}
           <div id="jedna-afera-aktorzy">
             <h4>Wszyscy aktorzy  afery</h4>
-            <ul>
-	      <li>aktor1</li>
-	      <li>aktor2</li>
+            <ul>{% for actor in all_actors %}
+	      <li><a href="">{{ actor.1 }}</a></li>{% endfor %}
 	    </ul>
 	  </div><!-- koniec jedna-afera-aktorzy -->
 	</div><!-- koniec jedna-afera -->
