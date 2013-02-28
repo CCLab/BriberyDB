@@ -11,7 +11,7 @@ from django.db import connections
 def get_scandal (scandal_id, db='afery'):
 
   cursor = connections[db].cursor()
-  cursor.execute("SELECT name,description,background  FROM scandals WHERE id=%s;", (scandal_id,))
+  cursor.execute("SELECT name, description, background FROM scandals WHERE id=%s;", (scandal_id,))
   return cursor.fetchall()
 
 def get_events (scandal_id, db='afery'):
@@ -19,7 +19,7 @@ def get_events (scandal_id, db='afery'):
   ''' id  | description | scandal_id | location_id | event_date | publication_date | type_id | subtype_id | types | refs | title | description                                                                                                                                                                                                                                                                                     | scandal_id | location_id | event_date | publication_date | type_id | subtype_id | types | refs | title'''
                 
   cursor = connections[db].cursor()
-  cursor.execute ("SELECT id, event_date, description, publication_date, types, refs FROM events WHERE scandal_id=%s ORDER BY event_date ASC;", (scandal_id,))
+  cursor.execute ("SELECT id, event_date, description, publication_date, types, refs, title FROM events WHERE scandal_id=%s ORDER BY event_date ASC;", (scandal_id,))
 
   return cursor.fetchall ()
 
@@ -69,7 +69,8 @@ def case (request, object_id):
   
   result['name'] = scandal [0][0][0]
   result['names'] = scandal [0][0][1:]
-  result['description'] = scandal [0][1]  
+  result['description'] = scandal [0][1]
+  result['background'] = scandal[0][2]
   result['num_events'] = len(events)
   result['event_leak'] = ujawnienie
   result['events'] = [ (e, get_event_actors(e[0])[:5], len(get_event_actors(e[0])))
