@@ -14,11 +14,22 @@ as alternative database named 'afery'.
 
 '''
 
+import types
+
 from django.db import connections
 
 Q = { }
 
-def query (query_name, parameter, db='afery'):
-
-  pass
+def query (query_name, param, db='afery'):
+  ''
   
+  if type(param) in (types.ListType, types.TupleType):
+    param = tuple(param)
+  else:
+    param = tuple((param,))
+    
+  cursor = connections[db].cursor()
+
+  cursor.execute(Q[query_name], param)
+
+  return cursor.fetchall()
