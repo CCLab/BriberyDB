@@ -15,7 +15,8 @@
                   <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
                       <ul>{% for actor in event_leak.1 %}
                           <li>{{ actor.0 }}</li>{% endfor %}            
-                      </ul> <span class="pokaz">pokaz wszystkich (00)</span>
+                      </ul> 
+                      <span class="pokaz">{% if event_leak.2 > 5 %}pokaż wszystkich ({{ event_leak.2 }}){% else %} {% endif %}</span>
                   </div><!-- koniec wydarzenie-aktorzy -->
                   <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
                   <p class="more"><a href="">czytaj wiecej</a></p>
@@ -29,7 +30,8 @@
               <div class="ramka">
               <h5>tytul wydarzenia</h5>
               <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
-                <ul>{% for actor in event.1 %}<li>{{ actor.0 }}</li>{% endfor %} <span class="pokaz">pokaz wszystkich (00)</span>
+                <ul>{% for actor in event.1 %}<li>{{ actor.0 }}</li>{% endfor %}</ul>
+                <span class="pokaz">{% if event.2 > 5 %}pokaz wszystkich ({{ event.2 }}){% else %} {% endif %}</span>
               </div><!-- koniec wydarzenie-aktorzy -->
               <p class="wydarzenie-tekst">{{ event.0.2 }}</p>
               <p class="more"><a href="">czytaj wiecej</a></p>
