@@ -31,6 +31,18 @@ def get_event_actors (event_id, db='afery'):
 
   return cursor.fetchall ()
             
+def get_case_actors (object_id, db='afery'):
+
+  QUERY = "SELECT DISTINCT actor_id, name FROM (actors_events JOIN events ON event_id=events.id) JOIN ACTORS ON actor_id=actors.id WHERE scandal_id=%s"
+
+  #"SELECT DISTINCT actor_id,name FROM (actors JOIN actors_events ON actor_id = actors_events.actor_id) RIGHT JOIN events ON event_id = events.id WHERE scandal_id=%s;"
+  
+  cursor = connections[db].cursor()
+
+  cursor.execute (QUERY, (object_id,))
+
+  return cursor.fetchall()
+
 # views
 
 
@@ -60,9 +72,11 @@ def case (request, object_id):
   result['description'] = scandal [0][1]  
   result['num_events'] = len(events)
   result['event_leak'] = ujawnienie
-  result['events'] = [ (e, get_event_actors(e[0])[:6], len(get_event_actors(e[0])))
+  result['events'] = [ (e, get_event_actors(e[0])[:5], len(get_event_actors(e[0])))
                        for e in events[1:]]
    
+  result['all_actors'] = get_case_actors(object_id)
+
   print result['events']
   
   template = loader.get_template ('afera.html')
