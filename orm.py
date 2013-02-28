@@ -18,7 +18,10 @@ import types
 
 from django.db import connections
 
-Q = { }
+Q = {
+  'event_actors': 'SELECT actor_id, name, types, roles FROM actors_events JOIN actors ON actor_id=actors.id WHERE event_id=%s;',
+
+  }
 
 def query (query_name, param, db='afery'):
   ''
