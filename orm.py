@@ -21,6 +21,8 @@ from django.db import connections
 Q = {
   'event_actors': 'SELECT actor_id, name, types, roles FROM actors_events JOIN actors ON actor_id=actors.id WHERE event_id=%s;',
 
+  'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
+
   }
 
 def query (query_name, param, db='afery'):

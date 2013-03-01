@@ -15,9 +15,9 @@ urlpatterns = patterns('',
      
     # (r'^afery/', include('afery.foo.urls')),
     
-    (r'afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
+    (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
 
-    
+    (r'^podmiot/all', 'aktor.views.actors'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
