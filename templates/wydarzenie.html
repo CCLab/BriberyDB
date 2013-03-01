@@ -1,0 +1,18 @@
+{% extends "body.html" %}{% block content %}
+          <div class="wydarzenie">
+            <div class="data">{{ event.1 }}</div>
+            <div class="glowka">
+              <h4>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h4>
+            </div>
+            <div class="ramka">
+              <h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
+              <p class="wydarzenie-tekst">{{ event.2 }}</p>
+            </div><!-- koniec ramka -->
+          </div><!-- koniec wydarzenie -->{# endfor #}
+          <div id="zrodla">
+            <h4>Żródła</h4>
+            <ul>{% for ref in refs %}
+              <li>{{ ref.2 }} {{ ref.4 }}: &bdquo;{{ ref.1 }}&rdquo;<li>{% endfor %}
+            </ul>
+          </div>
+{% endblock content %}
