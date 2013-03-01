@@ -1,5 +1,7 @@
 # Create your views here.
 
+import orm
+
 from django.http import HttpResponse as HTTPResponse
 
 from django.template import Context, RequestContext, loader, Template
@@ -84,3 +86,18 @@ def case (request, object_id):
 
   return HTTPResponse (template.render(Context(result))  )
   
+
+
+def event (request, object_id):
+
+  event = orm.query('event', object_id)[0]
+
+  if event:
+
+    refs = orm.query('refs','{'+','.join([str(i) for i in event[9]])+'}')
+
+  result = dict(refs=refs, event=event)
+
+  template = loader.get_template("wydarzenie.html")
+
+  return HTTPResponse (template.render(Context(result)))

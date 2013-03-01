@@ -14,7 +14,7 @@ as alternative database named 'afery'.
 
 '''
 
-import types
+import types, settings
 
 from django.db import connections
 
@@ -23,6 +23,9 @@ Q = {
 
   'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
 
+  'event' : 'SELECT * from events where id=%s;',
+
+  'refs':  'SELECT * FROM refs AS r WHERE r.id = ANY(%s);',
   }
 
 def query (query_name, param, db='afery'):
@@ -36,5 +39,8 @@ def query (query_name, param, db='afery'):
   cursor = connections[db].cursor()
 
   cursor.execute(Q[query_name], param)
+
+  if settings.DEBUG:
+    print cursor.query
 
   return cursor.fetchall()

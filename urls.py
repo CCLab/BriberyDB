@@ -14,6 +14,8 @@ urlpatterns = patterns('',
     (r'^/kontakt/$', 'direct_to_template', dict(template='contact.html'),'page_contact'),
      
     # (r'^afery/', include('afery.foo.urls')),
+
+    (r'^wydarzenie/(?P<object_id>\d+)/$', 'afera.views.event'),
     
     (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
 
