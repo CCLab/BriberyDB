@@ -96,15 +96,15 @@ def cases (request):
   for c in cases:
 
     case = dict(title=c[1], description=c[2])
-    print c
-    case['events'] = orm.query('event_count', c[0])
-
-    print case
+    actors = orm.query('case_actors', c[0])
+    case['events'] = orm.query('event_count', c[0])[0][0]
+    case['actors'] = actors[:5]
+    case['num_actors'] = len(actors)
     result.append(case)
+    print case
 
   template = loader.get_template ('afery.html')
 
-  result = {}
   return HTTPResponse (template.render(Context(dict(cases=result,tab=1)))  )
 
 

@@ -30,6 +30,9 @@ Q = {
   'refs':  'SELECT * FROM refs AS r WHERE r.id = ANY(%s);',
 
   'cases': 'SELECT id, name, description  FROM scandals;',
+
+  'case_actors':  'SELECT DISTINCT actor_id, name FROM (actors_events JOIN events ON event_id=events.id) JOIN ACTORS ON actor_id=actors.id WHERE scandal_id=%s;',
+
   }
 
 def query (query_name, param, db='afery'):
