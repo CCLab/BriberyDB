@@ -87,6 +87,26 @@ def case (request, object_id):
   return HTTPResponse (template.render(Context(result))  )
   
 
+def cases (request):
+
+  cases = orm.query('cases', None)
+  result = []
+
+  for c in cases:
+
+    case = dict(title=c[1], description=c[2])
+    print c
+    case['events'] = orm.query('event_count', c[0])
+
+    print case
+    result.append(case)
+
+  template = loader.get_template ('afery.html')
+
+  result = {}
+  return HTTPResponse (template.render(Context(result))  )
+
+
 
 def event (request, object_id):
 

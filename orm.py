@@ -25,7 +25,11 @@ Q = {
 
   'event' : 'SELECT * from events where id=%s;',
 
+  'event_count': 'SELECT count(id) FROM events WHERE scandal_id=%s;',
+
   'refs':  'SELECT * FROM refs AS r WHERE r.id = ANY(%s);',
+
+  'cases': 'SELECT id, name, description  FROM scandals;',
   }
 
 def query (query_name, param, db='afery'):
