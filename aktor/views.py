@@ -24,9 +24,14 @@ def actors (request):
   
 
 def actor (request, object_id):
-  pass
 
+  actor = orm.query(actor, object_id)[0]
 
+  result = dict(actor=actor)
+
+  template = loader.get_template("aktor.html")
+
+  return HTTPResponse (template.render(Context(result)))
 
 def event_actors (request, object_id):
 

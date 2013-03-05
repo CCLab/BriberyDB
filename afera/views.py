@@ -95,7 +95,7 @@ def cases (request):
 
   for c in cases:
 
-    case = dict(title=c[1], description=c[2])
+    case = dict(id=c[0],title=c[1], description=c[2])
     actors = orm.query('case_actors', c[0])
     case['events'] = orm.query('event_count', c[0])[0][0]
     case['actors'] = actors[:5]

@@ -33,6 +33,8 @@ Q = {
 
   'case_actors':  'SELECT DISTINCT actor_id, name FROM (actors_events JOIN events ON event_id=events.id) JOIN ACTORS ON actor_id=actors.id WHERE scandal_id=%s;',
 
+  'actor': 'SELECT id,name,human FROM actors WHERE id=%s;', 
+  
   }
 
 def query (query_name, param, db='afery'):
