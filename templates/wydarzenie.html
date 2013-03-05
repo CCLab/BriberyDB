@@ -1,18 +1,39 @@
 {% extends "body.html" %}{% block content %}
-          <div class="wydarzenie">
+
+	<div id="jedno-wydarzenie-paczka">
+
+	<div id="jedno-wydarzenie-nav-lewo">
+	poprzednie:
+	<span class="data">???????????????</span>
+	[ Tytul doniesienia wydarzenia wiadomosci ]
+	</div>
+
+          <div id="jedno-wydarzenie">
             <div class="data">{{ event.1 }}</div>
             <div class="glowka">
               <h4>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h4>
             </div>
+
             <div class="ramka">
               <h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
               <p class="wydarzenie-tekst">{{ event.2 }}</p>
             </div><!-- koniec ramka -->
-          </div><!-- koniec wydarzenie -->{# endfor #}
-          <div id="zrodla">
+
+          </div><!-- koniec jedno-wydarzenie -->{# endfor #}
+
+	<div id="jedno-wydarzenie-nav-prawo">
+	nastepne:
+	<span class="data">???????????????</span>
+	[ Tytul doniesienia wydarzenia wiadomosci ]
+	</div>
+
+	</div><!-- koniec jedno-wydarzenie-paczka -->
+
+          <div id="jedno-wydarzenie-zrodla">
             <h4>Żródła</h4>
             <ul>{% for ref in refs %}
               <li>{{ ref.2 }} {{ ref.4 }}: &bdquo;{{ ref.1 }}&rdquo;<li>{% endfor %}
             </ul>
-          </div>
+          </div><!-- koniec jedno-wydarzenie-zrodla -->
+
 {% endblock content %}

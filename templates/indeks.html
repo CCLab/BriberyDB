@@ -1,15 +1,23 @@
 {% extends "body.html" %}{% block content %}
+
         <div id="skorowidz">
+
           <ul id="skorowidz-table">{% for letter in letters %}
-            <li><a id="skorowidz-{{ letter.0 }}">{{ letter.0 }}</a></li>{% endfor %}
+            <li><a href="#skorowidz-{{ letter.0 }}">{{ letter.0 }}</a></li>{% endfor %}
           </ul>
-        </div><!-- koniec skorowidza -->
+        </div><!-- koniec skorowidz-table -->
+
         <div id="kolumna-indeksu">
-          <div id="jedna-litera">{% for letter in letters %}
+
+          <div class="jedna-litera">{% for letter in letters %}
             <h2><a id="skorowidz-{{ letter.0 }}">{{ letter.0 }}</a></h2>
+
             <ul>{% for podmiot in letter.1 %}
               <li><a href="">{{ podmiot.1 }}</a></li>{% endfor %}
             </ul>
-          </div><!-- koniec litery -->{% endfor %}
-        </div>
+		{% endfor %}
+          </div><!-- koniec jedna-litera -->
+
+        </div><!-- koniec kolumna-indeksu -->
+
 {% endblock content %}

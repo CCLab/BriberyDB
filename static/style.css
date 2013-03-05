@@ -7,9 +7,7 @@ a:hover,span:hover {
         -moz-transition: all 0.1s;
 }
 
-html, body {
-	font-family: 'Titillium Web', sans-serif;
-}
+html, body, h1, h2, h3, h4, h5 { font-family: 'Titillium Web', sans-serif; }
 
 h2, h3, h4, h5, h6 { font-weight: 400; }
 
@@ -68,6 +66,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 #header #navi-top {
 }
 #header #navi-top ul {
+        font-family: 'Titillium Web', sans-serif;
 	list-style:none;
 	background-color: #1a1a1a;
 	height:5ex;
@@ -76,6 +75,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
         padding-left:150px;
 }
 #header #navi-top ul li {
+        font-family: 'Titillium Web', sans-serif;
 	padding-top:1ex;
 	list-style-type: none;
 	display:block;
@@ -84,7 +84,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 }
 #header #navi-top ul li a {
 	color: #fff;
-        border-bottom: 2ex solid #a7bbb1 ;
+        border-bottom: 2ex solid #a7bbb1;
 	padding-bottom:8px;
 }
 #header #navi-top ul li a:hover, #header #navi-top ul li a#active {
@@ -94,11 +94,12 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 /********** end header ************/
 
 #wrapper {
-	background-color: #3e606f ;
+	background-color: #3e606f;
+	min-width: 900px;
 }
 #kontent {
-	border-top: 3ex solid #d1dbbd ;
-        background-color: #f1f4eb ;
+	border-top: 3ex solid #d1dbbd;
+        background-color: #f1f4eb;
 }
 
 /********** jedna-afera ************/
@@ -108,7 +109,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	padding: 0;
 }
 #jedna-afera h2 {
-        padding: 5px 10px;
+        padding: 7px 20px;
 	font-weight: 400;
 	font-size: 30px;
 	text-transform:uppercase;
@@ -116,7 +117,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	line-height:2ex;
 }
 #jedna-afera h3 {
-        padding: 4px 10px;
+        padding: 4px 20px;
 	font-weight: 600;
 	font-size: 17px;
 	text-transform:uppercase;
@@ -125,13 +126,12 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 }
 
 #jedna-afera p#opis {
-	font-size: small;
-        padding: 4px 10px;
+        padding: 20px;
 	background-color: #dee5e2 ;
 }
 #jedna-afera p#kontekst {
 	font-size: small;
-        padding: 4px 10px;
+        padding: 20px;
 	background-color: #e8edde;
 	border-bottom: 10px solid #3e606f ;
 }
@@ -199,6 +199,7 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 #jedna-afera .wydarzenie-aktorzy li {
 	float: left;
 	margin-right: 1em;
+	font-size: small;
 }
 
 #jedna-afera .wydarzenie-tekst {
@@ -212,17 +213,16 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
         margin-top:20px;
 	background-color: #dee5e2;
 	padding: 3px 10px;
-	width:20%;
+	width:50%;
 }
 
-
-
 #jedna-afera .pokaz {
-	display:inline-block;
+	width:50%;
 	background-color: #f1f4eb;
 	padding: 0 5px;
 	font-size: x-small;
 	cursor: pointer;
+	margin-top:5px;
 }
 
 #jedna-afera .pokaz:hover, #jedna-afera .more:hover {
@@ -239,10 +239,10 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 }
 #jedna-afera-aktorzy h4 {
 	padding-top: 0;
+	margin-top: 0;
 }
 #jedna-afera-aktorzy ul {
 	list-style-position: inside;
-	font-size: x-small;
 }
 #jedna-afera-aktorzy ul li {
 	float: left;
@@ -260,8 +260,136 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 /********** footer ************/
 
 #footer {
+background-color:black;
+color: white;
+padding: 20px;
+margin-top: 20px;
 }
 
 
 /********** end footer ************/
+
+/********** skorowidz ************/
+
+#skorowidz { } 
+
+#skorowidz-table {
+	float:left;
+	position:relative;
+	left: 20px;
+	top: 20px;
+	width:170px;
+        border-top: 10px solid #3e606f;
+	padding-top:5px;
+
+}
+
+#skorowidz-table li {
+	list-style: none;
+	float: left;
+}
+
+#skorowidz-table li a {
+        display: block;
+        width:30px;
+	height:30px;
+	margin: 2px;
+	background-color: #b2c0c5;
+	text-align: center;
+}
+
+#skorowidz-table li a:hover { background-color: #8ba0a9; }
+
+
+#kolumna-indeksu {
+        width: 50%; margin: 0 auto;
+        padding: 0;
+}
+
+.jedna-litera {
+	background-color: #fff;
+}
+
+.jedna-litera h2 {
+	background-color: #a7bbb1;
+	padding-left:20px;
+	font-weight: 600;
+        border-bottom: 10px solid #c8d4ce;
+}
+
+.jedna-litera h2 a { color: #fff; }
+
+.jedna-litera ul { padding: 20px; }
+.jedna-litera li { list-style: none; }
+.jedna-litera li a { color: #1a1a1a; }
+.jedna-litera li a:hover { font-weight: bold; }
+
+
+/********** end skorowidz ************/
+
+/********** jedno-wydarzenie ************/
+
+#jedno-wydarzenie-paczka {
+	display:table;
+}
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo,
+#jedno-wydarzenie { display: table-cell; }
+
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo {
+	padding: 20px;
+	color: #aaa;
+	line-height:1.2em;
+}
+
+#jedno-wydarzenie-nav-lewo { text-align:right; }
+
+#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
+	display: block;
+	margin-top:10px;
+	font-weight:600;
+}
+
+#jedno-wydarzenie-zrodla {
+	border-top: 10px solid #3e606f;
+	padding: 0 20px 10px 20px;
+	background-color: #91aa9d;
+	width: 80%; margin: 0 auto;
+}
+
+#jedno-wydarzenie-zrodla h4 {
+	padding-top: 0;
+	margin: 0 auto;
+	margin-top:0;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: small;
+        width:20%;
+        color: #fff;
+        background-color: #3e606f;
+        padding: 0 5px 5px 5px;
+        margin-bottom: 4px;
+
+}
+
+#jedno-wydarzenie-zrodla ul {
+        list-style-position: inside;
+}
+#jedno-wydarzenie-zrodla ul li {
+        float: left;
+        margin-right: 1em;
+	font-size: small;
+}
+
+#jedno-wydarzenie-zrodla ul:after {
+        content: "";
+        display: table;
+        clear:both;
+}
+
+#jedno-wydarzenie {
+        width: 50%; margin: 0 auto;
+	background-color: #fff;
+}
+
+/********** end jedno-wydarzenie ************/
 
