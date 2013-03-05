@@ -10,15 +10,17 @@ import settings
 urlpatterns = patterns('',
     # Example:
     (r'^$', 'direct_to_template', dict(template='main.html'), 'page_main'),
-    (r'^/o-serwisie/$', 'direct_to_template', dict(template='about.html'),'page_about'),
-    (r'^/kontakt/$', 'direct_to_template', dict(template='contact.html'),'page_contact'),
+    (r'^/o-serwisie/$', 'direct_to_template',
+      dict(template='about.html', extra_context=dict(tab=4)), 'page_about'),
+    (r'^/kontakt/$', 'direct_to_template',
+     dict(template='contact.html', extra_context=dict(tab=5)), 'page_contact'),
      
     # (r'^afery/', include('afery.foo.urls')),
 
     (r'^wydarzenie/(?P<object_id>\d+)/$', 'afera.views.event'),
     
     (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
-
+    (r'^afera/all/$', 'afera.views.cases' ),
     (r'^podmiot/all', 'aktor.views.actors'),
 
     # Uncomment the admin/doc line below to enable admin documentation:

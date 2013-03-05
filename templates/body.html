@@ -8,11 +8,11 @@
 	</a>
         <div id="navi-top">
           <ul>
-            <li><a id="active" href="">afery</a></li>
-            <li><a href="">aktorzy</a></li>
-            <li><a href="">instytucje</a></li>
-            <li><a href="">o stronie</a></li>
-            <li><a href="">kontakt</a></li>
+            <li><a {% if tab == 1 %}id="active" {% endif %}href="{% url afera.views.cases %}">afery</a></li>
+            <li><a {% if tab == 2 %}id="active" {% endif %}href="{% url aktor.views.actors %}">aktorzy</a></li>
+            <li><a {% if tab == 3 %}id="active" {% endif %}href="">instytucje</a></li>
+            <li><a {% if tab == 4 %}id="active" {% endif %}href="{% url page_about %}">o stronie</a></li>
+            <li><a {% if tab == 5 %}id="active" {% endif %}href="{% url page_contact %}">kontakt</a></li>
           </ul>
         </div><!-- koniec navi-top -->
       </div><!-- koniec header -->

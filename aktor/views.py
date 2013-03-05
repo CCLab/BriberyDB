@@ -19,7 +19,7 @@ def actors (request):
 
   template = loader.get_template("indeks.html")
 
-  return HTTPResponse (template.render(Context(dict(letters=result))))
+  return HTTPResponse (template.render(Context(dict(letters=result,tab=2))))
   
   
 

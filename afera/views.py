@@ -80,6 +80,7 @@ def case (request, object_id):
    
   result['all_actors'] = get_case_actors(object_id)
 
+  result['tab'] = 1
   print result['events']
   
   template = loader.get_template ('afera.html')
@@ -104,7 +105,7 @@ def cases (request):
   template = loader.get_template ('afery.html')
 
   result = {}
-  return HTTPResponse (template.render(Context(result))  )
+  return HTTPResponse (template.render(Context(dict(cases=result,tab=1)))  )
 
 
 
@@ -117,6 +118,8 @@ def event (request, object_id):
     refs = orm.query('refs','{'+','.join([str(i) for i in event[9]])+'}')
 
   result = dict(refs=refs, event=event)
+
+  result['tab'] = 1
 
   template = loader.get_template("wydarzenie.html")
 
