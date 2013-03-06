@@ -86,14 +86,17 @@ def case (request, object_id):
 
 
 def case_actors (request, object_id):
-
+  'returns HTML <ul> for case actors'
+  
   result = {}
   result['actors'] = get_case_actors(object_id)
   template = loader.get_template("aktorzy.inc")
   return HTTPResponse (template.render(Context(dict(case=result))))
 
-def cases (request):
 
+def cases (request):
+  'all cases view'
+  
   cases = orm.query('cases', None)
   result = []
 
@@ -109,12 +112,12 @@ def cases (request):
 
   template = loader.get_template ('afery.html')
 
-  return HTTPResponse (template.render(Context(dict(cases=result,tab=1)))  )
-
+  return HTTPResponse (template.render(Context(dict(cases=result,tab=1,javascripts=['actors']))))
 
 
 def event (request, object_id):
-
+  'single event view'
+  
   event = orm.query('event', object_id)[0]
 
   if event:
