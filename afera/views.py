@@ -29,7 +29,7 @@ def get_event_actors (event_id, db='afery'):
 
   cursor = connections[db].cursor()
   
-  cursor.execute ("SELECT actors.name,affiliations FROM actors_events JOIN actors ON actors_events.actor_id=actors.id where event_id=%s;",(event_id,))
+  cursor.execute ("SELECT actors.id, actors.name,affiliations FROM actors_events JOIN actors ON actors_events.actor_id=actors.id where event_id=%s;",(event_id,))
 
   return cursor.fetchall ()
             

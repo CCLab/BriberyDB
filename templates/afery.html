@@ -1,27 +1,22 @@
 {% extends "body.html" %}{% block content %}
-
-  <ul id="afery-nav">
-   <li><a href="">typ korupcji 1</a></li>
-   <li><a href="">typ korupcji 2</a></li>
-   <li><a href="">typ korupcji 2</a></li>
-   <li><a href="">typ korupcji 2</a></li>
-  </ul>{% for case in cases %} 
-
-	<div class="jedna-afera-wrapper">
-        <div class="jedna-afera">
-	  <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
-	  <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-          <p class="wydarzen">wydarzen: {{ case.events }}</p>
-          <div class="wydarzenie-aktorzy">Aktorzy afery:
-		<ul class="group">{% for actor in case.actors %}
-		<li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
-		</ul>
-	  <p class="pokaz">pokaz wszystkich ({{ case.num_actors }})</p>
-	  </div>
-	  <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
-          <a href="{% url afera.views.case object_id=case.id %}" class="more">wiecej</a>
-	</div><!-- koniec jedna-afera -->
-	</div><!-- koniec jedna-afera-wrapper -->{% endfor %}
-
-
-{% endblock content %}
+        <ul id="afery-nav">
+          <li><a href="">typ korupcji 1</a></li>
+          <li><a href="">typ korupcji 2</a></li>
+          <li><a href="">typ korupcji 2</a></li>
+          <li><a href="">typ korupcji 2</a></li>
+        </ul>{% for case in cases %} 
+        <div class="jedna-afera-wrapper">
+          <div class="jedna-afera">
+            <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
+            <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
+            <p class="wydarzen">wydarzen: {{ case.events }}</p>
+            <div class="wydarzenie-aktorzy">Aktorzy afery:
+              <ul class="group">{% for actor in case.actors %}
+               <li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
+              </ul>
+              <p class="pokaz">pokaz wszystkich ({{ case.num_actors }})</p>
+            </div>
+            <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
+            <a href="{% url afera.views.case object_id=case.id %}" class="more">wiecej</a>
+          </div><!-- koniec jedna-afera -->
+        </div><!-- koniec jedna-afera-wrapper -->{% endfor %}{% endblock content %}

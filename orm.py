@@ -35,7 +35,20 @@ Q = {
 
   'actor': 'SELECT id,name,human FROM actors WHERE id=%s;', 
 
-  'actor_roles': 'SELECT * FROM (SELECT DISTINCT UNNEST(roles) FROM actors_events WHERE actor_id=%s ORDER BY unnest) AS u JOIN actor_roles AS ar ON u.unnest=ar.id;'
+  'actor_roles': '''SELECT ar.id,ar.name,scandal_id,u.name FROM
+    (SELECT DISTINCT scandal_id,name,unnest(roles) FROM actors_events AS ae JOIN
+      (SELECT scandal_id,s.name,ee.id FROM events AS ee JOIN scandals AS s ON scandal_id=s.id)
+      AS e ON event_id=e.id WHERE actor_id=%s)
+    AS u JOIN actor_roles AS ar ON u.unnest=ar.id ORDER BY ar.id;''',
+
+
+
+#  SELECT scandal_id,ar.id,ar.name FROM
+#  (SELECT DISTINCT scandal_id,unnest(roles) FROM actors_events AS ae JOIN events AS e ON event_id=e.id
+#  WHERE actor_id=%s) AS u JOIN actor_roles AS ar ON u.unnest=ar.id ORDER BY ar.id;''',
+
+  
+#  #'SELECT * FROM (SELECT DISTINCT UNNEST(roles) FROM actors_events WHERE actor_id=%s ORDER BY unnest) AS u JOIN actor_roles AS ar ON u.unnest=ar.id;'
   
   }
 
