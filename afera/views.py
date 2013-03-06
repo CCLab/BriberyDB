@@ -52,9 +52,6 @@ def case (request, object_id):
 
   'single scandal view'
   
-#  cursor = connections['afery'].cursor()
-#  cursor = connections['kuku'].cursor()
-
   scandal = get_scandal(object_id)
   events = get_events (object_id)
 
@@ -86,7 +83,14 @@ def case (request, object_id):
   template = loader.get_template ('afera.html')
 
   return HTTPResponse (template.render(Context(result))  )
-  
+
+
+def case_actors (request, object_id):
+
+  result = {}
+  result['actors'] = get_case_actors(object_id)
+  template = loader.get_template("aktorzy.inc")
+  return HTTPResponse (template.render(Context(dict(case=result))))
 
 def cases (request):
 

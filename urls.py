@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     
     (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
     (r'^afera/all/$', 'afera.views.cases' ),
+    (r'^afera/(?P<object_id>\d+)/actors/$', 'afera.views.case_actors' ),
     (r'^podmiot/(?P<object_id>\d+)/?$', 'aktor.views.actor'),
     (r'^podmiot/all/?$', 'aktor.views.actors'),
 
