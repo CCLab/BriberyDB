@@ -34,6 +34,8 @@ Q = {
   'case_actors':  'SELECT DISTINCT actor_id, name FROM (actors_events JOIN events ON event_id=events.id) JOIN ACTORS ON actor_id=actors.id WHERE scandal_id=%s;',
 
   'actor': 'SELECT id,name,human FROM actors WHERE id=%s;', 
+
+  'actor_roles': 'SELECT * FROM (SELECT DISTINCT UNNEST(roles) FROM actors_events WHERE actor_id=%s ORDER BY unnest) AS u JOIN actor_roles AS ar ON u.unnest=ar.id;'
   
   }
 
