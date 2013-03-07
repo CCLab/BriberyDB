@@ -118,15 +118,25 @@ def cases (request):
 def event (request, object_id):
   'single event view'
   
-  event = orm.query('event', object_id)
+  event = orm.query('event', object_id)[0]
+  print event
+  
+  try:
+    if event:
+      refs = orm.query('refs','{'+','.join([str(i) for i in event[8]])+'}')
+  except (IndexError, TypeError):
+    refs = []
 
-  if event:
-    try:
-      refs = orm.query('refs','{'+','.join([str(i) for i in event[9]])+'}')
-    except IndexError:
-      refs = []
-
-  result = dict(refs=refs, event=event)
+  try: 
+    prev_e = orm.query('prev_event', (event[1],object_id))[0]
+  except IndexError:
+    prev_e = None
+  try:
+    next_e = orm.query('next_event', (event[1],object_id))[0]
+  except IndexError:
+    next_e = None
+                      
+  result = dict(refs=refs, event=event, prev=prev_e, next=next_e, tab=1)
 
   result['tab'] = 1
 

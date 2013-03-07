@@ -1,10 +1,10 @@
 {% extends "body.html" %}{% block content %}
         <div id="jedna-afera">
-	  <h2>{{ name }}</h2>
-	  <h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-	  <p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p>
-          <p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p>
-          <div class="wydarzen">wydarzeń: {{ num_events }}</div>
+          <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
+	  <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
+	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
+          <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
+          <div class="wydarzen">wydarzen: {{ num_events }}</div>
           <div id="ujawnienie">
               <div class="data">{{ event_leak.0.1 }}</div>
               <div class="glowka">
@@ -19,7 +19,6 @@
                       <p class="pokaz">{% if event_leak.2 > 5 %}pokaż wszystkich ({{ event_leak.2 }}){% else %} {% endif %}</p>
                   </div><!-- koniec wydarzenie-aktorzy -->
                   <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
-                  <a class="more" href="">czytaj więcej</a>
               </div><!-- koniec ramka -->
           </div><!-- koniec ujawnienie -->{% for event in events %}
           <div class="wydarzenie">

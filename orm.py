@@ -23,7 +23,8 @@ Q = {
 
   'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
 
-  'event' : 'SELECT * from events where id=%s;',
+  'event' : '''SELECT e.id, scandal_id, s.name AS scandal, e.title, e.description, background, event_date,
+    publication_date, refs, e.type_id, e.subtype_id FROM events AS e JOIN scandals AS s ON scandal_id=s.id WHERE e.id=%s;''',
 
   'event_count': 'SELECT count(id) FROM events WHERE scandal_id=%s;',
 
@@ -41,7 +42,11 @@ Q = {
       AS e ON event_id=e.id WHERE actor_id=%s)
     AS u JOIN actor_roles AS ar ON u.unnest=ar.id ORDER BY ar.id;''',
 
+  'prev_event': '''SELECT id, event_date, title FROM events WHERE scandal_id=%s and event_date <
+    (SELECT event_date FROM events WHERE id=%s) ORDER BY event_date DESC LIMIT 1;''',
 
+  'next_event': '''SELECT id, event_date, title FROM events WHERE scandal_id=%s and event_date >
+    (SELECT event_date FROM events WHERE id=%s) ORDER BY event_date ASC LIMIT 1;''',
 
 #  SELECT scandal_id,ar.id,ar.name FROM
 #  (SELECT DISTINCT scandal_id,unnest(roles) FROM actors_events AS ae JOIN events AS e ON event_id=e.id

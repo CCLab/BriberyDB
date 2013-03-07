@@ -1,39 +1,34 @@
 {% extends "body.html" %}{% block content %}
 
 	<div id="jedno-wydarzenie-paczka">
-
-	<div id="jedno-wydarzenie-nav-lewo">
+	<div id="jedno-wydarzenie-nav-lewo" style="visibility: {% if prev %}visible{% else %}hidden{% endif %};">
 	poprzednie:
-	<span class="data">???????????????</span>
-	[ Tytul doniesienia wydarzenia wiadomosci ]
+	<span class="data">{% if prev %}<a href="{% url afera.views.event object_id=prev.0 %}">{{ prev.1 }}</a>{% endif %}</span>{% if prev.2 %}
+	{{ prev.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}
 	</div>
 
           <div id="jedno-wydarzenie">
-            <div class="data">{{ event.1 }}</div>
+            <div class="data">{{ event.6 }}</div>
             <div class="glowka">
-              <h4>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h4>
+              <h4>{% if event.2 %}{{ event.2.0 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h4>
             </div>
 
             <div class="ramka">
-              <h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
-              <p class="wydarzenie-tekst">{{ event.2 }}</p>
+              <h5>{% if event.3 %}{{ event.3 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
+              <p class="wydarzenie-tekst">{{ event.4 }}</p>
             </div><!-- koniec ramka -->
 
-          </div><!-- koniec jedno-wydarzenie -->{# endfor #}
-
-	<div id="jedno-wydarzenie-nav-prawo">
+          </div><!-- koniec jedno-wydarzenie -->
+	<div id="jedno-wydarzenie-nav-prawo" style="visibility: {% if next %}visible{% else %}hidden{% endif %};">
 	nastepne:
-	<span class="data">???????????????</span>
-	[ Tytul doniesienia wydarzenia wiadomosci ]
+	<span class="data">{% if next %}<a href="{% url afera.views.event object_id=next.0 %}">{{ next.1 }}</a>{% endif %}</span>{% if next %}{% if next.2 %}
+        {{ next.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}{% endif %}
 	</div>
-
-	</div><!-- koniec jedno-wydarzenie-paczka -->
-
+	</div><!-- koniec jedno-wydarzenie-paczka -->{% if refs %}
           <div id="jedno-wydarzenie-zrodla">
             <h4>Żródła</h4>
             <ul>{% for ref in refs %}
               <li>{{ ref.2 }} {{ ref.4 }}: &bdquo;{{ ref.1 }}&rdquo;<li>{% endfor %}
             </ul>
-          </div><!-- koniec jedno-wydarzenie-zrodla -->
-
+          </div><!-- koniec jedno-wydarzenie-zrodla -->{% endif %}
 {% endblock content %}
