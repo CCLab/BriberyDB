@@ -39,7 +39,7 @@ def actor (request, object_id):
   roles = [ (r, roles_dict[r]) for r in roles_dict.keys()]
 
   print roles
-  result = dict(actor=actor, roles=roles)
+  result = dict(actor=actor, roles=roles, tab=2)
 
   template = loader.get_template("aktor.html")
 
