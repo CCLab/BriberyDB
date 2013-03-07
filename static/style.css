@@ -51,10 +51,21 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 #header {
 	background-color: #3e606f;
 }
-#header a #logo {
+#header #logo { display:block; }
+
+img#logo-bak {
 	display:block;
+	float: left;
+	position:relative;
+	zoom: 1;
+	width: 80px;
+	height: 80px;
+	top: 20px;
+	left: 20px;
+	border:1px solid white;
 }
-#header a #logo h1 {
+
+#header #logo h1 {
 	font-family: 'Titillium Web', sans-serif;
 	font-weight: 200;
 	font-size: 60px;
@@ -109,12 +120,13 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 }
 
 .jedna-afera-wrapper:hover {
-        background-color: #c8d4ce;
+        background-color: #e8edde ;
 }
 
 #jedna-afera {
 	width: 50%; margin: 0 auto;
 	padding: 0;
+	background: #f1f4eb url('http://evil.pl/stuff/otwarte/korupcja/elementy/timeline.png') repeat-y center top;
 }
 
 .jedna-afera {
@@ -153,6 +165,11 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
         margin-left: 10px;
 }
 
+.jedna-afera .wydarzen a {
+	color: #fff;
+}
+
+
 #jedna-afera p#opis {
         padding: 20px;
 	background-color: #dee5e2 ;
@@ -167,10 +184,10 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	display:block;
         text-transform: uppercase;
         font-size: x-small;
-        margin:0 0 0 20px;
+        margin: 0 0 0 20px;
         background-color: #dee5e2;
         padding: 3px 10px;
-        width:20%;
+        width: 20%;
 }
 
 .jedna-afera a.more:hover {
@@ -193,10 +210,12 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	color: #fff;
         background-color: #3e606f;
 	padding-bottom:5px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
-#jedna-afera #ujawnienie { background-color: #a7bbb1; }
+#jedna-afera #ujawnienie {
+/*	background-color: #a7bbb1;*/
+	}
 
 #jedna-afera .glowka {
         background-color: #91aa9d;
@@ -213,18 +232,32 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	color: #fff;
         background-color: #3e606f;
 	padding: 5px 5px;
-	margin-bottom: 4px;
 
 }
 #jedna-afera .ramka {
-	padding: 0 20px 0px 20px;
+	padding: 10px 20px 0px 20px;
 	margin-bottom: 40px;
+        background-color: #b2c0c5 ;
 }
+
+#jedna-afera #ujawnienie .ramka {
+        background-color: #c8d4ce ;
+}
+
+
 #jedna-afera div.data {
 	font-weight:600;
-	color: red;
+	color: #1a1a1a;
+	margin: 0 auto;
 	text-align: center;
-	background-color: #f1f4eb;
+	text-transform: uppercase;
+	background-color: #f1f4eb ;
+	width: 40%;
+	padding: 3px 0;
+/*	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;*/
+	border: 1px solid #3e606f ;
+	border-bottom: 0px;
 }
 
 #jedna-afera h5 {
@@ -266,7 +299,8 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
         margin-top:20px;
 	background-color: #dee5e2;
 	padding: 3px 10px;
-	width:50%;
+	width: 10em;
+	display:block;
 }
 
 #jedna-afera .pokaz, .jedna-afera .pokaz {
@@ -282,7 +316,9 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 	background-color: #e8edde ;
 }
 
-#jedna-afera .wydarzenie { background-color: #b2c0c5; }
+#jedna-afera .wydarzenie {
+/*	background-color: #b2c0c5;*/
+}
 #jedna-afera .wydarzenie .glowka { background-color: #8ba0a9; }
 
 #jedna-afera-aktorzy {
@@ -296,6 +332,8 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 }
 #jedna-afera-aktorzy ul {
 	list-style-position: inside;
+	font-size: small;
+	margin-top:10px;
 }
 #jedna-afera-aktorzy ul li {
 	float: left;
@@ -313,10 +351,11 @@ h2, h3, h4, h5, h6 { font-weight: 400; }
 /********** footer ************/
 
 #footer {
-background-color:black;
-color: white;
-padding: 20px;
-margin-top: 20px;
+	background-color:black;
+	color: white;
+	padding: 20px;
+	margin-top: 20px;
+	font-size: small;
 }
 
 
@@ -458,4 +497,59 @@ margin-top: 20px;
 }
 
 /********** end jedno-wydarzenie ************/
+
+/********** jeden-aktor ************/
+#jeden-aktor {
+        margin: 0 auto;
+	width:50%;
+}
+
+#jeden-aktor h2 {
+	font-size:medium;
+	color: #fff;
+	text-transform: uppercase;
+        background-color: #a7bbb1;
+        padding-left:20px;
+        font-weight: 400;
+        border-bottom: 10px solid #91aa9d ;
+}
+
+#jeden-aktor h3 {
+        text-transform: uppercase;
+        padding: 5px 0 5px 20px;
+	background-color: #c8d4ce;
+        font-weight: 600;
+}
+
+#jeden-aktor ul {
+        background-color: #fff;
+	padding: 5px 10px;
+	list-style: none;
+}
+
+#jeden-aktor ul li {
+	font-size: small;
+        font-weight: 600;
+        text-transform: uppercase;
+	line-height: 2em;
+}
+
+#jeden-aktor ul li span { 
+	display: inline-block;
+	width: 10em;
+	font-weight: 400;
+        text-transform: none;
+}
+
+#jeden-aktor ul li a {
+        text-transform: uppercase;
+        font-weight: 600;
+	font-size: medium;
+}
+
+#jeden-aktor ul li a:hover { color: #3e606f; }
+
+
+/********** end jeden-aktor ************/
+
 

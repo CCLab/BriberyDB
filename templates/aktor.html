@@ -1,12 +1,12 @@
 {% extends "body.html" %}{% block content %}
         <div id="jeden-aktor">
-	  <h2>{{ actor.1 }}</h2>
-          <ul>{% for role in roles %}
-            <h3>{{ role.0 }}</h3>
+	  <h2>{{ actor.1 }}</h2>{% for role in roles %}
+          <h3> [rola] {{ role.0 }}</h3>
+          <ul>
             <li>{% for case in role.1 %}
               <ul>
-                <li>w związku z: <span class="nazwa-afery">{{ case.1.0 }}</span></li>
-                <li>pełniona funkcja: [nie wiem co tu ma być tak naprawdę ]</li>
+                <li><span>w zwiazku z:</span> <a href="">{{ case.1.0 }}</a></li>
+                <li><span>pelniona funkcja:</span> [nie wiem co tu ma byc tak naprawde ]</li>
               </ul>{% endfor %}
             </li>{% endfor %}
           </ul>

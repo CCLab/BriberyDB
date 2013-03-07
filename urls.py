@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     (r'^wydarzenie/(?P<object_id>\d+)/$', 'afera.views.event'),
     
     (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
+    (r'^afery/$', 'afera.views.cases' ),
     (r'^afera/all/$', 'afera.views.cases' ),
     (r'^afera/(?P<object_id>\d+)/actors/$', 'afera.views.case_actors' ),
     (r'^podmiot/(?P<object_id>\d+)/?$', 'aktor.views.actor'),

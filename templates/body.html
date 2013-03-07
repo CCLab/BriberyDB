@@ -1,12 +1,10 @@
 {% extends "xhtml.html" %}{% block body %}
     <div id="wrapper">
       <div id="header" class="group">
-	<a href="/">
         <div id="logo">
-          <a href="{% url page_main %}">[logo]
+          <a href="{% url page_main %}"><img id="logo-bak" src=""/>
           <h1>Baza afer korupcyjnych</h1></a>
         </div><!-- koniec logo -->
-	</a>
         <div id="navi-top">
           <ul>
             <li><a {% if tab == 1 %}id="active" {% endif %}href="{% url afera.views.cases %}">afery</a></li>

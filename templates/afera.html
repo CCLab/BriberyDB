@@ -19,7 +19,7 @@
                       <p class="pokaz">{% if event_leak.2 > 5 %}pokaż wszystkich ({{ event_leak.2 }}){% else %} {% endif %}</p>
                   </div><!-- koniec wydarzenie-aktorzy -->
                   <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
-                  <p class="more"><a href="">czytaj więcej</a></p>
+                  <a class="more" href="">czytaj więcej</a>
               </div><!-- koniec ramka -->
           </div><!-- koniec ujawnienie -->{% for event in events %}
           <div class="wydarzenie">
@@ -34,13 +34,13 @@
                 <p class="pokaz">{% if event.2 > 5 %}pokaz wszystkich ({{ event.2 }}){% else %} {% endif %}</p>
               </div><!-- koniec wydarzenie-aktorzy -->
               <p class="wydarzenie-tekst">{{ event.0.2|truncatewords_html:50 }}</p>
-              <p class="more"><a href="">czytaj wiecej</a></p>
+              <a class="more" href="{% url afera.views.event object_id=event.0.0 %}">czytaj wiecej</a>
               </div><!-- koniec ramka -->
           </div><!-- koniec wydarzenie -->{% endfor %}
           <div id="jedna-afera-aktorzy">
             <h4>Wszyscy aktorzy afery</h4>
             <ul>{% for actor in all_actors %}
-	      <li><a href="">{{ actor.1 }}</a></li>{% endfor %}
+	      <li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
 	    </ul>
 	  </div><!-- koniec jedna-afera-aktorzy -->
 	</div><!-- koniec jedna-afera -->
