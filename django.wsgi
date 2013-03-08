@@ -1,8 +1,7 @@
-import os
-import sys
+import os, sys
 import django.core.handlers.wsgi
 
-path = (lambda p:'/'.join(p.split('/')[:-1]))(os.path.abspath(__file__))
+path = (lambda p:'/'.join(p.split('/')[:-2]))(os.path.abspath(__file__))
 
 if path not in sys.path:
     sys.path.append(path)
