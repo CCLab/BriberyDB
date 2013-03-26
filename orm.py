@@ -38,7 +38,7 @@ Q = {
 
   'event' : '''SELECT e.id, scandal_id, s.name AS scandal, e.title, e.description, background, event_date,
     publication_date, refs, e.type_id, e.subtype_id, location_id
-    FROM events AS e JOIN scandals AS s ON scandal_id=s.id WHERE e.id=%s;''',
+    FROM events AS e LEFT JOIN scandals AS s ON scandal_id=s.id WHERE e.id=%s;''',
 
   'event_count': 'SELECT count(id) FROM events WHERE scandal_id=%s;',
 
