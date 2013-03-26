@@ -1,5 +1,4 @@
 {% extends "body.html" %}{% block content %}
-
 	<div id="jedno-wydarzenie-paczka">
 	<div id="jedno-wydarzenie-nav-lewo" style="visibility: {% if prev %}visible{% else %}hidden{% endif %};">
 	poprzednie:
@@ -8,14 +7,14 @@
 	</div>
 
           <div id="jedno-wydarzenie">
-              <h2>{% if event.2 %}{{ event.2.0 }}{% else %}[ nazwa afery ]{% endif %}</h2>
-            <div class="data">{{ event.6|date:"Y-m-d" }}</div>
+              <h2>{% if scandal_title %}{{ scandal_title }}{% else %}[ nazwa afery ]{% endif %}</h2>
+            <div class="data">{{ event.1|date:"Y-m-d" }}</div>
 
             <div class="ramka">
-              <h3>{% if event.3 %}{{ event.3 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h3>
+              <h3>{% if event.4 %}{{ event.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h3>
             </div><!-- koniec ramka -->
-		<h5>tytul wydarzenia</h5>
-              <p class="wydarzenie-tekst">{{ event.4 }}</p>
+		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzeni a]{% endif %}</h5>
+              <p class="wydarzenie-tekst">{{ event.2 }}</p>
 
           </div><!-- koniec jedno-wydarzenie -->
 	<div id="jedno-wydarzenie-nav-prawo" style="visibility: {% if next %}visible{% else %}hidden{% endif %};">

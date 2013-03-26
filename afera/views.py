@@ -117,28 +117,32 @@ def cases (request):
 
 def event (request, object_id):
   'single event view'
-  
+  scandal_title = None  
   event = orm.query('event', object_id)[0]
-  print event
+  
+  scandal_title = orm.query('event_case_title', event[0])[0][0][0]
   
   try:
     if event:
       refs = orm.query('refs','{'+','.join([str(i) for i in event[8]])+'}')
+      
+    scandal_title = orm.query('event_case_title', event[0])[0][0]
   except (IndexError, TypeError):
     refs = []
 
   try: 
-    prev_e = orm.query('prev_event', (event[1],object_id))[0]
+    prev_e = orm.query('prev_event', (object_id, object_id))[0]
   except IndexError:
     prev_e = None
   try:
-    next_e = orm.query('next_event', (event[1],object_id))[0]
+    next_e = orm.query('next_event', (object_id,object_id))[0]
   except IndexError:
     next_e = None
                       
   result = dict(refs=refs, event=event, prev=prev_e, next=next_e, tab=1)
 
   result['tab'] = 1
+  result['scandal_title'] = scandal_title if isinstance(scandal_title, unicode) else scandal_title.decode('utf-8')
 
   template = loader.get_template("wydarzenie.html")
 
