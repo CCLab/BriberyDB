@@ -33,18 +33,6 @@ def get_event_actors (event_id, db='afery'):
 
   return cursor.fetchall ()
             
-def get_case_actors (object_id, db='afery'):
-
-  QUERY = "SELECT DISTINCT actor_id, name FROM (actors_events JOIN events ON event_id=events.id) JOIN ACTORS ON actor_id=actors.id WHERE scandal_id=%s"
-
-  #"SELECT DISTINCT actor_id,name FROM (actors JOIN actors_events ON actor_id = actors_events.actor_id) RIGHT JOIN events ON event_id = events.id WHERE scandal_id=%s;"
-  
-  cursor = connections[db].cursor()
-
-  cursor.execute (QUERY, (object_id,))
-
-  return cursor.fetchall()
-
 # views
 
 
@@ -54,8 +42,6 @@ def case (request, object_id):
   
   scandal = get_scandal(object_id)
   events = orm.query('case_events', object_id)
-
-#  print events[0]
 
   if events:
     ujawnienie = (events[0], get_event_actors(events[0][0])[:5],
@@ -75,10 +61,10 @@ def case (request, object_id):
   result['events'] = [ (e, get_event_actors(e[0])[:5], len(get_event_actors(e[0])))
                        for e in events[1:]]
    
-  result['all_actors'] = get_case_actors(object_id)
-
-  result['tab'] = 1
-  print result['events']
+  result['javascripts']=['actors']
+  result['all_actors'] = orm.query('case_actors', object_id)
+  result['tab'] = 1 print
+  result['events']
   
   template = loader.get_template ('afera.html')
 
@@ -89,7 +75,7 @@ def case_actors (request, object_id):
   'returns HTML <ul> for case actors'
   
   result = {}
-  result['actors'] = get_case_actors(object_id)
+  result['actors'] = orm.query('case_actors', object_id)
   template = loader.get_template("aktorzy.inc")
   return HTTPResponse (template.render(Context(dict(case=result))))
 
