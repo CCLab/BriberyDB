@@ -31,14 +31,21 @@ Q = {
   'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
 
 #  'case_events': '''SELECT e.id, event_date, description, publication_date, types, refs, title, locations.name as location
-  'case_events': '''select events.id, event_date, description, publication_date, types, refs, title, locations.name
-    FROM events LEFT JOIN locations ON events.location_id = locations.id
-    WHERE events.id=ANY(SELECT UNNEST(events) FROM scandals WHERE id=%s) 
-    ORDER BY event_date ASC;''',
+#  'case_events': '''select events.id, event_date, description, publication_date, types, refs, title, locations.name
+#    FROM events LEFT JOIN locations ON events.location_id = locations.id
+#    WHERE events.id=ANY(SELECT UNNEST(events) FROM scandals WHERE id=%s) 
+#    ORDER BY event_date ASC;''',
+
+  'case_events': '''sELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
+    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
+      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id
+        FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
+        LEFT JOIN locations ON e.location_id=locations.id
+        WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) ORDER BY event_date;''',
 
   'event' : '''SELECT e.id, scandal_id, s.name AS scandal, e.title, e.description, background, event_date,
     publication_date, refs, e.type_id, e.subtype_id, location_id
-    FROM events AS e LEFT JOIN scandals AS s ON scandal_id=s.id WHERE e.id=%s;''',
+    FROM events AS e JOIN scandals AS s ON scandal_id=s.id WHERE e.id=%s;''',
 
   'event_count': 'SELECT count(id) FROM events WHERE scandal_id=%s;',
 
