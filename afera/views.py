@@ -124,9 +124,7 @@ def event (request, object_id):
   
   try:
     if event:
-      refs = orm.query('refs','{'+','.join([str(i) for i in event[8]])+'}')
-      
-    scandal_title = orm.query('event_case_title', event[0])[0][0]
+      refs = orm.query('refs','{'+','.join([str(i) for i in event[5]])+'}')
   except (IndexError, TypeError):
     refs = []
 
