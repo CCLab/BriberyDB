@@ -1,6 +1,6 @@
 # Create your views here.
 
-import orm
+from skandale import orm
 
 from django.http import HttpResponse as HTTPResponse
 
