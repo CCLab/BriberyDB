@@ -1,6 +1,6 @@
 # Create your views here.
 
-import orm
+from skandale import orm
 
 from django.http import HttpResponse as HTTPResponse
 
@@ -53,7 +53,7 @@ def case (request, object_id):
   'single scandal view'
   
   scandal = get_scandal(object_id)
-  events = get_events (object_id)
+  events = orm.query('case_events', object_id)
 
 #  print events[0]
 
