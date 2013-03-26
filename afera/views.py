@@ -25,14 +25,6 @@ def get_events (scandal_id, db='afery'):
 
   return cursor.fetchall ()
 
-def get_event_actors (event_id, db='afery'):
-
-  cursor = connections[db].cursor()
-  
-  cursor.execute ("SELECT actors.id, actors.name,affiliations FROM actors_events JOIN actors ON actors_events.actor_id=actors.id where event_id=%s;",(event_id,))
-
-  return cursor.fetchall ()
-            
 # views
 
 
@@ -61,9 +53,9 @@ def case (request, object_id):
   result['events'] = [ (e, get_event_actors(e[0])[:5], len(get_event_actors(e[0])))
                        for e in events[1:]]
    
-  result['javascripts']=['actors']
+  result['javascripts'] = ['actors']
   result['all_actors'] = orm.query('case_actors', object_id)
-  result['tab'] = 1 print
+  result['tab'] = '1'
   result['events']
   
   template = loader.get_template ('afera.html')
