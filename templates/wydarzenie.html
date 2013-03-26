@@ -3,25 +3,24 @@
 	<div id="jedno-wydarzenie-paczka">
 	<div id="jedno-wydarzenie-nav-lewo" style="visibility: {% if prev %}visible{% else %}hidden{% endif %};">
 	poprzednie:
-	<span class="data">{% if prev %}<a href="{% url afera.views.event object_id=prev.0 %}">{{ prev.1 }}</a>{% endif %}</span>{% if prev.2 %}
+	<span class="data">{% if prev %}<a href="{% url afera.views.event object_id=prev.0 %}">{{ prev.1|date:"Y-m-d" }}</a>{% endif %}</span>{% if prev.2 %}
 	{{ prev.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}
 	</div>
 
           <div id="jedno-wydarzenie">
-            <div class="data">{{ event.6 }}</div>
-            <div class="glowka">
-              <h4>{% if event.2 %}{{ event.2.0 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h4>
-            </div>
+              <h2>{% if event.2 %}{{ event.2.0 }}{% else %}[ nazwa afery ]{% endif %}</h2>
+            <div class="data">{{ event.6|date:"Y-m-d" }}</div>
 
             <div class="ramka">
-              <h5>{% if event.3 %}{{ event.3 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
-              <p class="wydarzenie-tekst">{{ event.4 }}</p>
+              <h3>{% if event.3 %}{{ event.3 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h3>
             </div><!-- koniec ramka -->
+		<h5>tytul wydarzenia</h5>
+              <p class="wydarzenie-tekst">{{ event.4 }}</p>
 
           </div><!-- koniec jedno-wydarzenie -->
 	<div id="jedno-wydarzenie-nav-prawo" style="visibility: {% if next %}visible{% else %}hidden{% endif %};">
 	nastepne:
-	<span class="data">{% if next %}<a href="{% url afera.views.event object_id=next.0 %}">{{ next.1 }}</a>{% endif %}</span>{% if next %}{% if next.2 %}
+	<span class="data">{% if next %}<a href="{% url afera.views.event object_id=next.0 %}">{{ next.1|date:"Y-m-d" }}</a>{% endif %}</span>{% if next %}{% if next.2 %}
         {{ next.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}{% endif %}
 	</div>
 	</div><!-- koniec jedno-wydarzenie-paczka -->{% if refs %}
