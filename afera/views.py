@@ -96,7 +96,9 @@ def cases (request):
 def event (request, object_id):
   'single event view'
   scandal_title = None  
-  event = orm.query('event', object_id)[0]
+  event = list(orm.query('event', object_id)[0])
+  
+  event[2] = event[2].split('\n')
   
   scandal_title = orm.query('event_case_title', event[0])[0][0][0]
   

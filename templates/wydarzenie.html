@@ -13,8 +13,8 @@
             <div class="ramka">
               <h3>{% if event.4 %}{{ event.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h3>
             </div><!-- koniec ramka -->
-		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzeni a]{% endif %}</h5>
-              <p class="wydarzenie-tekst">{{ event.2 }}</p>
+		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzena]{% endif %}</h5>{% for para in event.2 %}{% if para %}
+              <p class="wydarzenie-tekst">{{ para }}</p>{% endif %}{% endfor %}
 
           </div><!-- koniec jedno-wydarzenie -->
 	<div id="jedno-wydarzenie-nav-prawo" style="visibility: {% if next %}visible{% else %}hidden{% endif %};">
