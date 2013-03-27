@@ -36,8 +36,8 @@ def case (request, object_id):
   events = orm.query('case_events', object_id)
 
   if events:
-    ujawnienie = (events[0], get_event_actors(events[0][0])[:5],
-                   len (get_event_actors(events[0][0])))
+    ujawnienie_actors = orm.query('event_actors',events[0][0])
+    ujawnienie = (events[0], ujawnienie_actors[:5],len(ujawnienie_actors))
 
   else:
     ujawnienie = (None, None, None)
@@ -50,7 +50,7 @@ def case (request, object_id):
   result['background'] = scandal[0][2]
   result['num_events'] = len(events)
   result['event_leak'] = ujawnienie
-  result['events'] = [ (e, get_event_actors(e[0])[:5], len(get_event_actors(e[0])))
+  result['events'] = [ (e, orm.query('event_actors', e[0])[:5], orm.query('event_actors_count', (e[0]))[0][0])
                        for e in events[1:]]
    
   result['javascripts'] = ['actors']

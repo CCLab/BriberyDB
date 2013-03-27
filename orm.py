@@ -28,6 +28,11 @@ Q = {
     JOIN actors ON actor_id=actors.id
     WHERE event_id=%s;''',
 
+  'event_actors_count': '''SELECT count(name)
+    FROM actors_events
+    JOIN actors ON actor_id=actors.id
+    WHERE event_id=%s;''',
+
   'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
 
   'case_events': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
@@ -58,7 +63,7 @@ Q = {
   
   'refs':  'SELECT * FROM refs AS r WHERE r.id = ANY(%s);',
 
-  'cases': 'SELECT id, name, description, background, consequences, types, fields  FROM scandals;',
+  'cases': 'SELECT id, name, description, background, consequences, types, fields, events  FROM scandals;',
 
   'case_actors':  '''SELECT DISTINCT actor_id, name
     FROM (actors_events JOIN events ON event_id=events.id)
