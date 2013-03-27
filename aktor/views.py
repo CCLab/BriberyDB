@@ -6,7 +6,8 @@ from django.http import HttpResponse as HTTPResponse
 
 from django.template import Context, RequestContext, loader, Template
 
-def actors (request):
+def actors (request, human=True):
+
   'Actors index.'
 
   letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -15,13 +16,14 @@ def actors (request):
   
   for l in letters:
 
-    result.append((l, orm.query('actors_like', (l.lower()+'%', l.upper()+'%'))))
-
+    if human:
+      result.append((l, orm.query('actors_human_like', (l.lower()+'%', l.upper()+'%'))))
+    else:
+      result.append((l, orm.query('actors_nonhuman_like', (l.lower()+'%', l.upper()+'%'))))
   template = loader.get_template("indeks.html")
 
   return HTTPResponse (template.render(Context(dict(letters=result,tab=2))))
-  
-  
+    
 
 def actor (request, object_id):
 

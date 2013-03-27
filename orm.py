@@ -33,7 +33,9 @@ Q = {
     JOIN actors ON actor_id=actors.id
     WHERE event_id=%s;''',
 
-  'actors_like': 'SELECT * FROM actors WHERE name LIKE %s OR name LIKE %s ORDER BY name ASC;',
+  'actors_nonhuman_like': 'SELECT * FROM actors WHERE (name LIKE %s OR name LIKE %s) AND human=FALSE ORDER BY name ASC;',
+  
+  'actors_human_like': 'SELECT * FROM v_actors WHERE surname LIKE %s OR surname LIKE %s ORDER BY surname ASC;',
 
   'case_events': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
     FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
