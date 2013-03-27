@@ -22,7 +22,7 @@ def actors (request, human=True):
       result.append((l, orm.query('actors_nonhuman_like', (l.lower()+'%', l.upper()+'%'))))
   template = loader.get_template("indeks.html")
 
-  return HTTPResponse (template.render(Context(dict(letters=result,tab=2))))
+  return HTTPResponse (template.render(Context(dict(letters=result,tab=2 if human else 3))))
     
 
 def actor (request, object_id):
