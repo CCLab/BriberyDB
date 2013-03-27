@@ -85,6 +85,8 @@ def cases (request):
     case['events'] = orm.query('event_count', c[0])[0][0]
     case['actors'] = actors[:5]
     case['num_actors'] = len(actors)
+    case['num_events'] = len(c[7])
+    
     result.append(case)
     print case
 

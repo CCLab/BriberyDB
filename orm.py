@@ -44,6 +44,7 @@ Q = {
         LEFT JOIN locations ON e.location_id=locations.id
         WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) ORDER BY event_date;''',
 
+  'case_num_events': '''select array_length(events,1) from scandals where id=%s;''',
 
   'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
     FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type

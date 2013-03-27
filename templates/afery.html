@@ -9,7 +9,7 @@
           <div class="jedna-afera">
             <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
             <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-            <p class="wydarzen"><a href="{% url afera.views.case object_id=case.id %}">wydarzen: {{ case.events }}</a></p>
+            <p class="wydarzen"><a href="{% url afera.views.case object_id=case.id %}">wydarzen: {{ case.num_events }}</a></p>
             <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}
             </div>
             <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
