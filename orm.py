@@ -23,10 +23,11 @@ import types, settings
 from django.db import connections
 
 Q = {
-  'event_actors': '''SELECT actor_id, name, types, roles, human
+  'event_actors': '''SELECT actor_id, name, types, roles, human, count(name)
     FROM actors_events
     JOIN actors ON actor_id=actors.id
-    WHERE event_id=%s;''',
+    WHERE event_id=%s
+    GROUP BY actors_events.actor_id,actors.name,actors_events.types,actors_events.roles,actors.human;''',
 
   'event_actors_count': '''SELECT count(name)
     FROM actors_events

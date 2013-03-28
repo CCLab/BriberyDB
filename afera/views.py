@@ -50,7 +50,7 @@ def case (request, object_id):
   result['background'] = scandal[0][2]
   result['num_events'] = len(events)
   result['event_leak'] = ujawnienie
-  result['events'] = [ (e, orm.query('event_actors', e[0])[:5], orm.query('event_actors_count', (e[0]))[0][0])
+  result['events'] = [ (e, orm.query('event_actors', e[0])[:6]  )
                        for e in events[1:]]
    
   result['javascripts'] = ['actors']
