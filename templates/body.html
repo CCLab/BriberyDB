@@ -8,8 +8,8 @@
         <div id="navi-top">
           <ul>
             <li><a {% if tab == 1 %}id="active" {% endif %}href="{% url afera.views.cases %}">afery</a></li>
-            <li><a {% if tab == 2 %}id="active" {% endif %}href="{% url aktor.views.actors %}">aktorzy</a></li>
-            <li><a {% if tab == 3 %}id="active" {% endif %}href="">instytucje</a></li>
+            <li><a {% if tab == 2 %}id="active" {% endif %}href="{% url page_actors_human %}">aktorzy</a></li>
+            <li><a {% if tab == 3 %}id="active" {% endif %}href="{% url page_actors_organizational %}">instytucje</a></li>
             <li><a {% if tab == 4 %}id="active" {% endif %}href="{% url page_about %}">o stronie</a></li>
             <li><a {% if tab == 5 %}id="active" {% endif %}href="{% url page_contact %}">kontakt</a></li>
           </ul>
