@@ -47,8 +47,6 @@ Q = {
 
   'case_num_events': '''select array_length(events,1) from scandals where id=%s;''',
 
-# actor_roles  select id, name as role from (select distinct unnest(roles) as role_id from actors_events where actor_id=2) as ar left join actor_roles on ar.role_id=id;
-
   'actor_roles': '''SELECT DISTINCT s.id AS id, role, type, name[1] AS scandal FROM
     (SELECT event_id, role, name AS type FROM
       (SELECT event_id, name AS role, actor_type_id FROM
@@ -56,8 +54,7 @@ Q = {
           WHERE actor_id=%s) AS ar
         LEFT JOIN actor_roles ON ar.role_id=id) AS ert
       LEFT JOIN actor_types ON actor_type_id=actor_types.id) AS event
-   LEFT JOIN scandals AS s on event_id=ANY(s.events);''',
-
+  JOIN scandals AS s on event_id=ANY(s.events);''',
 
   'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
     FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
