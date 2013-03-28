@@ -33,22 +33,16 @@ def actor (request, object_id):
 
   roles_dict = {}
   for row in roles_rows:
-    print row 
     role = row[1]
     case = row[3]
-    role_dict = roles_dict.get(role,{})
+    role_dict = roles_dict.get(role,dict(id=row[0]))
     case_list = role_dict.get(case, [])
     case_list.append(row[2])
     role_dict[case] = case_list
     roles_dict[role] = role_dict
     
-    
-  print roles_dict
-
-  roles = [ ( role, [ (case, roles_dict[role][case]) for case in roles_dict[role].keys() ] ) for role in roles_dict.keys() ]
+  roles = [ ( role, [ ((case, roles_dict[role]['id']), roles_dict[role][case]) for case in roles_dict[role].keys() if not case=='id' ] ) for role in roles_dict.keys() ]
   
-  print roles
-         
   result = dict(actor=actor, roles=roles, tab=2)
 
   template = loader.get_template("aktor.html")
