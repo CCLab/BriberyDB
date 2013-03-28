@@ -24,7 +24,8 @@ urlpatterns = patterns('',
     (r'^afera/all/$', 'afera.views.cases' ),
     (r'^afera/(?P<object_id>\d+)/actors/$', 'afera.views.case_actors' ),
     (r'^podmiot/(?P<object_id>\d+)/?$', 'aktor.views.actor'),
-    (r'^podmiot/all/?$', 'aktor.views.actors'),
+    (r'^podmiot/ludzie/?$', 'aktor.views.actors', dict(human=True),'page_actors_human'),
+    (r'^podmiot/instytucje/?$', 'aktor.views.actors', dict(human=False), 'page_actors_organizational'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
