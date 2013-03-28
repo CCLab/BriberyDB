@@ -29,25 +29,31 @@ def actor (request, object_id):
 
   actor = orm.query('actor', object_id)[0]
 
-
   roles_rows = orm.query('actor_roles', object_id)
 
   roles_dict = {}
   for row in roles_rows:
-    r = roles_dict.get(row[1],[])
-    r.append ((row[2], row[3]))
-    roles_dict [row[1]] = r
-  
-  roles = [ (r, roles_dict[r]) for r in roles_dict.keys()]
+    print row 
+    role = row[1]
+    case = row[3]
+    role_dict = roles_dict.get(role,{})
+    case_list = role_dict.get(case, [])
+    case_list.append(row[2])
+    role_dict[case] = case_list
+    roles_dict[role] = role_dict
+    
+    
+  print roles_dict
 
+  roles = [ ( role, [ (case, roles_dict[role][case]) for case in roles_dict[role].keys() ] ) for role in roles_dict.keys() ]
+  
   print roles
+         
   result = dict(actor=actor, roles=roles, tab=2)
 
   template = loader.get_template("aktor.html")
 
   return HTTPResponse (template.render(Context(result)))
-
-
 
 
 def event_actors (request, object_id):

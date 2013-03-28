@@ -1,12 +1,13 @@
 {% extends "body.html" %}{% block content %}
         <div id="jeden-aktor">
 	  <h2>{{ actor.1 }}</h2>{% for role in roles %}
-          <h3> [rola] {{ role.0 }}</h3>
+          <h3>{{ role.0 }}</h3>
           <ul>
             <li>{% for case in role.1 %}
               <ul>
-                <li><span>w zwiazku z:</span> <a href="">{{ case.1.0 }}</a></li>
-                <li><span>pelniona funkcja:</span> [nie wiem co tu ma byc tak naprawde ]</li>
+                <li><span>w zwiazku z:</span> <a href="">{{ case.0 }}</a></li>
+                <li><span>pelniona funkcja:</span>{% for fun in case.1 %}{{ fun }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                </li>
               </ul>{% endfor %}
             </li>{% endfor %}
           </ul>
