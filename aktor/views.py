@@ -10,17 +10,38 @@ def actors (request, human=True):
 
   'Actors index.'
 
-  letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
   result = []
-  
-  for l in letters:
 
-    if human:
+  if human: 
+
+    from string import uppercase as LETTERS
+
+    for l in LETTERS:
       result.append((l, orm.query('actors_human_like', (l.lower()+'%', l.upper()+'%'))))
-    else:
-      result.append((l, orm.query('actors_nonhuman_like', (l.lower()+'%', l.upper()+'%'))))
-  template = loader.get_template("indeks.html")
+      
+    template = loader.get_template("indeks.html")
+
+  else:
+
+    actors = orm.query('nonhuman_actor_list', (None,))
+    actors_dict = {}
+
+    for row in actors:
+      group = actors_dict.get(row[2], [])
+      group.append(row[:2])
+      actors_dict[row[2]] = group
+
+    #  print actors_dict
+
+    keys = actors_dict.keys()
+    keys.sort()
+
+    for k in keys:
+      actors = actors_dict[k]
+      actors.sort(key=lambda a:a[1])
+      result.append((k, actors))
+
+    template = loader.get_template("instytucje.html")
 
   return HTTPResponse (template.render(Context(dict(letters=result,tab=2 if human else 3))))
     
