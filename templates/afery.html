@@ -1,9 +1,6 @@
 {% extends "body.html" %}{% block content %}
-        <ul id="afery-nav">
-          <li><a href="">typ korupcji 1</a></li>
-          <li><a href="">typ korupcji 2</a></li>
-          <li><a href="">typ korupcji 2</a></li>
-          <li><a href="">typ korupcji 2</a></li>
+        <ul id="afery-nav">{% for t in types %} 
+          <li><a href="{% url afera.views.cases object_id=t.0 %}">{% for phrase in t.1 %}{{ phrase }}{% if not forloop.last %} /<br>{% endif %}{% endfor %}</a></li>{% endfor %}
         </ul>{% for case in cases %} 
         <div class="jedna-afera-wrapper">
           <div class="jedna-afera">

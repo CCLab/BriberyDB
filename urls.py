@@ -15,14 +15,18 @@ urlpatterns = patterns('',
     (r'^/kontakt/$', direct_to_template,
      dict(template='contact.html', extra_context=dict(tab=5)), 'page_contact'),
      
-    # (r'^afery/', include('afery.foo.urls')),
-
     (r'^wydarzenie/(?P<object_id>\d+)/$', 'afera.views.event'),
-    
-    (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
+    (r'^wydarzenie/(?P<object_id>\d+)/podmioty/$', 'aktor.views.event'),
+
     (r'^afery/$', 'afera.views.cases' ),
+
+    (r'^afery/(?P<object_id>\d+)/$', 'afera.views.cases' ),
+
+    (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
     (r'^afera/all/$', 'afera.views.cases' ),
-    (r'^afera/(?P<object_id>\d+)/actors/$', 'afera.views.case_actors' ),
+    (r'^afera/(?P<object_id>\d+)/podmioty/$', 'afera.views.case_actors' ),
+
+
     (r'^podmiot/(?P<object_id>\d+)/?$', 'aktor.views.actor'),
     (r'^podmiot/ludzie/?$', 'aktor.views.actors', dict(human=True),'page_actors_human'),
     (r'^podmiot/instytucje/?$', 'aktor.views.actors', dict(human=False), 'page_actors_organizational'),

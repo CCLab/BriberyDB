@@ -72,10 +72,15 @@ def case_actors (request, object_id):
   return HTTPResponse (template.render(Context(dict(case=result))))
 
 
-def cases (request):
+def cases (request, object_id=None):
   'all cases view'
-  
-  cases = orm.query('cases', None)
+
+  if object_id:
+    cases = orm.query('cases_type', object_id)
+  else:
+    cases = orm.query('cases')
+
+  types =  [ (typ[0], [ t for t in typ[1].split('/') if t]) for typ in orm.query('case_types') ]
   result = []
 
   for c in cases:
@@ -92,7 +97,7 @@ def cases (request):
 
   template = loader.get_template ('afery.html')
 
-  return HTTPResponse (template.render(Context(dict(cases=result,tab=1,javascripts=['actors']))))
+  return HTTPResponse (template.render(Context(dict(cases=result,tab=1,javascripts=['actors'], types=types))))
 
 
 def event (request, object_id):
