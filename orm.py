@@ -76,7 +76,17 @@ Q = {
   
   'refs':  'SELECT * FROM refs AS r WHERE r.id = ANY(%s);',
 
-  'cases': 'SELECT id, name, description, background, consequences, types, fields, events  FROM scandals;',
+#  plain cases
+#  'cases': 'SELECT id, name, description, background, consequences, types, fields, events  FROM scandals;',
+
+  # cases sorted by earlier events
+  
+  'cases': '''SELECT * FROM (SELECT DISTINCT ON (s.id)
+    s.id, s.name, s.description, s.background, s.consequences, s.types, s.fields, s.events, event_date
+    FROM (SELECT id, name, description, background, consequences, types, fields, events, UNNEST (events) AS event_id
+      FROM scandals) AS s LEFT JOIN events AS e ON s.event_id=e.id ORDER BY s.id,event_date) as scandals ORDER BY event_date;''',
+
+  'cases_type': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(types);',
 
   'case_actors':  '''SELECT DISTINCT actor_id, name
     FROM (actors_events JOIN events ON event_id=events.id)
@@ -118,6 +128,13 @@ Q = {
     FROM scandal_field
     WHERE id = ANY(SELECT UNNEST(fields) FROM scandals WHERE id=%s);''',
 
+  'nonhuman_actor_list': '''SELECT DISTINCT actors.id, actor, name AS affiliation FROM
+    (SELECT actor_id AS id, name AS actor, unnest(affiliations) AS affiliation_id FROM actors_events AS ae
+      LEFT JOIN actors AS a ON ae.actor_id=a.id) AS actors LEFT JOIN
+        actor_affiliations ON actors.affiliation_id=actor_affiliations.id WHERE human=FALSE
+        GROUP BY affiliation,actors.id,actors.actor;''',
+  
+  'case_types': 'SELECT id, name from scandal_types;'
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
