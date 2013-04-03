@@ -608,3 +608,13 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 /********** end jeden-aktor ************/
 
 
+/* jedynka */
+
+div#jedynka-kolumna{ display: table; width: 50%; }
+div.wiersz { display: table-row; }
+div.wiersz-dlugi { display: table-cell; }
+div.wiersz-krotki { display: table-cell; }
+div#kolumna-obrazek { display: table-cell; }
+div.wiersz-niski { display: table-row; }
+div.zajawka-odd { display: table-cell; }
+
