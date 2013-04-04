@@ -1,0 +1,620 @@
+* { margin:0; padding:0; text-indent:0; border:0; }
+
+a { text-decoration: none; color: black;}
+a:hover,span:hover {
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        -moz-transition: all 0.1s;
+}
+
+html, body, h1, h2, h3, h4, h5 { font-family: 'Titillium Web', sans-serif; }
+
+h2, h3, h4, h5, h6 { font-weight: 400; }
+
+/* 300 400 600 700
+#1a1a1a czarny
+#3e606f niebieski ciemny
+#8ba0a9 niebieski sredni
+#b2c0c5 niebieski jasny
+
+#91aa9d zielony ciemny
+#a7bbb1 zielony 
+#c8d4ce zielony jasny
+
+#d1dbbd zielony
+#dee5e2 zielony
+#e8edde zielony
+
+#f1f4eb tlo
+
+
+*/
+
+/********** clearfix ************/
+
+.group:before,
+.group:after {
+	content: "";
+	display: table;
+}
+.group:after {
+	clear:both;
+}
+.group {
+	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+/********** clearfix end ************/
+
+/********** header ************/
+
+#header {
+	background-color: #3e606f;
+}
+#header #logo { display:block; }
+
+img#logo-bak {
+	display:block;
+	float: left;
+	position:relative;
+	zoom: 1;
+	width: 80px;
+	height: 80px;
+	top: 20px;
+	left: 20px;
+	border:1px solid white;
+}
+
+#header #logo h1 {
+	font-family: 'Titillium Web', sans-serif;
+	font-weight: 200;
+	font-size: 60px;
+	text-transform: uppercase;
+	color: #fff;
+	padding-left:150px;
+}
+
+#header #navi-top {
+}
+#header #navi-top ul {
+        font-family: 'Titillium Web', sans-serif;
+	list-style:none;
+	background-color: #1a1a1a;
+	height:5ex;
+	border-bottom: 2ex solid #a7bbb1;
+	text-transform: uppercase;
+        padding-left:150px;
+}
+#header #navi-top ul li {
+        font-family: 'Titillium Web', sans-serif;
+	padding-top:1ex;
+	list-style-type: none;
+	display:block;
+	margin-right:30px;
+	float:left;
+}
+#header #navi-top ul li a {
+	color: #fff;
+        border-bottom: 2ex solid #a7bbb1;
+	padding-bottom:8px;
+}
+#header #navi-top ul li a:hover, #header #navi-top ul li a#active {
+	border-bottom: 2ex solid #1a1a1a;
+}
+
+/********** end header ************/
+
+#wrapper {
+	background-color: #3e606f;
+	min-width: 900px;
+}
+#kontent {
+	border-top: 3ex solid #d1dbbd;
+        background-color: #f1f4eb;
+}
+
+/********** jedna-afera ************/
+
+.jedna-afera-wrapper { width:100%; }
+.jedna-afera-wrapper:hover { background-color: #e8edde ; }
+.jedna-afera {
+        width: 50%; margin: 0 auto;
+        background-color: #fff;
+	margin-bottom: 40px;
+}
+
+#jedna-afera {
+	background: #f1f4eb url('http://evil.pl/stuff/otwarte/korupcja/elementy/timeline.png') repeat-y center top;
+	min-width:1000px;
+	max-width:1500px;
+}
+
+#jedna-afera #j-a-nazwa { 
+background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/nazwa.png) no-repeat 70px 20px; }
+#jedna-afera #j-a-nazwa h2 { margin: 0 auto; width: 50%; }
+#jedna-afera #j-a-inne {
+background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/inne.png) no-repeat 70px 10px; }
+#jedna-afera #j-a-inne h3 { margin: 0 auto; width: 50%; }
+#jedna-afera #j-a-opis {
+background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/opis.png) no-repeat 70px 20px;}
+#jedna-afera #j-a-opis p { margin: 0 auto; width: 50%; }
+#jedna-afera #j-a-kontekst {
+background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.png) no-repeat 70px 20px;}
+#jedna-afera #j-a-kontekst p { margin: 0 auto; width: 50%; }
+
+#jedna-afera h2, .jedna-afera h2 {
+        padding: 7px 20px;
+	font-weight: 400;
+	font-size: 30px;
+	text-transform:uppercase;
+	background-color: #91aa9d;
+	line-height:2ex;
+}
+#jedna-afera h3, .jedna-afera h3 {
+        padding: 4px 20px;
+	font-weight: 600;
+	font-size: 17px;
+	text-transform:uppercase;
+	background-color: #a7bbb1;
+	border-bottom: 10px solid #c8d4ce;
+}
+
+.jedna-afera .wydarzen a {
+	float:right;
+	padding:5px;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: small;
+        width:11em;
+        color: #fff;
+        background-color: #3e606f;
+        margin-bottom: 20px;
+        margin-left: 10px;
+}
+
+#jedna-afera p#opis {
+        padding: 20px;
+	background-color: #dee5e2 ;
+}
+
+.jedna-afera p.opis {
+        padding: 20px;
+        background-color: #fff;
+}
+
+.jedna-afera a.more {
+	display:block;
+        text-transform: uppercase;
+        font-size: x-small;
+        margin: 0 0 0 20px;
+        background-color: #dee5e2;
+        padding: 3px 10px;
+        width: 20%;
+}
+
+.jedna-afera a.more:hover {
+        background-color: #c8d4ce;
+}
+
+#jedna-afera p#kontekst {
+	font-size: small;
+        padding: 20px;
+	background-color: #e8edde;
+	border-bottom: 10px solid #3e606f ;
+}
+
+#jedna-afera .wydarzen {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: small;
+	width:20%;
+	color: #fff;
+        background-color: #3e606f;
+	padding-bottom:5px;
+	margin-bottom: 40px;
+}
+
+#jedna-afera #ujawnienie, #jedna-afera .wydarzenie {
+	margin: 0 auto; width: 50%;
+	}
+
+#jedna-afera .glowka {
+        background-color: #91aa9d;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#jedna-afera h4 {
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: small;
+	width:40%;
+	color: #fff;
+        background-color: #3e606f;
+	padding: 5px 5px;
+
+}
+#jedna-afera .ramka {
+	padding: 10px 20px 0px 20px;
+	margin-bottom: 40px;
+        background-color: #b2c0c5 ;
+}
+
+#jedna-afera #ujawnienie .ramka {
+        background-color: #c8d4ce ;
+}
+
+#jedna-afera #ujawnienie .wydarzenie-tekst { padding-bottom: 20px; }
+
+
+#jedna-afera div.data {
+	font-weight:400;
+	color: #1a1a1a;
+	margin: 0 auto;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: #f1f4eb ;
+	background-color: #fff ;
+	width: 40%;
+	padding: 3px 0;
+/*	border-top-left-radius: 0.5em;
+	border-top-right-radius: 0.5em;*/
+	border: 1px solid #3e606f ;
+	border-bottom: 0px;
+}
+
+#jedna-afera h5 {
+	font-size: 24px;
+	font-weight: 700;
+	margin-top:10px;
+	margin-bottom:10px;
+	color: #1a1a1a;
+	line-height:2ex;
+}
+
+.jedna-afera .wydarzenie-aktorzy {
+	padding:20px 20px 0 20px;
+	width:70%;
+}
+
+#jedna-afera .wydarzenie-aktorzy, .jedna-afera .wydarzenie-aktorzy {
+	font-size: small;
+	text-transform: uppercase;
+}
+#jedna-afera .wydarzenie-aktorzy ul, .jedna-afera .wydarzenie-aktorzy ul {
+        text-transform: none;
+	list-style-position:inside;
+}
+#jedna-afera .wydarzenie-aktorzy li, .jedna-afera .wydarzenie-aktorzy li {
+	float: left;
+	margin-right: 1em;
+	font-size: small;
+}
+
+#jedna-afera .wydarzenie-tekst {
+	margin-top:10px;
+	font-weight: 400;
+}
+
+#jedna-afera .more {
+        text-transform: uppercase;
+	font-size: x-small;
+        margin-top:20px;
+	background-color: #dee5e2;
+	padding: 3px 10px;
+	width: 10em;
+	display:block;
+}
+
+#jedna-afera .pokaz, .jedna-afera .pokaz {
+	width:50%;
+	background-color: #f1f4eb;
+	padding: 0 5px;
+	font-size: x-small;
+	cursor: pointer;
+	margin-top:5px;
+}
+
+#jedna-afera .pokaz:hover, .jedna-afera .pokaz:hover, #jedna-afera .more:hover {
+	background-color: #e8edde ;
+}
+
+#jedna-afera .wydarzenie {
+/*	background-color: #b2c0c5;*/
+}
+#jedna-afera .wydarzenie .glowka { background-color: #8ba0a9; }
+
+#jedna-afera-aktorzy {
+	border-top: 10px solid #3e606f;
+	padding: 0 20px 10px 20px;
+	background-color: #91aa9d;
+	margin: 0 auto; width: 80%;
+}
+#jedna-afera-aktorzy h4 {
+	padding-top: 0;
+	margin-top: 0;
+}
+#jedna-afera-aktorzy ul {
+	list-style-position: inside;
+	font-size: small;
+	margin-top:10px;
+}
+#jedna-afera-aktorzy ul li {
+	float: left;
+	margin-right: 1em;
+}
+
+#jedna-afera-aktorzy ul:after {
+        content: "";
+        display: table;
+        clear:both;
+}
+
+/********** end jedna-afera ************/
+
+/********** footer ************/
+
+#footer {
+	background-color:black;
+	color: white;
+	padding: 20px;
+	margin-top: 20px;
+	font-size: small;
+}
+
+
+/********** end footer ************/
+
+/********** skorowidz ************/
+
+#skorowidz { } 
+
+#skorowidz-table, #afery-nav {
+	float:left;
+	position:relative;
+	left: 20px;
+	top: 20px;
+	width:170px;
+        border-top: 10px solid #3e606f;
+	padding-top:5px;
+
+}
+
+#skorowidz-table li, #afery-nav li {
+	list-style: none;
+	float: left;
+}
+
+#skorowidz-table li a {
+        display: block;
+        width:30px;
+	height:30px;
+	margin: 2px;
+	background-color: #b2c0c5;
+	text-align: center;
+}
+
+#afery-nav li {
+	width:100%;
+	margin-bottom: 5px;
+}
+
+#afery-nav li a {
+        display: block;
+	width: 100%;
+        background-color: #b2c0c5;
+        text-align: center;
+}
+
+#skorowidz-table li a:hover, #afery-nav li a:hover { 
+	background-color: #8ba0a9; }
+
+
+#kolumna-indeksu {
+        width: 50%; margin: 0 auto;
+        padding: 0;
+}
+
+.jedna-litera {
+	background-color: #fff;
+}
+
+.jedna-litera h2 {
+	background-color: #a7bbb1;
+	padding-left:20px;
+	font-weight: 600;
+        border-bottom: 10px solid #c8d4ce;
+}
+
+.jedna-litera h2 a { color: #fff; }
+
+.jedna-litera ul { padding: 20px; }
+.jedna-litera li { list-style: none; }
+.jedna-litera li a { color: #1a1a1a; }
+.jedna-litera li a:hover { font-weight: bold; }
+
+
+/********** end skorowidz ************/
+
+/********** jedno-wydarzenie ************/
+
+#jedno-wydarzenie-paczka {
+	display:table;
+}
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo,
+#jedno-wydarzenie { display: table-cell; }
+
+#jedno-wydarzenie h2 {
+        font-size:medium;
+        color: #000;
+        text-transform: uppercase;
+        background-color: #8ba0a9 ;
+        padding-left:20px;
+        font-weight: 600;
+        border-bottom: 10px solid #b2c0c5;
+}
+
+#jedno-wydarzenie .ramka {
+        background-color: #c8d4ce;
+        padding-left: 10px;
+        padding-right: 10px;
+}
+
+#jedno-wydarzenie p.wydarzenie-tekst {
+	background-color: #fff;
+	padding: 10px 20px 20px 20px;
+}
+
+#jedno-wydarzenie h3 {
+        margin: 0 auto;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: small;
+        width:40%;
+        color: #fff;
+        background-color: #3e606f;
+        padding: 5px 5px;
+}
+
+#jedno-wydarzenie h5 {
+        font-size: 24px;
+        font-weight: 700;
+	padding: 20px 20px 10px 20px;
+        color: #1a1a1a;
+	background-color: #fff;
+        line-height:2ex;
+}
+
+#jedno-wydarzenie .data {
+        font-weight:800;
+        color: #3e606f;
+	float:left;
+	position: relative;
+        text-transform: uppercase;
+        padding: 3px 20px;
+}
+
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo {
+	padding: 20px;
+	color: #aaa;
+	line-height:1.2em;
+}
+
+#jedno-wydarzenie-nav-lewo { text-align:right; }
+
+#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
+	display: block;
+	margin-top:10px;
+	font-weight:600;
+}
+
+#jedno-wydarzenie-zrodla {
+	border-top: 10px solid #3e606f;
+	padding: 0 20px 10px 20px;
+	background-color: #91aa9d;
+	width: 80%; margin: 0 auto;
+}
+
+#jedno-wydarzenie-zrodla h4 {
+	padding-top: 0;
+	margin: 0 auto;
+	margin-top:0;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: small;
+        width:20%;
+        color: #fff;
+        background-color: #3e606f;
+        padding: 0 5px 5px 5px;
+        margin-bottom: 4px;
+
+}
+
+#jedno-wydarzenie-zrodla ul {
+        list-style-position: inside;
+}
+#jedno-wydarzenie-zrodla ul li {
+        float: left;
+        margin-right: 1em;
+	font-size: small;
+}
+
+#jedno-wydarzenie-zrodla ul:after {
+        content: "";
+        display: table;
+        clear:both;
+}
+
+#jedno-wydarzenie {
+        width: 50%; margin: 0 auto;
+}
+
+/********** end jedno-wydarzenie ************/
+
+/********** jeden-aktor ************/
+#jeden-aktor {
+        margin: 0 auto;
+	width:50%;
+}
+
+#jeden-aktor h2 {
+	font-size:medium;
+	color: #fff;
+	text-transform: uppercase;
+        background-color: #a7bbb1;
+        padding-left:20px;
+        font-weight: 400;
+        border-bottom: 10px solid #91aa9d ;
+}
+
+#jeden-aktor h3 {
+        text-transform: uppercase;
+        padding: 5px 0 5px 20px;
+	background-color: #c8d4ce;
+        font-weight: 600;
+}
+
+#jeden-aktor ul {
+        background-color: #fff;
+	padding: 5px 10px;
+	list-style: none;
+}
+
+#jeden-aktor ul li {
+	font-size: small;
+        font-weight: 600;
+        text-transform: uppercase;
+	line-height: 2em;
+}
+
+#jeden-aktor ul li span { 
+	display: inline-block;
+	width: 10em;
+	font-weight: 400;
+        text-transform: none;
+}
+
+#jeden-aktor ul li a {
+        text-transform: uppercase;
+        font-weight: 600;
+	font-size: medium;
+}
+
+#jeden-aktor ul li a:hover { color: #3e606f; }
+
+
+/********** end jeden-aktor ************/
+
+
+/* jedynka */
+
+div#jedynka-kolumna{ display: table; width: 50%; }
+div.wiersz { display: table-row; }
+div.wiersz-dlugi { display: table-cell; }
+div.wiersz-krotki { display: table-cell; }
+div#kolumna-obrazek { display: table-cell; }
+div.wiersz-niski { display: table-row; }
+div.zajawka-odd { display: table-cell; }
+

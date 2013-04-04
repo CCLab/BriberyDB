@@ -1,0 +1,23 @@
+{% extends "xhtml.html" %}{% block body %}
+    <div id="wrapper">
+      <div id="header" class="group">
+        <div id="logo">
+          <a href="{% url page_main %}"><img id="logo-bak" src=""/>
+          <h1>Baza afer korupcyjnych</h1></a>
+        </div><!-- koniec logo -->
+        <div id="navi-top">
+          <ul>
+            <li><a {% if tab == 1 %}id="active" {% endif %}href="{% url afera.views.cases %}">afery</a></li>
+            <li><a {% if tab == 2 %}id="active" {% endif %}href="{% url page_actors_human %}">aktorzy</a></li>
+            <li><a {% if tab == 3 %}id="active" {% endif %}href="{% url page_actors_organizational %}">instytucje</a></li>
+            <li><a {% if tab == 4 %}id="active" {% endif %}href="{% url page_about %}">o stronie</a></li>
+            <li><a {% if tab == 5 %}id="active" {% endif %}href="{% url page_contact %}">kontakt</a></li>
+          </ul>
+        </div><!-- koniec navi-top -->
+      </div><!-- koniec header -->
+      <div id="kontent" class="group">{% block content %}{% endblock content %}
+      </div><!-- koniec kontent -->      
+      <div id="footer" class="group">
+        <p>Korupcjawpolsce.pl &mdash; projekt finansowany z grantu CEE Trust oraz </p>
+      </div><!-- koniec footer -->      
+    </div><!-- koniec wrapper -->{% endblock body %}

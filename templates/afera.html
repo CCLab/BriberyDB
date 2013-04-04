@@ -1,0 +1,46 @@
+{% extends "body.html" %}{% block content %}
+        <div id="jedna-afera">
+          <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
+	  <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
+	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
+          <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
+          <div class="wydarzen">wydarzen: {{ num_events }}</div>
+          <div id="ujawnienie">
+              <div class="data">{{ event_leak.0.1|date:"Y-m-d" }}</div>
+              <div class="glowka">
+                  <h4>Ujawnienie afery</h4>
+              </div>
+              <div class="ramka">
+                  <h5>{% if event_leak.0.6 %}{{ event_leak.0.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
+                  <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
+                      <ul class="group">{% for actor in event_leak.1 %}
+                          <a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}            
+                      </ul> 
+                      <p class="pokaz">{% if event_leak.2 > 5 %}pokaż wszystkich ({{ event_leak.2 }}){% else %} {% endif %}</p>
+                  </div><!-- koniec wydarzenie-aktorzy -->
+                  <p class="wydarzenie-tekst">{{ event_leak.0.2 }}</p>
+              </div><!-- koniec ramka -->
+          </div><!-- koniec ujawnienie -->{% for event in events %}
+          <div class="wydarzenie">
+              <div class="data">{{ event.0.1|date:"Y-m-d" }}</div>
+              <div class="glowka">
+              <h4>{% if event.0.4 %}{{ event.0.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h4>
+              </div>
+              <div class="ramka">
+              <h5>{% if event.0.6 %}{{ event.0.6 }}{% else %}[ tytuł wydarzenia ]{% endif %}</h5>
+              <div class="wydarzenie-aktorzy">Aktorzy wydarzenia:
+                <ul class="group">{% for actor in event.1 %}<li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}</ul>
+                <p class="pokaz">{% if event.2 > 5 %}pokaz wszystkich ({{ event.2 }}){% else %} {% endif %}</p>
+              </div><!-- koniec wydarzenie-aktorzy -->
+              <p class="wydarzenie-tekst">{{ event.0.2|truncatewords_html:50 }}</p>
+              <a class="more" href="{% url afera.views.event object_id=event.0.0 %}">czytaj wiecej</a>
+              </div><!-- koniec ramka -->
+          </div><!-- koniec wydarzenie -->{% endfor %}
+          <div id="jedna-afera-aktorzy">
+            <h4>Wszyscy aktorzy afery</h4>
+            <ul>{% for actor in all_actors %}
+	      <li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
+	    </ul>
+	  </div><!-- koniec jedna-afera-aktorzy -->
+	</div><!-- koniec jedna-afera -->
+{% endblock content %}
