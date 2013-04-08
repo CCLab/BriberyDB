@@ -1,56 +1,38 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext);
+
+@import url(http://fonts.googleapis.com/css?family=Headland+One&subset=latin,latin-ext);
+
+
 * { margin:0; padding:0; text-indent:0; border:0; }
 
-a { text-decoration: none; color: black;}
+a { text-decoration: none; color: #1a1a1a;}
+
 a:hover,span:hover {
         transition: all 0.1s;
         -webkit-transition: all 0.1s;
         -moz-transition: all 0.1s;
 }
 
-html, body, h1, h2, h3, h4, h5 { font-family: 'Titillium Web', sans-serif; }
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+	color: #1a1a1a;
+}
 
-h2, h3, h4, h5, h6 { font-weight: 400; }
-
-/* 300 400 600 700
-#1a1a1a czarny
-#3e606f niebieski ciemny
-#8ba0a9 niebieski sredni
-#b2c0c5 niebieski jasny
-
-#91aa9d zielony ciemny
-#a7bbb1 zielony 
-#c8d4ce zielony jasny
-
-#d1dbbd zielony
-#dee5e2 zielony
-#e8edde zielony
-
-#f1f4eb tlo
-
-
-*/
+html, body { font-family: 'Open Sans', sans-serif; }
 
 /********** clearfix ************/
 
-.group:before,
-.group:after {
-	content: "";
-	display: table;
-}
-.group:after {
-	clear:both;
-}
-.group {
-	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
-}
+.group:before, .group:after { content: ""; display: table; }
+.group:after { clear:both; }
+.group { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
 
 /********** clearfix end ************/
 
 /********** header ************/
 
-#header {
-	background-color: #3e606f;
-}
+#header { background-color: #03406A; }
+
 #header #logo { display:block; }
 
 img#logo-bak {
@@ -66,28 +48,24 @@ img#logo-bak {
 }
 
 #header #logo h1 {
-	font-family: 'Titillium Web', sans-serif;
-	font-weight: 200;
 	font-size: 60px;
-	text-transform: uppercase;
 	color: #fff;
 	padding-left:150px;
 }
 
-#header #navi-top {
-}
+#header #navi-top { }
+
 #header #navi-top ul {
-        font-family: 'Titillium Web', sans-serif;
 	list-style:none;
 	background-color: #1a1a1a;
-	height:5ex;
-	border-bottom: 2ex solid #a7bbb1;
+	height:4ex;
+	border-bottom: 2ex solid #BF8130;
 	text-transform: uppercase;
         padding-left:150px;
 }
+
 #header #navi-top ul li {
-        font-family: 'Titillium Web', sans-serif;
-	padding-top:1ex;
+	padding-top:.5ex;
 	list-style-type: none;
 	display:block;
 	margin-right:30px;
@@ -95,9 +73,10 @@ img#logo-bak {
 }
 #header #navi-top ul li a {
 	color: #fff;
-        border-bottom: 2ex solid #a7bbb1;
-	padding-bottom:8px;
+        border-bottom: 2ex solid #BF8130;
+	padding-bottom:9px;
 }
+
 #header #navi-top ul li a:hover, #header #navi-top ul li a#active {
 	border-bottom: 2ex solid #1a1a1a;
 }
@@ -105,122 +84,123 @@ img#logo-bak {
 /********** end header ************/
 
 #wrapper {
-	background-color: #3e606f;
+	background-color: #03406A;
 	min-width: 900px;
 }
+
 #kontent {
-	border-top: 3ex solid #d1dbbd;
-        background-color: #f1f4eb;
+	border-top: 3ex solid #FFAC40;
+        background-color: #fff;
 }
 
 /********** jedna-afera ************/
 
 .jedna-afera-wrapper { width:100%; }
-.jedna-afera-wrapper:hover { background-color: #e8edde ; }
 .jedna-afera {
         width: 50%; margin: 0 auto;
         background-color: #fff;
 	margin-bottom: 40px;
+	border-bottom: 10px solid #65A5D1;
 }
 
 #jedna-afera {
-	background: #f1f4eb url('http://evil.pl/stuff/otwarte/korupcja/elementy/timeline.png') repeat-y center top;
+	background: #fff url(https://dl.dropbox.com/u/90555826/korupcja/timeline.png) repeat-y center top;
 	min-width:1000px;
 	max-width:1500px;
 }
 
-#jedna-afera #j-a-nazwa { 
-background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/nazwa.png) no-repeat 70px 20px; }
 #jedna-afera #j-a-nazwa h2 { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-inne {
-background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/inne.png) no-repeat 70px 10px; }
+#jedna-afera #j-a-inne { background-color: #eee; }
 #jedna-afera #j-a-inne h3 { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-opis {
-background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/opis.png) no-repeat 70px 20px;}
+#jedna-afera #j-a-opis { background-color: #ccc;}
 #jedna-afera #j-a-opis p { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-kontekst {
-background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.png) no-repeat 70px 20px;}
+#jedna-afera #j-a-kontekst { background-color: #eee; }
 #jedna-afera #j-a-kontekst p { margin: 0 auto; width: 50%; }
 
 #jedna-afera h2, .jedna-afera h2 {
-        padding: 7px 20px;
-	font-weight: 400;
+        padding: 7px 40px;
 	font-size: 30px;
 	text-transform:uppercase;
-	background-color: #91aa9d;
+	background-color: #A65E00;
 	line-height:2ex;
 }
+
 #jedna-afera h3, .jedna-afera h3 {
-        padding: 4px 20px;
-	font-weight: 600;
+        padding: 4px 40px;
 	font-size: 17px;
-	text-transform:uppercase;
-	background-color: #a7bbb1;
-	border-bottom: 10px solid #c8d4ce;
+	background-color: #BF8130;
+	border-bottom: 10px solid #FF9000;
 }
 
 .jedna-afera .wydarzen a {
-	float:right;
-	padding:5px;
-        text-align: center;
+	display: block;
+	float: right;
+	margin-right:20px;
+	margin-left:70%;
         text-transform: uppercase;
+	padding:5px 20px;
+        text-align: right;
         font-size: small;
-        width:11em;
-        color: #fff;
-        background-color: #3e606f;
-        margin-bottom: 20px;
-        margin-left: 10px;
+        color: #000;
+        background-color: #FF9000;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
 }
 
+.jedna-afera .wydarzen a:hover { }
+
 #jedna-afera p#opis {
-        padding: 20px;
-	background-color: #dee5e2 ;
+        padding: 40px;
+	background-color: #FFC273 ;
 }
 
 .jedna-afera p.opis {
-        padding: 20px;
+        padding: 40px;
         background-color: #fff;
 }
 
 .jedna-afera a.more {
 	display:block;
-        text-transform: uppercase;
-        font-size: x-small;
-        margin: 0 0 0 20px;
-        background-color: #dee5e2;
+	text-align: center;
+        font-size: small;
+        margin: 0 20px;
+	margin-left: 75%;
+        background-color: #65A5D1;
         padding: 3px 10px;
-        width: 20%;
+	text-transform:uppercase;
+	color: #fff;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
 }
 
-.jedna-afera a.more:hover {
-        background-color: #c8d4ce;
-}
+.jedna-afera a.more:hover { background-color: #3E94D1; }
 
 #jedna-afera p#kontekst {
 	font-size: small;
-        padding: 20px;
-	background-color: #e8edde;
-	border-bottom: 10px solid #3e606f ;
+        padding: 20px 40px;
+	background-color: #FFAC40;
+	border-bottom: 10px solid #A65E00;
 }
 
 #jedna-afera .wydarzen {
 	margin: 0 auto;
 	text-align: center;
-	text-transform: uppercase;
 	font-size: small;
+	text-transform: uppercase;
 	width:20%;
 	color: #fff;
-        background-color: #3e606f;
+        background-color: #A65E00;
 	padding-bottom:5px;
 	margin-bottom: 40px;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
 }
 
 #jedna-afera #ujawnienie, #jedna-afera .wydarzenie {
-	margin: 0 auto; width: 50%;
-	}
+	margin: 0 auto; width: 50%; }
 
 #jedna-afera .glowka {
-        background-color: #91aa9d;
+        background-color: #A65E00;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -228,119 +208,136 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 #jedna-afera h4 {
 	margin: 0 auto;
 	text-align: center;
-	text-transform: uppercase;
 	font-size: small;
 	width:40%;
 	color: #fff;
-        background-color: #3e606f;
+        background-color: #03406A;
 	padding: 5px 5px;
-
+	line-height: 1em;
 }
-#jedna-afera .ramka {
+
+#jedna-afera .wydarzenie .ramka {
 	padding: 10px 20px 0px 20px;
 	margin-bottom: 40px;
-        background-color: #b2c0c5 ;
+        background-color: #FFC273 ;
+}
+
+#jedna-afera #ujawnienie .glowka { background-color: #FF9000; }
+
+#jedna-afera #ujawnienie .glowka h4 {
+	background-color: #A65E00; text-transform:uppercase;
 }
 
 #jedna-afera #ujawnienie .ramka {
-        background-color: #c8d4ce ;
+        padding: 10px 40px 0px 40px;
+        margin-bottom: 40px;
+	background-color: #eee;	
 }
 
-#jedna-afera #ujawnienie .wydarzenie-tekst { padding-bottom: 20px; }
-
+#jedna-afera #ujawnienie .wydarzenie-tekst {
+	padding-bottom: 40px;
+}
 
 #jedna-afera div.data {
-	font-weight:400;
 	color: #1a1a1a;
 	margin: 0 auto;
 	text-align: center;
-	text-transform: uppercase;
-	background-color: #f1f4eb ;
-	background-color: #fff ;
+	background-color: #FFC273;
 	width: 40%;
-	padding: 3px 0;
-/*	border-top-left-radius: 0.5em;
-	border-top-right-radius: 0.5em;*/
-	border: 1px solid #3e606f ;
-	border-bottom: 0px;
+	padding: 3px 1px;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
 }
 
 #jedna-afera h5 {
 	font-size: 24px;
-	font-weight: 700;
-	margin-top:10px;
-	margin-bottom:10px;
+	margin-top:20px;
+	margin-bottom:20px;
 	color: #1a1a1a;
 	line-height:2ex;
+	width:95%;
 }
 
 .jedna-afera .wydarzenie-aktorzy {
-	padding:20px 20px 0 20px;
-	width:70%;
+	padding:20px;
+	background-color:#FFC273;
 }
 
 #jedna-afera .wydarzenie-aktorzy, .jedna-afera .wydarzenie-aktorzy {
 	font-size: small;
-	text-transform: uppercase;
 }
+
 #jedna-afera .wydarzenie-aktorzy ul, .jedna-afera .wydarzenie-aktorzy ul {
         text-transform: none;
 	list-style-position:inside;
 }
+
 #jedna-afera .wydarzenie-aktorzy li, .jedna-afera .wydarzenie-aktorzy li {
 	float: left;
 	margin-right: 1em;
 	font-size: small;
 }
 
-#jedna-afera .wydarzenie-tekst {
-	margin-top:10px;
-	font-weight: 400;
+#jedna-afera .wydarzenie .ramka .wydarzenie-tekst {
+	margin-top:20px;
+	padding: 20px;
 }
 
 #jedna-afera .more {
-        text-transform: uppercase;
-	font-size: x-small;
-        margin-top:20px;
-	background-color: #dee5e2;
-	padding: 3px 10px;
-	width: 10em;
 	display:block;
+	margin: 0 auto;
+	text-align:center;
+	font-size: small;
+        margin-top:20px;
+	background-color: #65A5D1;
+	padding: 3px 10px;
+        text-transform: uppercase;
+	width:40%;
+	color: #fff;
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
 }
 
+#jedna-afera .more:hover { background-color: #3E94D1; }
+
 #jedna-afera .pokaz, .jedna-afera .pokaz {
-	width:50%;
-	background-color: #f1f4eb;
+	text-transform: uppercase;
 	padding: 0 5px;
 	font-size: x-small;
 	cursor: pointer;
-	margin-top:5px;
+	margin-top:10px;
 }
 
-#jedna-afera .pokaz:hover, .jedna-afera .pokaz:hover, #jedna-afera .more:hover {
-	background-color: #e8edde ;
+#jedna-afera .pokaz:hover, .jedna-afera .pokaz:hover {
+	background-color: #FFAC40 ;
 }
 
-#jedna-afera .wydarzenie {
-/*	background-color: #b2c0c5;*/
-}
-#jedna-afera .wydarzenie .glowka { background-color: #8ba0a9; }
+#jedna-afera .wydarzenie { }
+#jedna-afera .wydarzenie .glowka { background-color: #FFAC40; }
+#jedna-afera .wydarzenie .glowka h4 { background-color: #A65E00; }
 
 #jedna-afera-aktorzy {
-	border-top: 10px solid #3e606f;
+	border-top: 10px solid #03406A;
 	padding: 0 20px 10px 20px;
-	background-color: #91aa9d;
+	background-color: #65A5D1;
 	margin: 0 auto; width: 80%;
 }
+
 #jedna-afera-aktorzy h4 {
 	padding-top: 0;
 	margin-top: 0;
+	text-transform:uppercase;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
+
 }
+
 #jedna-afera-aktorzy ul {
 	list-style-position: inside;
 	font-size: small;
 	margin-top:10px;
 }
+
 #jedna-afera-aktorzy ul li {
 	float: left;
 	margin-right: 1em;
@@ -372,14 +369,13 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 #skorowidz { } 
 
 #skorowidz-table, #afery-nav {
-	float:left;
-	position:relative;
+	position:absolute;
+	position:fixed;
 	left: 20px;
-	top: 20px;
-	width:170px;
-        border-top: 10px solid #3e606f;
+	top: 185px;
+	width:176px;
+        border-top: 10px solid #03406A;
 	padding-top:5px;
-
 }
 
 #skorowidz-table li, #afery-nav li {
@@ -392,7 +388,7 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
         width:30px;
 	height:30px;
 	margin: 2px;
-	background-color: #b2c0c5;
+	background-color: #65A5D1;
 	text-align: center;
 }
 
@@ -404,117 +400,124 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 #afery-nav li a {
         display: block;
 	width: 100%;
-        background-color: #b2c0c5;
+	padding-top:3px;
+	padding-bottom:3px;
+        background-color: #65A5D1;
         text-align: center;
+	text-transform:uppercase;
+	font-size:small;
+	line-height:1.2em;
 }
 
 #skorowidz-table li a:hover, #afery-nav li a:hover { 
-	background-color: #8ba0a9; }
-
+	background-color: #3E94D1;
+}
 
 #kolumna-indeksu {
         width: 50%; margin: 0 auto;
         padding: 0;
 }
 
-.jedna-litera {
-	background-color: #fff;
-}
+.jedna-litera { background-color: #fff; }
 
 .jedna-litera h2 {
-	background-color: #a7bbb1;
+	background-color: #A65E00;
 	padding-left:20px;
-	font-weight: 600;
-        border-bottom: 10px solid #c8d4ce;
+        border-bottom: 10px solid #BF8130;
+	font-weight:200;
 }
 
 .jedna-litera h2 a { color: #fff; }
+.jedna-litera h2 a:hover { }
 
 .jedna-litera ul { padding: 20px; }
 .jedna-litera li { list-style: none; }
 .jedna-litera li a { color: #1a1a1a; }
-.jedna-litera li a:hover { font-weight: bold; }
-
 
 /********** end skorowidz ************/
 
 /********** jedno-wydarzenie ************/
 
-#jedno-wydarzenie-paczka {
-	display:table;
+#jedno-wydarzenie-paczka { display:table; }
+
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo, #jedno-wydarzenie {
+	display: table-cell;
 }
-#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo,
-#jedno-wydarzenie { display: table-cell; }
+
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo { max-width:10em; }
 
 #jedno-wydarzenie h2 {
-        font-size:medium;
-        color: #000;
-        text-transform: uppercase;
-        background-color: #8ba0a9 ;
-        padding-left:20px;
-        font-weight: 600;
-        border-bottom: 10px solid #b2c0c5;
+        color: #fff;
+	text-align:center;
+        background-color: #A65E00 ;
+        border-bottom: 10px solid #BF8130;
+	margin-bottom:40px; 
 }
 
 #jedno-wydarzenie .ramka {
-        background-color: #c8d4ce;
+        background-color: #fff;
         padding-left: 10px;
         padding-right: 10px;
 }
 
-#jedno-wydarzenie p.wydarzenie-tekst {
-	background-color: #fff;
-	padding: 10px 20px 20px 20px;
-}
+#jedno-wydarzenie p.wydarzenie-tekst { padding: 10px 40px 20px 40px; }
 
 #jedno-wydarzenie h3 {
         margin: 0 auto;
         text-align: center;
-        text-transform: uppercase;
         font-size: small;
-        width:40%;
+        width:50%;
         color: #fff;
-        background-color: #3e606f;
+        background-color: #BF8130;
         padding: 5px 5px;
+	line-height:1em;
+	text-transform:uppercase;
 }
 
 #jedno-wydarzenie h5 {
         font-size: 24px;
-        font-weight: 700;
-	padding: 20px 20px 10px 20px;
+	padding: 20px 40px 10px 40px;
         color: #1a1a1a;
-	background-color: #fff;
         line-height:2ex;
 }
 
 #jedno-wydarzenie .data {
-        font-weight:800;
-        color: #3e606f;
-	float:left;
-	position: relative;
-        text-transform: uppercase;
-        padding: 3px 20px;
+        color: #1a1a1a;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #fff ;
+        width: 50%;
+        padding: 3px 0;
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
 }
 
 #jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo {
-	padding: 20px;
-	color: #aaa;
+	position:fixed;
+	top:265px;
+	padding: 30px;
+	color: #03406A;
 	line-height:1.2em;
+	font-weight:bold;
 }
 
-#jedno-wydarzenie-nav-lewo { text-align:right; }
+#jedno-wydarzenie-nav-lewo { text-align:right; right: 75%; }
 
 #jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
 	display: block;
 	margin-top:10px;
-	font-weight:600;
+	margin-bottom:10px;
+	font-weight: 200;
+}
+
+#jedno-wydarzenie-nav-lewo .data a, #jedno-wydarzenie-nav-prawo .data a {
+	color: #65A5D1;
 }
 
 #jedno-wydarzenie-zrodla {
-	border-top: 10px solid #3e606f;
-	padding: 0 20px 10px 20px;
-	background-color: #91aa9d;
-	width: 80%; margin: 0 auto;
+	border-top: 10px solid #03406A;
+	background-color: #65A5D1;
+	width: 50%; margin: 0 auto;
 }
 
 #jedno-wydarzenie-zrodla h4 {
@@ -522,19 +525,22 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 	margin: 0 auto;
 	margin-top:0;
         text-align: center;
-        text-transform: uppercase;
         font-size: small;
         width:20%;
         color: #fff;
-        background-color: #3e606f;
+        background-color: #03406A;
         padding: 0 5px 5px 5px;
         margin-bottom: 4px;
-
+	text-transform:uppercase;
+        border-bottom-left-radius: 1em;
+        border-bottom-right-radius: 1em;
 }
 
 #jedno-wydarzenie-zrodla ul {
         list-style-position: inside;
+	padding:10px 20px;
 }
+
 #jedno-wydarzenie-zrodla ul li {
         float: left;
         margin-right: 1em;
@@ -549,72 +555,76 @@ background: #f1f4eb url(http://evil.pl/stuff/otwarte/korupcja/elementy/kontekst.
 
 #jedno-wydarzenie {
         width: 50%; margin: 0 auto;
+	background-color: #eee;
+	padding-bottom:10px;
 }
 
 /********** end jedno-wydarzenie ************/
 
 /********** jeden-aktor ************/
-#jeden-aktor {
-        margin: 0 auto;
-	width:50%;
-}
+#jeden-aktor { margin: 0 auto; width:50%; }
 
 #jeden-aktor h2 {
-	font-size:medium;
 	color: #fff;
-	text-transform: uppercase;
-        background-color: #a7bbb1;
-        padding-left:20px;
-        font-weight: 400;
-        border-bottom: 10px solid #91aa9d ;
+        background-color: #A65E00;
+	padding: 5px 10px 5px 20px;
+        border-bottom: 10px solid #FF9000 ;
+	text-transform:uppercase;
+	font-weight:200;
+	line-height:1em;
 }
 
 #jeden-aktor h3 {
-        text-transform: uppercase;
         padding: 5px 0 5px 20px;
-	background-color: #c8d4ce;
-        font-weight: 600;
+	background-color: #BF8130;
+	text-transform: uppercase;
 }
 
 #jeden-aktor ul {
         background-color: #fff;
 	padding: 5px 10px;
 	list-style: none;
+	margin-bottom:10px;
 }
 
 #jeden-aktor ul li {
 	font-size: small;
-        font-weight: 600;
         text-transform: uppercase;
 	line-height: 2em;
+	margin-bottom:10px;
 }
 
 #jeden-aktor ul li span { 
 	display: inline-block;
 	width: 10em;
-	font-weight: 400;
         text-transform: none;
 }
 
 #jeden-aktor ul li a {
         text-transform: uppercase;
-        font-weight: 600;
 	font-size: medium;
 }
 
-#jeden-aktor ul li a:hover { color: #3e606f; }
+#jeden-aktor ul li a:hover { }
 
+#jeden-aktor ul li ul { border-bottom: 1px solid #eee; }
 
 /********** end jeden-aktor ************/
-
 
 /* jedynka */
 
 div#jedynka-kolumna{ display: table; width: 50%; }
 div.wiersz { display: table-row; }
-div.wiersz-dlugi { display: table-cell; }
-div.wiersz-krotki { display: table-cell; }
-div#kolumna-obrazek { display: table-cell; }
+div.wiersz-dlugi, div.wiersz-krotki, div#kolumna-obrazek {
+	display: table-cell;
+}
 div.wiersz-niski { display: table-row; }
-div.zajawka-odd { display: table-cell; }
 
+div.zajawka {
+	display: table-cell;
+	padding:0.2ex;
+	width: 10em;
+	height:15em;
+	background: #fff;
+	margin: 2ex;
+}
