@@ -132,3 +132,26 @@ def event (request, object_id):
   template = loader.get_template("wydarzenie.html")
 
   return HTTPResponse (template.render(Context(result)))
+
+
+
+def api_case_json(request, object_id):
+
+  import json
+
+  case = get_scandal(object_id)
+  events = orm.query('case_events', object_id)
+
+  result = {}
+
+  result['timeline'] = { 'headline': case[0][0][0], 'type': 'default', 'text': case[0][1], 'startDate': events[0][1].strftime('%Y,%m,%d') }
+
+
+  dates = []
+
+  for event in events:
+    dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 'endDate': event[1].strftime('%Y-%m-%d'), 'headline':event[6], 'text': event[2]})
+
+  result['date']=dates
+
+  return HTTPResponse(json.dumps(result))

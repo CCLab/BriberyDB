@@ -5,9 +5,9 @@
           <ul>
             <li>{% for case in role.1 %}
               <ul>
-                <li><span>w zwiazku z:</span> <a href="{% url afera.views.case  object_id=case.0.1 %}">{{ case.0.0 }}</a></li>
+                <li><span>w zwiazku z:</span> <a href="{% url afera.views.case  object_id=case.0.1 %}">{{ case.0.0 }}</a></li>{% if human %}
                 <li><span>pelniona funkcja:</span>{% for fun in case.1 %}{{ fun }}{% if not forloop.last %}, {% endif %}{% endfor %}
-                </li>
+                </li>{% endif %}
               </ul>{% endfor %}
             </li>
           </ul>{% endfor %}
