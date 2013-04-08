@@ -23,7 +23,7 @@ def actors (request, human=True):
 
   else:
 
-    actors = orm.query('nonhuman_actor_list', (None,))
+    actors = orm.query('nonhuman_actor_list')
     actors_dict = {}
 
     for row in actors:
@@ -38,7 +38,7 @@ def actors (request, human=True):
 
     for k in keys:
       actors = actors_dict[k]
-      actors.sort(key=lambda a:a[1])
+      actors.sort(key=lambda a:a[1].lower())
       result.append((k, actors))
 
     template = loader.get_template("instytucje.html")
@@ -71,11 +71,12 @@ def actor (request, object_id):
   return HTTPResponse (template.render(Context(result)))
 
 
-def event_actors (request, object_id):
+def event (request, object_id):
 
   actors = orm.query('event_actors', object_id)
-
-  print actors
-
-  return HTTPRequest ()
   
+  template = loader.get_template("aktorzy_wydarzenuia.inc")
+
+  return HTTPRequest (template.render(Context(dict(event=[None, actors]))))
+  
+
