@@ -134,7 +134,11 @@ Q = {
         actor_affiliations ON actors.affiliation_id=actor_affiliations.id WHERE human=FALSE
         GROUP BY affiliation,actors.id,actors.actor;''',
   
-  'case_types': 'SELECT id, name from scandal_types;'
+  'case_types': 'SELECT id, name from scandal_types;',
+
+  'letters': '''SELECT ARRAY
+    (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
+      AS l WHERE LENGTH(letter)=1 ORDER BY letter) AS letters;''',
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
