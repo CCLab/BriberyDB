@@ -26,7 +26,7 @@
           <div id="jedno-wydarzenie-zrodla">
             <h4>Żródła</h4>
             <ul>{% for ref in refs %}
-              <li>{{ ref.2 }} {{ ref.4 }}: &bdquo;{{ ref.1 }}&rdquo;</li>{% endfor %}
+              <li>{% if ref.3 %}<a href="{{ ref.3 }}" target="_blank">{% endif %}{{ ref.2 }} {{ ref.4 }}: &bdquo;{{ ref.1 }}&rdquo;{% if ref.3 %}</a>{% endif %}</li>{% endfor %}
             </ul>
           </div><!-- koniec jedno-wydarzenie-zrodla -->{% endif %}
 {% endblock content %}
