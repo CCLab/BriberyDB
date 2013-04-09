@@ -14,9 +14,9 @@ def actors (request, human=True):
 
   if human: 
 
-    from string import uppercase as LETTERS
+    letters = [ l if isinstance(l, unicode) else l.decode('utf-8') for l in orm.query('letters')[0][0]]
 
-    for l in LETTERS:
+    for l in letters:
       result.append((l, orm.query('actors_human_like', (l.lower()+'%', l.upper()+'%'))))
       
     template = loader.get_template("indeks.html")
