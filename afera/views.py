@@ -56,7 +56,6 @@ def case (request, object_id):
   result['javascripts'] = ['actors']
   result['all_actors'] = orm.query('case_actors', object_id)
   result['tab'] = '1'
-  result['events']
   
   template = loader.get_template ('afera.html')
 
@@ -134,6 +133,20 @@ def event (request, object_id):
   return HTTPResponse (template.render(Context(result)))
 
 
+def timeline(request, object_id):
+  'single scandal timeline view'
+
+  result = {}
+  scandal = get_scandal(object_id)
+  result['name'] = scandal [0][0][0]
+  result['names'] = scandal [0][0][1:]
+  result['description'] = scandal [0][1]
+  result['background'] = scandal[0][2]
+  result['case'] = object_id
+  template = loader.get_template ('linia.html')
+
+  return HTTPResponse (template.render(Context(result))  )
+
 
 def api_case_json(request, object_id):
 
@@ -152,6 +165,6 @@ def api_case_json(request, object_id):
   for event in events:
     dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 'endDate': event[1].strftime('%Y-%m-%d'), 'headline':event[6], 'text': event[2]})
 
-  result['date']=dates
+  result['timeline']['date']=dates
 
   return HTTPResponse(json.dumps(result))
