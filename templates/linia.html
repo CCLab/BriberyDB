@@ -1,0 +1,34 @@
+{% extends "body.html" %}{% block content %}
+        <div id="jedna-afera">
+          <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
+	  <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
+	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
+          <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
+          <div id="timeline-embed"></div>
+          <script type="text/javascript">
+            var timeline_config = {
+              width:              '100%',
+              height:             '600',
+              source:             'http://polskieafery.pl/api/afera/1/',
+              embed_id:           'timeline-embed',               //OPTIONAL USE A DIFFERENT DIV ID FOR EMBED
+              start_at_end:       false,                          //OPTIONAL START AT LATEST DATE
+              start_at_slide:     '0',                            //OPTIONAL START AT SPECIFIC SLIDE
+              start_zoom_adjust:  '3',                            //OPTIONAL TWEAK THE DEFAULT ZOOM LEVEL
+              hash_bookmark:      true,                           //OPTIONAL LOCATION BAR HASHES
+              font:               'Bevan-PotanoSans',             //OPTIONAL FONT
+              debug:              true,                           //OPTIONAL DEBUG TO CONSOLE
+              lang:               'pl',                           //OPTIONAL LANGUAGE
+              maptype:            'watercolor',                   //OPTIONAL MAP STYLE
+              css:                '/static/css/timeline.css',     //OPTIONAL PATH TO CSS
+              js:                 '/static/js/timeline-min.js'    //OPTIONAL PATH TO JS
+            }
+          </script>
+          <script type="text/javascript" src="/static/js/storyjs-embed.js"></script>
+          <div id="jedna-afera-aktorzy">
+            <h4>Wszyscy aktorzy afery</h4>
+            <ul>{% for actor in all_actors %}
+	      <li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
+	    </ul>
+	  </div><!-- koniec jedna-afera-aktorzy -->
+	</div><!-- koniec jedna-afera -->
+{% endblock content %}
