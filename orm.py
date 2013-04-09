@@ -88,10 +88,11 @@ Q = {
 
   'cases_type': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(types);',
 
-  'case_actors':  '''SELECT DISTINCT actor_id, name
+  'case_actors':  '''SELECT DISTINCT actor_id, name, count(actor_id) AS count
     FROM (actors_events JOIN events ON event_id=events.id)
     JOIN actors ON actor_id=actors.id
-    where event_id=any(select unnest(events) from scandals where id=%s);''',
+    WHERE event_id=ANY(SELECT UNNEST(events) FROM scandals WHERE id=%s)
+    GROUP BY actors_events.actor_id, actors.name ORDER BY count DESC;;''',
 
   'actor': 'SELECT id,name,human FROM actors WHERE id=%s;', 
 
