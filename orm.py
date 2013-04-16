@@ -86,7 +86,7 @@ Q = {
   'cases': '''SELECT * FROM (SELECT DISTINCT ON (s.id)
     s.id, s.name, s.description, s.background, s.consequences, s.types, s.fields, s.events, event_date
     FROM (SELECT id, name, description, background, consequences, types, fields, events, UNNEST (events) AS event_id
-      FROM scandals) AS s LEFT JOIN events AS e ON s.event_id=e.id ORDER BY s.id,event_date) as scandals ORDER BY event_date;''',
+      FROM scandals) AS s LEFT JOIN events AS e ON s.event_id=e.id ORDER BY s.id,event_date) as scandals ORDER BY event_date DESC;''',
 
   'cases_type': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(types);',
 
