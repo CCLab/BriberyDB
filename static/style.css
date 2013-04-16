@@ -1,25 +1,32 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=latin,latin-ext);
-
 @import url(http://fonts.googleapis.com/css?family=Headland+One&subset=latin,latin-ext);
-
 
 * { margin:0; padding:0; text-indent:0; border:0; }
 
-a { text-decoration: none; color: #1a1a1a;}
+a { text-decoration: none; color: #3E94D1; }
 
-a:hover,span:hover {
+a:hover {
         transition: all 0.1s;
         -webkit-transition: all 0.1s;
         -moz-transition: all 0.1s;
+	color: #29628b;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-	color: #1a1a1a;
+html, body { font-family: 'Open Sans', sans-serif; font-weight: 200; }
+
+h2 {
+	font-size: 30px;
+	font-weight:200;
+	line-height:2ex;
+	text-transform: capitalize;
 }
 
-html, body { font-family: 'Open Sans', sans-serif; }
+h3 {
+        font-size: 20px;
+        font-weight:200;
+        line-height:2ex;
+        text-transform: capitalize;
+}
 
 /********** clearfix ************/
 
@@ -31,12 +38,13 @@ html, body { font-family: 'Open Sans', sans-serif; }
 
 /********** header ************/
 
-#header { background-color: #03406A; }
+#header { background-color: #fefefe; }
 
 #header #logo { display:block; }
 
 img#logo-bak {
-	display:block;
+	display:none;
+/*	display:block;
 	float: left;
 	position:relative;
 	zoom: 1;
@@ -44,28 +52,32 @@ img#logo-bak {
 	height: 80px;
 	top: 20px;
 	left: 20px;
-	border:1px solid white;
+	border:1px solid white;*/
 }
 
 #header #logo h1 {
-	font-size: 60px;
-	color: #fff;
+	font-size: 50px;
+	color: #1a1a1a;
 	padding-left:150px;
+	font-weight: 200;
+	text-transform: uppercase;
 }
 
-#header #navi-top { }
+#header #navi-top { margin-bottom: 0px; }
 
 #header #navi-top ul {
 	list-style:none;
-	background-color: #1a1a1a;
-	height:4ex;
-	border-bottom: 2ex solid #BF8130;
+	font-size:small;
+	font-weight: 400;
+	background-color: #235477;
+	height:3ex;
+	border-bottom: 2ex solid #65A5D1;
 	text-transform: uppercase;
         padding-left:150px;
 }
 
 #header #navi-top ul li {
-	padding-top:.5ex;
+	padding-top:.2ex;
 	list-style-type: none;
 	display:block;
 	margin-right:30px;
@@ -73,123 +85,193 @@ img#logo-bak {
 }
 #header #navi-top ul li a {
 	color: #fff;
-        border-bottom: 2ex solid #BF8130;
-	padding-bottom:9px;
+        border-bottom: 1ex solid #235477;
+	padding-bottom:2px;
 }
 
 #header #navi-top ul li a:hover, #header #navi-top ul li a#active {
-	border-bottom: 2ex solid #1a1a1a;
+	border-bottom: 2ex solid #235477;
 }
 
 /********** end header ************/
 
-#wrapper {
-	background-color: #03406A;
-	min-width: 900px;
+#wrapper { min-width: 900px; background-color: #fafafa; }
+
+#kontent { padding-top: 20px;}
+
+/********** wszystkie afery ************/
+
+#afery-nav {
+	margin-left:20px;
+	list-style-type: none; 
+	display: block;
+	clear: both;
 }
 
-#kontent {
-	border-top: 3ex solid #FFAC40;
-        background-color: #fff;
+#afery-nav:after { content: ""; display: table; }
+#afery-nav:after { clear:both; }
+#afery-nav { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
+
+#afery-nav li {
+	list-style: none;
+	display:inline-block;
+	float: left;
+	margin-bottom: 5px;
+	margin-right: 5px;
 }
 
-/********** jedna-afera ************/
-
-.jedna-afera-wrapper { width:100%; }
-.jedna-afera {
-        width: 50%; margin: 0 auto;
-        background-color: #fff;
-	margin-bottom: 40px;
-	border-bottom: 10px solid #65A5D1;
-}
-
-#jedna-afera {
-	background: #fff url(https://dl.dropbox.com/u/90555826/korupcja/timeline.png) repeat-y center top;
-	min-width:1000px;
-	max-width:1500px;
-}
-
-#jedna-afera #j-a-nazwa h2 { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-inne { background-color: #eee; }
-#jedna-afera #j-a-inne h3 { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-opis { background-color: #ccc;}
-#jedna-afera #j-a-opis p { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-kontekst { background-color: #eee; }
-#jedna-afera #j-a-kontekst p { margin: 0 auto; width: 50%; }
-
-#jedna-afera h2, .jedna-afera h2 {
-        padding: 7px 40px;
-	font-size: 30px;
+#afery-nav li a {
+        display: block;
+	font-size:small;
+	line-height:1.2em;
 	text-transform:uppercase;
-	background-color: #A65E00;
-	line-height:2ex;
+	background-color: #65A6D1;
+	color: #fff;
+	font-weight:200;
+	padding: 3px 5px;
 }
 
-#jedna-afera h3, .jedna-afera h3 {
-        padding: 4px 40px;
-	font-size: 17px;
-	background-color: #BF8130;
-	border-bottom: 10px solid #FF9000;
+#afery-nav li a:hover { background-color: #235477; }
+
+.jedna-afera-wrapper {
+	display: inline-block;
+	float: left;
+        width: 20%; 
+        min-width: 245px;
+        max-width: 500px;
+}
+
+.jedna-afera {
+        background-color: #fff;
+	margin: 20px 0px 20px 20px;
+	padding: 10px 10px 10px 10px ;
+	box-shadow: 0px 0px 5px #888888;
+
+}
+
+.jedna-afera h2 {
+        font-size: x-large;
+}
+
+.jedna-afera h3 {
+        font-size: small;
+	margin-top:10px;
+	padding-bottom:10px;
 }
 
 .jedna-afera .wydarzen a {
 	display: block;
-	float: right;
-	margin-right:20px;
-	margin-left:70%;
-        text-transform: uppercase;
-	padding:5px 20px;
-        text-align: right;
-        font-size: small;
-        color: #000;
-        background-color: #FF9000;
-        border-bottom-left-radius: 1em;
-        border-bottom-right-radius: 1em;
+	padding: 2px 10px;
+        font-size: x-small;
+	text-transform: uppercase;
+	font-weight: 400;
+	margin-bottom: 10px;
+	background: #efefef url('https://dl.dropboxusercontent.com/u/90555826/korupcja/strz.png') center right no-repeat;
 }
 
-.jedna-afera .wydarzen a:hover { }
-
-#jedna-afera p#opis {
-        padding: 40px;
-	background-color: #FFC273 ;
+.jedna-afera .wydarzen a:hover {
+	color: #29628b;
+	color: #fff;
+	background-color: #65A5D1;
 }
 
 .jedna-afera p.opis {
-        padding: 40px;
-        background-color: #fff;
+	font-size: small;
+	font-weight: 200;
+	margin-top:10px;
 }
 
 .jedna-afera a.more {
 	display:block;
-	text-align: center;
-        font-size: small;
-        margin: 0 20px;
-	margin-left: 75%;
-        background-color: #65A5D1;
-        padding: 3px 10px;
-	text-transform:uppercase;
+        font-size: x-small;
+        font-weight: 400;
+	text-transform: uppercase;
+	background: #65A5D1 url('https://dl.dropboxusercontent.com/u/90555826/korupcja/strz.png') center right no-repeat;
 	color: #fff;
-        border-top-left-radius: 1em;
-        border-top-right-radius: 1em;
+        padding: 5px 10px 7px 10px ;
+	margin-top:10px; 
 }
 
-.jedna-afera a.more:hover { background-color: #3E94D1; }
+.jedna-afera a.more:hover { color: #4cb5ff; background-color: #29628b; }
+
+.jedna-afera .wydarzenie-aktorzy {
+	font-weight: 400;
+	padding:10px;
+	border: 1px solid #eee;
+	background-color: #fafafa;
+}
+
+.jedna-afera .wydarzenie-aktorzy {
+	font-size: x-small;
+}
+
+.jedna-afera .wydarzenie-aktorzy ul {
+	font-size: x-small;
+        text-transform: none;
+	list-style-position:inside;
+}
+
+.jedna-afera .pokaz {
+	color: #29628b;
+	padding: 0 5px;
+	font-size: x-small;
+	cursor: pointer;
+	margin-top:10px;
+	text-transform: uppercase;
+}
+
+
+/********** koniec wszystkie afery ************/
+
+/********** jedna afera ************/
+
+#jedna-afera { }
+#jedna-afera #j-a-nazwa {
+        border-bottom:1px solid #eee;
+}
+#jedna-afera #j-a-nazwa h2 {
+	margin: 0 auto;
+	width: 50%;
+	box-shadow: 0px 0px 5px #888888;
+}
+
+#jedna-afera #j-a-inne { background-color: #ccc; }
+#jedna-afera #j-a-inne h3 {
+	margin: 0 auto; width: 50%;
+	padding: 5px 0;
+	background-color: #ccc;
+}
+#jedna-afera #j-a-opis { background-color: #ccc;}
+#jedna-afera #j-a-opis p { margin: 0 auto; width: 50%; }
+#jedna-afera #j-a-kontekst { background-color: #eee; border-top:1px solid #ccc; }
+#jedna-afera #j-a-kontekst p { margin: 0 auto; width: 50%; }
+
+#jedna-afera h2 {
+        padding: 10px 40px;
+	font-size: 30px;
+	background-color: #fff;
+	line-height:2ex;
+}
+
+#jedna-afera p#opis {
+	font-size: medium;
+        padding: 40px;
+	background-color: #fff;
+	box-shadow: 0px 0px 5px #888888;
+}
 
 #jedna-afera p#kontekst {
 	font-size: small;
-        padding: 20px 40px;
-	background-color: #FFAC40;
-	border-bottom: 10px solid #A65E00;
+        padding: 40px;
 }
 
 #jedna-afera .wydarzen {
 	margin: 0 auto;
 	text-align: center;
 	font-size: small;
-	text-transform: uppercase;
 	width:20%;
-	color: #fff;
-        background-color: #A65E00;
+	color: #1a1a1a;
+        background-color: #ccc;
 	padding-bottom:5px;
 	margin-bottom: 40px;
         border-bottom-left-radius: 1em;
@@ -225,7 +307,7 @@ img#logo-bak {
 #jedna-afera #ujawnienie .glowka { background-color: #FF9000; }
 
 #jedna-afera #ujawnienie .glowka h4 {
-	background-color: #A65E00; text-transform:uppercase;
+	background-color: #A65E00; 
 }
 
 #jedna-afera #ujawnienie .ramka {
@@ -258,26 +340,6 @@ img#logo-bak {
 	width:95%;
 }
 
-.jedna-afera .wydarzenie-aktorzy {
-	padding:20px;
-	background-color:#FFC273;
-}
-
-#jedna-afera .wydarzenie-aktorzy, .jedna-afera .wydarzenie-aktorzy {
-	font-size: small;
-}
-
-#jedna-afera .wydarzenie-aktorzy ul, .jedna-afera .wydarzenie-aktorzy ul {
-        text-transform: none;
-	list-style-position:inside;
-}
-
-#jedna-afera .wydarzenie-aktorzy li, .jedna-afera .wydarzenie-aktorzy li {
-	float: left;
-	margin-right: 1em;
-	font-size: small;
-}
-
 #jedna-afera .wydarzenie .ramka .wydarzenie-tekst {
 	margin-top:20px;
 	padding: 20px;
@@ -291,25 +353,19 @@ img#logo-bak {
         margin-top:20px;
 	background-color: #65A5D1;
 	padding: 3px 10px;
-        text-transform: uppercase;
 	width:40%;
 	color: #fff;
         border-top-left-radius: 1em;
         border-top-right-radius: 1em;
 }
 
-#jedna-afera .more:hover { background-color: #3E94D1; }
+#jedna-afera .more:hover { }
 
-#jedna-afera .pokaz, .jedna-afera .pokaz {
-	text-transform: uppercase;
+#jedna-afera .pokaz {
 	padding: 0 5px;
 	font-size: x-small;
 	cursor: pointer;
 	margin-top:10px;
-}
-
-#jedna-afera .pokaz:hover, .jedna-afera .pokaz:hover {
-	background-color: #FFAC40 ;
 }
 
 #jedna-afera .wydarzenie { }
@@ -317,30 +373,36 @@ img#logo-bak {
 #jedna-afera .wydarzenie .glowka h4 { background-color: #A65E00; }
 
 #jedna-afera-aktorzy {
-	border-top: 10px solid #03406A;
-	padding: 0 20px 10px 20px;
-	background-color: #65A5D1;
-	margin: 0 auto; width: 80%;
+	margin: 0 auto;
+	margin-top: 20px;
+	width: 50%;
+	padding: 0 20px 20px 20px ;
+	background-color: #fff;
+	box-shadow: 0px 0px 5px #888;
 }
 
 #jedna-afera-aktorzy h4 {
-	padding-top: 0;
-	margin-top: 0;
-	text-transform:uppercase;
-        border-bottom-left-radius: 1em;
-        border-bottom-right-radius: 1em;
-
+	padding: 5px 10px;
+        border-bottom-left-radius: .5em;
+        border-bottom-right-radius: .5em;
+	background-color: #ccc;
+	color: #000;
+	text-transform: uppercase;
+	font-weight: 200;
 }
 
 #jedna-afera-aktorzy ul {
-	list-style-position: inside;
+	list-style-type: none;
 	font-size: small;
 	margin-top:10px;
 }
 
 #jedna-afera-aktorzy ul li {
+	font-weight: 400;
 	float: left;
 	margin-right: 1em;
+	padding-right: 1em;
+	border-right: 1px solid #ccc;
 }
 
 #jedna-afera-aktorzy ul:after {
@@ -366,19 +428,17 @@ img#logo-bak {
 
 /********** skorowidz ************/
 
-#skorowidz { } 
-
-#skorowidz-table, #afery-nav {
-	position:absolute;
+#skorowidz {
 	position:fixed;
 	left: 20px;
-	top: 185px;
-	width:176px;
-        border-top: 10px solid #03406A;
+	top: 120px;
+	width:166px;
 	padding-top:5px;
-}
 
-#skorowidz-table li, #afery-nav li {
+} 
+#skorowidz-table { }
+
+#skorowidz-table li {
 	list-style: none;
 	float: left;
 }
@@ -386,59 +446,83 @@ img#logo-bak {
 #skorowidz-table li a {
         display: block;
         width:30px;
-	height:30px;
+        height:25px;
 	margin: 2px;
-	background-color: #65A5D1;
 	text-align: center;
+        font-size:medium;
+        line-height:1.2em;
+        text-transform:uppercase;
+        background-color: #65A6D1;
+        color: #fff;
+        font-weight:200;
+	padding-top: 5px;
 }
 
-#afery-nav li {
-	width:100%;
+#skorowidz-table li a:hover { 
+        background-color: #235477;
+}
+
+
+#skorowidz #afery-nav {
+	list-style-type: none; 
+	display: block;
+	clear: both;
+	height: 5ex;
+}
+
+#skorowidz #afery-nav li {
+	list-style: none;
+	display:block;
+	float: none;
 	margin-bottom: 5px;
 }
 
-#afery-nav li a {
+#skorowidz #afery-nav li a {
         display: block;
-	width: 100%;
-	padding-top:3px;
-	padding-bottom:3px;
-        background-color: #65A5D1;
-        text-align: center;
-	text-transform:uppercase;
 	font-size:small;
 	line-height:1.2em;
+	text-transform:uppercase;
+	background-color: #65A6D1;
+	color: #fff;
+	font-weight:200;
+	padding: 3px 5px;
 }
 
-#skorowidz-table li a:hover, #afery-nav li a:hover { 
-	background-color: #3E94D1;
-}
+#skorowidz #afery-nav li a:hover { background-color: #235477; }
 
 #kolumna-indeksu {
         width: 50%; margin: 0 auto;
         padding: 0;
 }
 
-.jedna-litera { background-color: #fff; }
-
-.jedna-litera h2 {
-	background-color: #A65E00;
-	padding-left:20px;
-        border-bottom: 10px solid #BF8130;
-	font-weight:200;
+.jedna-litera {
+	background-color: #fff; 
+        box-shadow: 0px 0px 5px #888;
+	padding:10px 20px;
 }
 
-.jedna-litera h2 a { color: #fff; }
+.jedna-litera h2 {
+        border-bottom: 1px solid #ccc;
+	font-weight:200;
+	text-transform: none;
+}
+
+.jedna-litera h2 a { color: #1a1a1a; }
 .jedna-litera h2 a:hover { }
 
 .jedna-litera ul { padding: 20px; }
 .jedna-litera li { list-style: none; }
-.jedna-litera li a { color: #1a1a1a; }
+.jedna-litera li a { }
+.jedna-litera li a:hover { color: #29628b; }
 
 /********** end skorowidz ************/
 
 /********** jedno-wydarzenie ************/
 
-#jedno-wydarzenie-paczka { display:table; }
+#jedno-wydarzenie-paczka { 
+	display:table;
+        background-color: #eee;
+}
 
 #jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo, #jedno-wydarzenie {
 	display: table-cell;
@@ -462,62 +546,23 @@ img#logo-bak {
 
 #jedno-wydarzenie p.wydarzenie-tekst { padding: 10px 40px 20px 40px; }
 
-#jedno-wydarzenie h3 {
-        margin: 0 auto;
-        text-align: center;
-        font-size: small;
-        width:50%;
-        color: #fff;
-        background-color: #BF8130;
-        padding: 5px 5px;
-	line-height:1em;
-	text-transform:uppercase;
-}
+#jedno-wydarzenie h3 { }
 
-#jedno-wydarzenie h5 {
-        font-size: 24px;
-	padding: 20px 40px 10px 40px;
-        color: #1a1a1a;
-        line-height:2ex;
-}
+#jedno-wydarzenie h5 { }
 
-#jedno-wydarzenie .data {
-        color: #1a1a1a;
-        margin: 0 auto;
-        text-align: center;
-        background-color: #fff ;
-        width: 50%;
-        padding: 3px 0;
-	border-top-left-radius: 1em;
-	border-top-right-radius: 1em;
-}
+#jedno-wydarzenie .data { }
 
-#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo {
-	position:fixed;
-	top:265px;
-	padding: 30px;
-	color: #03406A;
-	line-height:1.2em;
-	font-weight:bold;
-}
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo { }
 
-#jedno-wydarzenie-nav-lewo { text-align:right; right: 75%; }
+#jedno-wydarzenie-nav-lewo { }
 
-#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
-	display: block;
-	margin-top:10px;
-	margin-bottom:10px;
-	font-weight: 200;
-}
+#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data { }
 
-#jedno-wydarzenie-nav-lewo .data a, #jedno-wydarzenie-nav-prawo .data a {
-	color: #65A5D1;
-}
+#jedno-wydarzenie-nav-lewo .data a, #jedno-wydarzenie-nav-prawo .data a { }
 
 #jedno-wydarzenie-zrodla {
-	border-top: 10px solid #03406A;
-	background-color: #65A5D1;
 	width: 50%; margin: 0 auto;
+        background-color: #eee;
 }
 
 #jedno-wydarzenie-zrodla h4 {
@@ -528,10 +573,9 @@ img#logo-bak {
         font-size: small;
         width:20%;
         color: #fff;
-        background-color: #03406A;
+        background-color: #888;
         padding: 0 5px 5px 5px;
         margin-bottom: 4px;
-	text-transform:uppercase;
         border-bottom-left-radius: 1em;
         border-bottom-right-radius: 1em;
 }
@@ -562,34 +606,32 @@ img#logo-bak {
 /********** end jedno-wydarzenie ************/
 
 /********** jeden-aktor ************/
-#jeden-aktor { margin: 0 auto; width:50%; }
+
+#jeden-aktor {
+	margin: 0 auto; width:50%;
+	background-color: #fff;
+        box-shadow: 0px 0px 5px #888888;
+        padding:10px 20px;
+}
 
 #jeden-aktor h2 {
-	color: #fff;
-        background-color: #A65E00;
-	padding: 5px 10px 5px 20px;
-        border-bottom: 10px solid #FF9000 ;
-	text-transform:uppercase;
-	font-weight:200;
-	line-height:1em;
+        border-bottom: 1px solid #ccc;
 }
 
 #jeden-aktor h3 {
-        padding: 5px 0 5px 20px;
-	background-color: #BF8130;
-	text-transform: uppercase;
+	text-transform: lowercase;
+	margin: 10px;
 }
 
 #jeden-aktor ul {
         background-color: #fff;
-	padding: 5px 10px;
+	padding: 5px 5px;
 	list-style: none;
 	margin-bottom:10px;
 }
 
 #jeden-aktor ul li {
 	font-size: small;
-        text-transform: uppercase;
 	line-height: 2em;
 	margin-bottom:10px;
 }
@@ -601,11 +643,12 @@ img#logo-bak {
 }
 
 #jeden-aktor ul li a {
-        text-transform: uppercase;
 	font-size: medium;
 }
 
-#jeden-aktor ul li a:hover { }
+#jeden-aktor ul li a:hover {
+	color: #29628b;
+}
 
 #jeden-aktor ul li ul { border-bottom: 1px solid #eee; }
 
