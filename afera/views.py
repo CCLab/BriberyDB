@@ -57,7 +57,7 @@ def case (request, object_id):
   result['all_actors'] = orm.query('case_actors', object_id)
   result['tab'] = '1'
   result['fields'] = orm.query('scandal_fields', object_id)
-  result['fields'] = orm.query('scandal_types', object_id)
+  result['types'] = orm.query('scandal_types', object_id)
   
   template = loader.get_template ('afera.html')
 
