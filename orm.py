@@ -13,14 +13,16 @@ should go to the original app database, defined in Django settings.py
 as alternative database named 'afery'.
 
 
-
-
-
 '''
 
-import types, settings
+import types, os
 
-from django.db import connections
+DJANGO = None
+
+if 'DJANGO_SETTINGS_MODULE' in os.environ.keys():
+  import settings
+  from django.db import connections
+  DJANGO = True
 
 Q = {
   'event_actors': '''SELECT actor_id, name, types, roles, human, count(name)
@@ -149,15 +151,22 @@ Q = {
   
 #  #'SELECT * FROM (SELECT DISTINCT UNNEST(roles) FROM actors_events WHERE actor_id=%s ORDER BY unnest) AS u JOIN actor_roles AS ar ON u.unnest=ar.id;'  }
 
-def query (query_name, param=None, db='afery'):
-  'Run the chosen query against the named database, return a sequence of rows.'
+def query (query_name, param=None, db='afery', connection=None):
+
+  '''Run the chosen query against the named database, return a sequence of
+  rows.  If DJANGO_SETTINGS_MODULE environment variable is set, it uses the
+  database connection specified in Django site settings module.  If there is
+  not, supply psycopg2's connection object as connection parameter.'''
   
   if type(param) in (types.ListType, types.TupleType):
     param = tuple(param)
   else:
     param = tuple((param,))
     
-  cursor = connections[db].cursor()
+  if DJANGO:
+    cursor = connections[db].cursor()
+  else:
+    cursor = connection.cursor()
 
   cursor.execute(Q[query_name], param)
 
