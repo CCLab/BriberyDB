@@ -11,7 +11,11 @@
             <div class="ramka">
               <h3>{% if event.4 %}{{ event.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h3>
             </div><!-- koniec ramka -->
-		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzena]{% endif %}</h5>{% for para in event.2 %}{% if para %}
+		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzena]{% endif %}</h5>
+                {% if actors %}<h4>Aktorzy wydarzenia</h4>
+                <ul>{% for actor in actors %}
+                  <li>{{ actor.1 }}</li>{% endfor %}
+                </ul>{% endif %}{% for para in event.2 %}{% if para %}
               <p class="wydarzenie-tekst">{{ para }}</p>{% endif %}{% endfor %}
 
           </div><!-- koniec jedno-wydarzenie -->
