@@ -56,6 +56,8 @@ def case (request, object_id):
   result['javascripts'] = ['actors']
   result['all_actors'] = orm.query('case_actors', object_id)
   result['tab'] = '1'
+  result['fields'] = orm.query('scandal_fields', object_id)
+  result['fields'] = orm.query('scandal_types', object_id)
   
   template = loader.get_template ('afera.html')
 
@@ -90,6 +92,7 @@ def cases (request, object_id=None):
     case['actors'] = actors[:5]
     case['num_actors'] = len(actors)
     case['num_events'] = len(c[7])
+    case['fields'] = orm.query('scandal_fields', c[0])
     
     result.append(case)
     print case
@@ -103,7 +106,7 @@ def event (request, object_id):
   'single event view'
   scandal_title = None  
   event = list(orm.query('event', object_id)[0])
-  
+  actors = orm.query('event_actors', object_id)  
   event[2] = event[2].split('\n')
   
   scandal_title = orm.query('event_case_title', event[0])[0][0][0]
@@ -123,7 +126,7 @@ def event (request, object_id):
   except IndexError:
     next_e = None
                       
-  result = dict(refs=refs, event=event, prev=prev_e, next=next_e, tab=1)
+  result = dict(refs=refs, event=event, prev=prev_e, next=next_e, actors=actors,tab=1)
 
   result['tab'] = 1
   result['scandal_title'] = scandal_title if isinstance(scandal_title, unicode) else scandal_title.decode('utf-8')
