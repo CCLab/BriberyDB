@@ -559,8 +559,12 @@ div#wprowadzenie p {
 	margin-bottom:20px;
 }
 
-#footer div { display: table-cell; padding-right: 40px; }
-#footer div:first-child { width: 70%;}
+#footer div {
+	display: table-cell;
+	padding-right: 40px;
+	width: 20%;
+}
+#footer div:first-child { width: 50%;}
 
 /********** end footer ************/
 
