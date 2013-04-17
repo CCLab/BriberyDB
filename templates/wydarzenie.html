@@ -14,7 +14,7 @@
 		<h5>{% if event.6 %}{{ event.6 }}{% else %}[ tytul wydarzena]{% endif %}</h5>
                 {% if actors %}<h4>Aktorzy wydarzenia</h4>
                 <ul>{% for actor in actors %}
-                  <li>{{ actor.1 }}</li>{% endfor %}
+                  <li><a href="{% url aktor.views.actor object_id=actor.0 %}">{{ actor.1 }}</a></li>{% endfor %}
                 </ul>{% endif %}{% for para in event.2 %}{% if para %}
               <p class="wydarzenie-tekst">{{ para }}</p>{% endif %}{% endfor %}
 
