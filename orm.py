@@ -139,6 +139,8 @@ Q = {
   
   'case_types': 'SELECT id, name from scandal_types;',
 
+  'case_fields': 'SELECT id, name from scandal_field;',
+
   'letters': '''SELECT ARRAY
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
       AS l WHERE LENGTH(letter)=1 ORDER BY letter) AS letters;''',

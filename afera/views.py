@@ -82,6 +82,7 @@ def cases (request, object_id=None):
     cases = orm.query('cases')
 
   types =  [ (typ[0], [ t for t in typ[1].split('/') if t]) for typ in orm.query('case_types') ]
+  fields = [ (field[0], [ t for t in field[1].split('/') if t]) for field in orm.query('case_fields') ]
   result = []
 
   for c in cases:
@@ -92,14 +93,16 @@ def cases (request, object_id=None):
     case['actors'] = actors[:5]
     case['num_actors'] = len(actors)
     case['num_events'] = len(c[7])
-    case['fields'] = orm.query('scandal_fields', c[0])
+ #   case['fields'] = orm.query('scandal_fields', c[0])
+#    fields = orm.query('scandal_fields', c[0])
     
     result.append(case)
     print case
 
   template = loader.get_template ('afery.html')
 
-  return HTTPResponse (template.render(Context(dict(cases=result,tab=1,javascripts=['actors'], types=types))))
+  return HTTPResponse (template.render(Context(dict(cases=result,
+    tab=1, javascripts=['actors', 'jquery-1.9.1.min'], jquery=True, types=types, fields=fields))))
 
 
 def event (request, object_id):
