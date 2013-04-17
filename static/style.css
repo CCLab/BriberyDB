@@ -101,6 +101,9 @@ img#logo-bak {
 
 /********** wszystkie afery ************/
 
+#wprowadzenie { width:70%; }
+#wprowadzenie p { margin-bottom:1em; margin-left: 20px;}
+
 #afery-nav {
 	margin-left:20px;
 	list-style-type: none; 
@@ -112,12 +115,15 @@ img#logo-bak {
 #afery-nav:after { clear:both; }
 #afery-nav { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
 
+
 #afery-nav li {
 	list-style: none;
 	display:inline-block;
 	float: left;
 	margin-bottom: 5px;
 	margin-right: 5px;
+        text-transform:uppercase;
+        font-size:small;
 }
 
 #afery-nav li a {
@@ -129,9 +135,11 @@ img#logo-bak {
 	color: #fff;
 	font-weight:200;
 	padding: 3px 5px;
+	width: 11em;
 }
 
 #afery-nav li a:hover { background-color: #235477; }
+#afery-nav li a#active { background-color: #235477; }
 
 .jedna-afera-wrapper {
 	display: inline-block;
