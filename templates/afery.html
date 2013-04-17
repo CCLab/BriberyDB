@@ -4,7 +4,8 @@
         </ul>
         <ul id="afery-nav">{% for f in fields %} 
           <li><a href="{% url afera.views.cases object_id=f.0 %}">{% for phrase in f.1 %}{{ phrase }}{% if not forloop.last %} /<br>{% endif %}{% endfor %}</a></li>{% endfor %}
-        </ul>{% for case in cases %} 
+        </ul>
+        <div id="przycisk"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
         <div class="jedna-afera-wrapper">
           <div class="jedna-afera">
             <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
