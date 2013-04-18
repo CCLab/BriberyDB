@@ -58,7 +58,8 @@ img#logo-bak {
 #header #logo h1 {
 	font-size: 50px;
 	color: #1a1a1a;
-	padding-left:150px;
+/*	padding-left:150px;*/
+	padding-left:100px;
 	font-weight: 200;
 	text-transform: uppercase;
 }
@@ -73,7 +74,8 @@ img#logo-bak {
 	height:3ex;
 	border-bottom: 2ex solid #65A5D1;
 	text-transform: uppercase;
-        padding-left:150px;
+/*        padding-left:150px;*/
+        padding-left:100px;
 }
 
 #header #navi-top ul li {
@@ -101,20 +103,56 @@ img#logo-bak {
 
 /********** wszystkie afery ************/
 
-#wprowadzenie { width:70%; }
-#wprowadzenie p { margin-bottom:1em; margin-left: 20px;}
+#wprowadzenie {
+	width:70%; 
+	background-color: #fefefe;
+	margin-left: 20px;
+	padding: 40px;
+	margin-bottom: 20px;
+        box-shadow: 0px 0px 10px #888;
+}
+
+div#wprowadzenie p {
+        font-size: medium;
+	margin-bottom:1em;
+}
+
+#wprowadzenie p~p { font-size: small; }
+
+#przycisk {
+	margin-left:20px;
+	cursor: pointer;
+}
+
+#przycisk button {
+	padding: 10px;
+	background-color: #65A6D1;
+	color: #fafafa;
+}
+
+#przycisk button:hover {
+	background-color: #235477;
+}
+
+#typysfery {
+	float:left;
+	width: 20%;
+	min-width: 12em;
+	max-width: 14em;
+	margin-right: 20px;
+	height:100%;
+	clear: both;
+}
 
 #afery-nav {
 	margin-left:20px;
 	list-style-type: none; 
 	display: block;
-	clear: both;
 }
 
 #afery-nav:after { content: ""; display: table; }
 #afery-nav:after { clear:both; }
 #afery-nav { zoom: 1; /* For IE 6/7 (trigger hasLayout) */ }
-
 
 #afery-nav li {
 	list-style: none;
@@ -141,8 +179,13 @@ img#logo-bak {
 #afery-nav li a:hover { background-color: #235477; }
 #afery-nav li a#active { background-color: #235477; }
 
+#male-afery { margin-left: 14em; }
+
+#male-afery:after { content: ""; display: table; }
+#male-afery:after { clear:both; }
+
 .jedna-afera-wrapper {
-	display: inline-block;
+	display: block;
 	float: left;
         width: 20%; 
         min-width: 245px;
@@ -151,7 +194,7 @@ img#logo-bak {
 
 .jedna-afera {
         background-color: #fff;
-	margin: 20px 0px 20px 20px;
+	margin: 20px 20px 20px 0px;
 	padding: 10px 10px 10px 10px ;
 	box-shadow: 0px 0px 5px #888888;
 
@@ -240,7 +283,13 @@ img#logo-bak {
 #jedna-afera #j-a-nazwa h2 {
 	margin: 0 auto;
 	width: 50%;
-	box-shadow: 0px 0px 5px #888888;
+/*	box-shadow: 0px 0px 5px #888888;*/
+        padding: 10px 40px;
+	font-size: 30px;
+	background-color: #fff;
+	line-height:2ex;
+	border: 1px solid #ccc;
+	border-bottom: 0px solid #ccc;
 }
 
 #jedna-afera #j-a-inne { background-color: #ccc; }
@@ -249,48 +298,63 @@ img#logo-bak {
 	padding: 5px 0;
 	background-color: #ccc;
 }
-#jedna-afera #j-a-opis { background-color: #ccc;}
-#jedna-afera #j-a-opis p { margin: 0 auto; width: 50%; }
-#jedna-afera #j-a-kontekst { background-color: #eee; border-top:1px solid #ccc; }
-#jedna-afera #j-a-kontekst p { margin: 0 auto; width: 50%; }
 
-#jedna-afera h2 {
-        padding: 10px 40px;
-	font-size: 30px;
-	background-color: #fff;
-	line-height:2ex;
+#jedna-afera #j-a-typ, #jedna-afera #j-a-sfera { }
+#jedna-afera #j-a-typ h4, #jedna-afera #j-a-sfera h4 {
+	width: 50%;
+	padding: 5px 40px 0 40px;
+	background-color: #fafafa;
+	color: #000;
+	text-align: left;
+        font-size: small;
+        line-height: 1.5em;
+	font-weight: 200;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
-#jedna-afera p#opis {
+#jedna-afera #j-a-typ h4 {
+	padding-top:20px;
+	padding-bottom:20px;
+	border-bottom: 1px solid #ccc;
+}
+#jedna-afera #j-a-sfera h4 { padding-top:20px; padding-bottom:20px; }
+
+#jedna-afera #j-a-kontekst { background-color: #eee; border-top:1px solid #ccc; }
+#jedna-afera #j-a-kontekst p {
+	margin: 0 auto; width: 50%;
+	font-size: small;
+        padding: 40px;
+}
+
+#jedna-afera #j-a-opis { background-color: #ddd; border: 1px solid #ccc;}
+#jedna-afera #j-a-opis p { 
+	margin: 0 auto; width: 50%;
 	font-size: medium;
         padding: 40px;
 	background-color: #fff;
 	box-shadow: 0px 0px 5px #888888;
 }
 
-#jedna-afera p#kontekst {
-	font-size: small;
-        padding: 40px;
-}
-
 #jedna-afera .wydarzen {
-	margin: 0 auto;
 	text-align: center;
 	font-size: small;
 	width:20%;
 	color: #1a1a1a;
         background-color: #ccc;
-	padding-bottom:5px;
+	padding:5px;
+	margin: 0 auto;
 	margin-bottom: 40px;
-        border-bottom-left-radius: 1em;
-        border-bottom-right-radius: 1em;
+	text-transform: uppercase;
+
 }
 
-#jedna-afera #ujawnienie, #jedna-afera .wydarzenie {
+#jedna-afera #ujawnienie,
+#jedna-afera .wydarzenie {
 	margin: 0 auto; width: 50%; }
 
 #jedna-afera .glowka {
-        background-color: #A65E00;
+        background-color: #ccc;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -301,56 +365,62 @@ img#logo-bak {
 	font-size: small;
 	width:40%;
 	color: #fff;
-        background-color: #03406A;
 	padding: 5px 5px;
 	line-height: 1em;
+	background-color: #9a9a9a; 
+	text-transform: uppercase;
+	font-weight: 200;
 }
 
-#jedna-afera .wydarzenie .ramka {
-	padding: 10px 20px 0px 20px;
-	margin-bottom: 40px;
-        background-color: #FFC273 ;
+#jedna-afera #ujawnienie h4 {
+        background-color: #65A5D1;
 }
 
-#jedna-afera #ujawnienie .glowka { background-color: #FF9000; }
-
-#jedna-afera #ujawnienie .glowka h4 {
-	background-color: #A65E00; 
-}
-
-#jedna-afera #ujawnienie .ramka {
+#jedna-afera .ramka {
         padding: 10px 40px 0px 40px;
         margin-bottom: 40px;
 	background-color: #eee;	
 }
 
-#jedna-afera #ujawnienie .wydarzenie-tekst {
-	padding-bottom: 40px;
+#jedna-afera .wydarzenie .ramka {
+        background-color: #fff;
 }
+
+#jedna-afera .wydarzenie-tekst { padding-bottom: 20px; }
+#jedna-afera #ujawnienie .wydarzenie-tekst { padding-bottom: 40px; }
 
 #jedna-afera div.data {
 	color: #1a1a1a;
 	margin: 0 auto;
 	text-align: center;
-	background-color: #FFC273;
+	background-color: #fff;
 	width: 40%;
-	padding: 3px 1px;
-        border-top-left-radius: 1em;
-        border-top-right-radius: 1em;
+	padding: 3px 0px;
+        box-shadow: 0px 0px 5px #888888;
 }
 
 #jedna-afera h5 {
 	font-size: 24px;
 	margin-top:20px;
 	margin-bottom:20px;
-	color: #1a1a1a;
 	line-height:2ex;
 	width:95%;
+	font-weight: 200;
 }
 
-#jedna-afera .wydarzenie .ramka .wydarzenie-tekst {
-	margin-top:20px;
-	padding: 20px;
+#jedna-afera .wydarzenie-aktorzy {
+	font-size: x-small;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+
+#jedna-afera .wydarzenie-aktorzy ul {
+	list-style-position: inside;
+}
+
+#jedna-afera .wydarzenie-aktorzy ul li {
+	float: left;
+	margin-right: 1em;
 }
 
 #jedna-afera .more {
@@ -358,16 +428,16 @@ img#logo-bak {
 	margin: 0 auto;
 	text-align:center;
 	font-size: small;
-        margin-top:20px;
-	background-color: #65A5D1;
+	text-transform: uppercase;
 	padding: 3px 10px;
 	width:40%;
 	color: #fff;
-        border-top-left-radius: 1em;
-        border-top-right-radius: 1em;
+	background: #65A5D1 url('https://dl.dropboxusercontent.com/u/90555826/korupcja/strz.png') center right no-repeat;
 }
 
-#jedna-afera .more:hover { }
+#jedna-afera .more:hover {
+	color: #4cb5ff; background-color: #29628b;
+}
 
 #jedna-afera .pokaz {
 	padding: 0 5px;
@@ -377,8 +447,6 @@ img#logo-bak {
 }
 
 #jedna-afera .wydarzenie { }
-#jedna-afera .wydarzenie .glowka { background-color: #FFAC40; }
-#jedna-afera .wydarzenie .glowka h4 { background-color: #A65E00; }
 
 #jedna-afera-aktorzy {
 	margin: 0 auto;
@@ -391,8 +459,6 @@ img#logo-bak {
 
 #jedna-afera-aktorzy h4 {
 	padding: 5px 10px;
-        border-bottom-left-radius: .5em;
-        border-bottom-right-radius: .5em;
 	background-color: #ccc;
 	color: #000;
 	text-transform: uppercase;
@@ -470,7 +536,6 @@ img#logo-bak {
         background-color: #235477;
 }
 
-
 #skorowidz #afery-nav {
 	list-style-type: none; 
 	display: block;
@@ -529,86 +594,124 @@ img#logo-bak {
 
 #jedno-wydarzenie-paczka { 
 	display:table;
-        background-color: #eee;
+        background-color: #fafafa;
 }
 
 #jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo, #jedno-wydarzenie {
 	display: table-cell;
 }
 
-#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo { max-width:10em; }
+#jedno-wydarzenie {
+        width: 50%; margin: 0 auto;
+	border: 1px solid #eee;
+}
 
 #jedno-wydarzenie h2 {
-        color: #fff;
-	text-align:center;
-        background-color: #A65E00 ;
-        border-bottom: 10px solid #BF8130;
+        color: #000;
 	margin-bottom:40px; 
+	padding: 10px 40px;
+}
+
+#jedno-wydarzenie .data {
+	color: #1a1a1a;
+        margin: 0 auto;
+        text-align: center;
+        background-color: #fff;
+        width: 40%;
+        padding: 3px 0px;
+        box-shadow: 0px 0px 5px #888888;
+
 }
 
 #jedno-wydarzenie .ramka {
-        background-color: #fff;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #ccc;
         padding-left: 10px;
         padding-right: 10px;
 }
 
-#jedno-wydarzenie p.wydarzenie-tekst { padding: 10px 40px 20px 40px; }
+#jedno-wydarzenie .ramka h4 {
+        margin: 0 auto;
+        text-align: center;
+        font-size: small;
+        width:60%;
+        color: #fff;
+        padding: 5px 5px;
+        line-height: 1em;
+        background-color: #9a9a9a;
+        text-transform: uppercase;
+        font-weight: 200;
+}
 
-#jedno-wydarzenie h3 { }
+#jedno-wydarzenie .wydarzenie-aktorzy {
+        background-color: #fff;
+        font-size: small;
+        font-weight: 200;
+	padding: 0 40px 10px 40px;
+}
 
-#jedno-wydarzenie h5 { }
+#jedno-wydarzenie .wydarzenie-aktorzy ul { list-style-position: inside; }
+#jedno-wydarzenie .wydarzenie-aktorzy ul li { }
 
-#jedno-wydarzenie .data { }
+#jedno-wydarzenie p.wydarzenie-tekst {
+	padding: 10px 40px 20px 40px;
+        background-color: #fff;
+}
 
-#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo { }
+#jedno-wydarzenie h5 {
+        font-size: 24px;
+        line-height:2ex;
+        font-weight: 200;
+	padding: 20px 40px;
+        background-color: #fff;
+}
 
-#jedno-wydarzenie-nav-lewo { }
+#jedno-wydarzenie-nav-lewo, #jedno-wydarzenie-nav-prawo {
+	max-width:10em;
+	padding: 40px;
+        position:fixed;
+        top:200px;
+}
 
-#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data { }
+#jedno-wydarzenie-nav-lewo { text-align: right; right: 75%;}
+
+#jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
+	display: block;
+	clear: both;
+}
 
 #jedno-wydarzenie-nav-lewo .data a, #jedno-wydarzenie-nav-prawo .data a { }
 
 #jedno-wydarzenie-zrodla {
-	width: 50%; margin: 0 auto;
         background-color: #eee;
 }
 
 #jedno-wydarzenie-zrodla h4 {
-	padding-top: 0;
 	margin: 0 auto;
-	margin-top:0;
         text-align: center;
         font-size: small;
         width:20%;
         color: #fff;
         background-color: #888;
-        padding: 0 5px 5px 5px;
+        padding: 2px 5px;
         margin-bottom: 4px;
-        border-bottom-left-radius: 1em;
-        border-bottom-right-radius: 1em;
+	text-transform: uppercase;
+	font-weight: 200;
 }
 
 #jedno-wydarzenie-zrodla ul {
         list-style-position: inside;
 	padding:10px 20px;
-}
-
-#jedno-wydarzenie-zrodla ul li {
-        float: left;
-        margin-right: 1em;
 	font-size: small;
 }
+
+#jedno-wydarzenie-zrodla ul li { }
 
 #jedno-wydarzenie-zrodla ul:after {
         content: "";
         display: table;
         clear:both;
-}
-
-#jedno-wydarzenie {
-        width: 50%; margin: 0 auto;
-	background-color: #eee;
-	padding-bottom:10px;
 }
 
 /********** end jedno-wydarzenie ************/

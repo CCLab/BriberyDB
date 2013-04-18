@@ -1,5 +1,6 @@
 {% extends "body.html" %}{% block content %}
         <div id="skorowidz">
+	<p>Skocz do:</p>
           <ul id="afery-nav">{% for letter in letters %}
             <li><a href="#skorowidz-{{ letter.0 }}">{{ letter.0 }}</a></li>{% endfor %}
           </ul>
