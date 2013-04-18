@@ -5,8 +5,10 @@
 from skandale import orm
 from django import forms
 from django.http import HttpResponse as HTTPResponse
+from django.http import HttpResponseRedirect as HTTPResponseRedirect
 from django.template import Context, RequestContext, loader, Template
 from django.forms.extras.widgets import SelectDateWidget
+from django.shortcuts import render_to_response
 
 #def afera(request, object_id):
 #  pass
@@ -28,6 +30,7 @@ def afera(request, object_id):
 
 def wydarzenie (request, object_id=None):
 
+
   locations = orm.query('locations')
     
   class EventForm (forms.Form):
@@ -40,14 +43,30 @@ def wydarzenie (request, object_id=None):
     location = forms.MultipleChoiceField(locations, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
 
 
-  if object_id:
-    event = orm.query('event')
+  if request.method == "GET":
+
+    if object_id:
+      event = orm.query('event',object_id)
     
-#    if event:
+      if event[0][0]:
+        event=event[0]
+        event_form = EventForm (initial=dict(title=event[6], description=event[2], event=event[1], publication=event[3]))
+      else:
+        event_form = EventForm()
+            
+    else:
+      event_form = EventForm()
 
-    event_form = EventForm (initial=dict(title=event[6], description=event[2], event=event[1], publication=event[3]))
+    template = loader.get_template('edycja_wydarzenia.html')
+    return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
+    
+  elif request.method =="POST":
+  
+    event_form = EventForm(request.POST)
 
-  else:
-    event_form = EventForm()
-  return HTTPResponse(event_form.as_p())
-      
+    if event_form.is_valid():
+      pass
+    else:
+      template = loader.get_template('edycja_wydarzenia.html')
+      return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
+          
