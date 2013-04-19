@@ -1,0 +1,16 @@
+{% if case_id %}
+<ul>
+<li> <a href="{% url edytor.views.wydarzenie case_id=case_id %}">dodaj wydarzenie</a></li>
+<li>dodaj pozycje bibliografii </li>
+</ul>
+<hr>
+{% endif %}
+
+
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="zapisz">
+</form>
+

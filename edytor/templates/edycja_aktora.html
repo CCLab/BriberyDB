@@ -1,0 +1,15 @@
+
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="zapisz">
+</form>
+
+{% if event_id %}
+dodaj aktora
+
+<a href="{% url edytor.views.aktor case_id=case_id event_id=event_id %}">przypisz aktora</a>
+dodaj pozycje bibliografii 
+
+{% endif %}

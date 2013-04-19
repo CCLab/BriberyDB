@@ -50,7 +50,7 @@ def afera(request, case_id=None):
     else:
       case_form=ScandalForm()
       
-    return HTTPResponse(template.render(RequestContext(request, dict(form=case_form))))
+    return HTTPResponse(template.render(RequestContext(request, dict(form=case_form, case_id=case_id))))
 
   elif request.method == "POST":
     case_form = ScandalForm(request.POST)
@@ -107,7 +107,7 @@ def wydarzenie (request, case_id, event_id=None):
       event_form = EventForm()
 
     template = loader.get_template('edycja_wydarzenia.html')
-    return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
+    return HTTPResponse(template.render(RequestContext(request, dict(form=event_form, event_id=event_id, case_id=case_id))))
     
   elif request.method =="POST":
   
@@ -137,7 +137,7 @@ def aktor(request, case_id, event_id):
     
   class EventActorForm(forms.Form):
     actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ] )
-    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ])
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
     roles = forms.ChoiceField(choices=orm.query('all_actor_roles'))
     affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')])
     secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')])
@@ -148,8 +148,15 @@ def aktor(request, case_id, event_id):
    return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
       
   elif request.method == "POST":
-    pass
-          
+
+    event_form = EventForm(request.POST)
+    
+    if event_form.is_valid():
+      data = [ [int(i) for i in event_form.cleaned_data[index]] if index in ['types', 'affiliations', 'secondary_affiliations']  else event_form.cleaned_data[index]
+        for index in ('actor', 'types', 'roles', 'affiliations', 'affiliations', 'secondary_affiliations')]
+
+
+                      
           
 def roles(request, object_id):
 
@@ -164,5 +171,4 @@ def roles(request, object_id):
   role_form = RoleForm(initial ={'roles': {'10': 'checked',}})
   
   return HTTPResponse(role_form)
-  
   
