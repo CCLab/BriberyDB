@@ -17,11 +17,13 @@ as alternative database named 'afery'.
 
 import types, os
 
+from psycopg2 import ProgrammingError
+
 DJANGO = None
 
 if 'DJANGO_SETTINGS_MODULE' in os.environ.keys():
   import settings
-  from django.db import connections
+  from django.db import connections,transaction
   DJANGO = True
 
 Q = {
@@ -97,7 +99,10 @@ Q = {
     GROUP BY actors_events.actor_id, actors.name ORDER BY count DESC;;''',
 
   'actor': 'SELECT id,name,human FROM actors WHERE id=%s;', 
-
+  'actors': 'SELECT id,name,human FROM actors WHERE id=%s;', 
+  'roles' : 'SELECT id,name,human FROM actor_roles;',
+  'events_types': 'SELECT id, name FROM event_types;', 
+  'locations': 'SELECT id,name from locations;',
 #  'actor_roles': '''SELECT ar.id,ar.name,scandal_id,u.name FROM
 #    (SELECT DISTINCT scandal_id,name,unnest(roles) FROM actors_events AS ae JOIN
 #      (SELECT scandal_id,s.name,ee.id FROM events AS ee JOIN scandals AS s ON scandal_id=s.id)
@@ -137,13 +142,31 @@ Q = {
         actor_affiliations ON actors.affiliation_id=actor_affiliations.id WHERE human=FALSE
         GROUP BY affiliation,actors.id,actors.actor;''',
   
+
+  'get_case' : ''' SELECT id, name, description, background, types, fields from scandals where id=%s;''', 
+  
+  'create_case': '''INSERT INTO scandals (id, name, description, background, types, fields) 
+    VALUES (DEFAULT, %s, %s, %s, %s, %s) RETURNING id;''', 
+    
+  'update_case': '''UPDATE scandals SET name=%s, description=%s, background=%s, types=%s, fields=%s WHERE id=%s;''',
+
   'case_types': 'SELECT id, name from scandal_types;',
 
   'case_fields': 'SELECT id, name from scandal_field;',
 
+  'case_events_list': 'SELECT events FROM scandals WHERE id=%s;',
+
+  'case_update_events': 'UPDATE scandals SET events=%s WHERE id=%s;',
+  
   'letters': '''SELECT ARRAY
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
       AS l WHERE LENGTH(letter)=1 ORDER BY letter) AS letters;''',
+
+  'create_event': '''insert into events (id, title, types, description, publication_date, event_date, major) 
+     VALUES (DEFAULT, %s,%s,%s,%s,%s,%s) RETURNING id;''', 
+  
+  'update_event': 'UPDATE events SET title=%s, types=%s, description=%s, publication_date=%s, event_date=%s, major=%s where id=%s;',
+
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
@@ -174,8 +197,14 @@ def query (query_name, param=None, db='afery', connection=None):
 
   if settings.DEBUG:
     print cursor.query
+  try:
+    result = cursor.fetchall()
+  except ProgrammingError: #ugly
+    result = None
+  if DJANGO:
+    transaction.commit_unless_managed(using=db)
 
-  return  cursor.fetchall()
+  return result
 #    result = [ data if isinstance(data, unicode) else data.decode('utf-8') for data in row]
 #    result.append(tuple(data))
 #  return tuple(result) 

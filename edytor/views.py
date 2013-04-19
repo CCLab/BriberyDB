@@ -77,16 +77,17 @@ def afera(request, case_id=None):
 def wydarzenie (request, case_id, event_id=None):
 
   locations = orm.query('locations')
-    
+  
   class EventForm (forms.Form):
+    types = forms.ChoiceField(orm.query('events_types'))
     title = forms.CharField(label=u'Tytul')
     #initial=event[6] if object_id else None)
     description = forms.CharField(label='Opis', widget=forms.Textarea())
 #    initial=event[2] if object_id else None)
     publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)))
     event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2014)))
-    location = forms.MultipleChoiceField(locations, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
-    major = forms.BooleanField(label="Wazne")
+    location = forms.MultipleChoiceField(locations, required=False, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
+    major = forms.BooleanField(label="Wazne", required=False)
 
   if request.method == "GET":
 
@@ -96,7 +97,8 @@ def wydarzenie (request, case_id, event_id=None):
       try: 
         if event[0][0]:
           event=event[0]
-          event_form = EventForm (initial=dict(title=event[6], description=event[2], event=event[1], publication=event[3]))
+          event_form = EventForm (initial=dict(title=event[6], description=event[2], 
+            event=event[1], publication=event[3]))
         else:
           event_form = EventForm()
       except IndexError:
@@ -112,27 +114,22 @@ def wydarzenie (request, case_id, event_id=None):
     event_form = EventForm(request.POST)
 
     if event_form.is_valid():
-      data = [ event_form.cleaned_data[index] for index in ('title', 'description', 'publication_date', 'event_date', 'major')]
-      if event_id:
-      
+      data = [ [int(event_form.cleaned_data[index])] if index=='types' else event_form.cleaned_data[index] 
+        for index in ('title', 'types', 'description', 'publication_date', 'event_date', 'major')]
+
+      if event_id:      
         data.append(str(event_id))
-        result = orm.query('update_event', (data, event_id))[0][0]
+        result = orm.query('update_event', data)
       else:
         event_id = orm.query('create_event', data)[0][0]
-           
-  #     TODO wstawianie eventu do afery
-                    
-        events = orm.query('case_events_list', case_id)[0][0]
-        
-        events.append(int(event_id))
-        
+        events = orm.query('case_events_list',int(case_id))[0][0]        
+        events.append(int(event_id))        
         status = orm.query('case_update_events', (events, case_id))
-        
-        return HTTPResponseRedirect('/edit/%s/event/%s' % ( case_id, event_id))
+                
+      return HTTPResponseRedirect('/edit/%s/event/%s' % ( case_id, event_id))
     else:
       template = loader.get_template('edycja_wydarzenia.html')
       return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
-          
           
 def aktor(request):
   pass          
