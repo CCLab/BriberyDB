@@ -1,9 +1,9 @@
 {% extends "xhtml.html" %}{% block body %}
-    <div id="wrapper">
+    <div id="wrapper" class="group">
       <div id="header" class="group">
         <div id="logo">
           <a href="{% url page_main %}"><img id="logo-bak" src=""/>
-          <h1>Afery polskie - Historia</h1></a>
+          <h1>Afery polskie. <span>Historia</span></h1></a>
         </div><!-- koniec logo -->
         <div id="navi-top">
           <ul>
@@ -17,11 +17,12 @@
       </div><!-- koniec header -->
       <div id="kontent" class="group">{% block content %}{% endblock content %}
       </div><!-- koniec kontent -->      
+	<div class="push"></div>
+    </div><!-- koniec wrapper -->
       <div id="footer" class="group">
-
-        <div class="cell"><img class="footer-logo" src="/static/image/ceetrust.png"></div>
-        <div class="cell"><p>Projekt finansowany z grantu CEE Trust.</p>
-          <p>Project developed with the financial support of the Prevention of and Fight against Crime Programme European Commission – Directorate-General Home Affairs. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.</p></div>
-        <div class="cell"><img src="/static/image/flaga.jpg"></div>
-      </div><!-- koniec footer -->      
-    </div><!-- koniec wrapper -->{% endblock body %}
+        <img src="/static/image/ceetrust.png">
+	<p>Projekt jest finansowany w ramach grantu
+	Trust for Civil Society in Central and Eastern Europe.</p>
+        <p>Project developed with the financial support of the Prevention of and Fight against Crime Programme European Commission – Directorate-General Home Affairs. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.</p>
+        <img src="https://dl.dropboxusercontent.com/u/90555826/korupcja/flagaue.png">
+      </div><!-- koniec footer -->{% endblock body %}
