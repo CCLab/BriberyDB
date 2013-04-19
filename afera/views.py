@@ -175,3 +175,28 @@ def api_case_json(request, object_id):
   result['timeline']['date']=dates
 
   return HTTPResponse(json.dumps(result))
+
+
+
+
+# Create your views here.
+
+from skandale import orm
+from django import forms
+from django.http import HttpResponse as HTTPResponse
+from django.template import Context, RequestContext, loader, Template
+
+def edit(request, object_id):
+
+  all_roles = orm.query('roles')
+  role_choice = [ (i[0], i[1]) for i in all_roles]
+  
+  class RoleForm (models.Model):
+    roles = forms.MultipleChoiceField (roles)
+    
+  role_form = RoleForm()
+  
+  return HTTPResponse(role_form.as_p())
+  
+  
+  

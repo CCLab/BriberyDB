@@ -1,8 +1,10 @@
+# -*- coding: utf-8
+
 from django import template
 
 import datetime
 
-months = ('stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'wrzesnia', 'pazdziernika', 'listopada', 'grudnia')
+months = (None, u'stycznia', u'lutego', u'marca', u'kwietnia', u'maja', u'czerwca', u'lipca', u'sierpnia', u'września', u'października', u'listopada', u'grudnia')
 
 register = template.Library()
 
