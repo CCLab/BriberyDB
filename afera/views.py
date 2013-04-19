@@ -101,8 +101,8 @@ def cases (request, object_id=None):
   template = loader.get_template ('afery.html')
 
   return HTTPResponse (template.render(Context(dict(cases=result,
+#    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields)))) rollup disabled for now
     tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields))))
-
 
 def event (request, object_id):
   'single event view'

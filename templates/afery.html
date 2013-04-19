@@ -14,7 +14,7 @@
         </ul>
 	</div>
 	<div id="male-afery">
-        <div id="przycisk"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
+        <div id="przycisk" style="display: none"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
         <div class="jedna-afera-wrapper">
           <div class="jedna-afera">
             <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
@@ -27,5 +27,4 @@
           </div><!-- koniec jedna-afera -->
         </div><!-- koniec jedna-afera-wrapper -->{% endfor %}
 	</div><!--koniec "male-afery -->
-{% endblock content %}{% if not hide %}
-        <script>$('.wydarzenie-aktorzy,.opis,.wydarzen,h2').hide()</script>{% endif %}
+{% endblock content %}
