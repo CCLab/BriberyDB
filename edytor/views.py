@@ -131,9 +131,24 @@ def wydarzenie (request, case_id, event_id=None):
       template = loader.get_template('edycja_wydarzenia.html')
       return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
           
-def aktor(request):
-  pass          
-          
+def aktor(request, case_id, event_id):
+
+  template = loader.get_template('edycja_aktora.html')
+    
+  class EventActorForm(forms.Form):
+    actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ] )
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ])
+    roles = forms.ChoiceField(choices=orm.query('all_actor_roles'))
+    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')])
+    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')])
+    
+  if request.method == "GET":
+  
+   actor_form = EventActorForm()
+   return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
+      
+  elif request.method == "POST":
+    pass
           
           
 def roles(request, object_id):
