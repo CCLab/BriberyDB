@@ -98,7 +98,7 @@ def wydarzenie (request, case_id, event_id=None):
         if event[0][0]:
           event=event[0]
           event_form = EventForm (initial=dict(title=event[6], description=event[2], 
-            event=event[1], publication=event[3]))
+            event_date=event[1], publication_date=event[3]))
         else:
           event_form = EventForm()
       except IndexError:
