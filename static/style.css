@@ -12,7 +12,11 @@ a:hover {
 	color: #29628b;
 }
 
-html, body { font-family: 'Open Sans', sans-serif; font-weight: 200; }
+html, body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 200;
+	height:100%;
+}
 
 h2 {
 	font-size: 30px;
@@ -64,6 +68,10 @@ img#logo-bak {
 	text-transform: uppercase;
 }
 
+#header #logo h1 span {
+        color: #65A5D1;
+}
+
 #header #navi-top { margin-bottom: 0px; }
 
 #header #navi-top ul {
@@ -97,9 +105,16 @@ img#logo-bak {
 
 /********** end header ************/
 
-#wrapper { min-width: 900px; background-color: #fafafa; }
+#wrapper {
+	min-height:100%;
+	height: auto !important;
+	height:100%;
+	margin: 0 auto -120px;
+	min-width: 900px;
+	background-color: #fafafa; 
+}
 
-#kontent { padding-top: 20px;}
+#kontent { padding-top: 20px; }
 
 /********** wszystkie afery ************/
 
@@ -139,10 +154,11 @@ div#wprowadzenie p {
 	width: 20%;
 	min-width: 12em;
 	max-width: 14em;
-	margin-right: 20px;
 	height:100%;
 	clear: both;
 }
+
+#typysfery ul { margin-bottom:2em; }
 
 #afery-nav {
 	margin-left:20px;
@@ -189,15 +205,16 @@ div#wprowadzenie p {
 	float: left;
         width: 20%; 
         min-width: 245px;
-        max-width: 500px;
+        max-width: 400px;
+	box-shadow: 0px 0px 5px #888888;
+	margin: 20px 20px 20px 0px;
+	padding: 10px 10px 10px 10px ;
+        background-color: #fff;
 }
 
 .jedna-afera {
-        background-color: #fff;
-	margin: 20px 20px 20px 0px;
-	padding: 10px 10px 10px 10px ;
-	box-shadow: 0px 0px 5px #888888;
-
+	height:100%;
+	height: 500px;
 }
 
 .jedna-afera h2 {
@@ -232,7 +249,7 @@ div#wprowadzenie p {
 	margin-top:10px;
 }
 
-.jedna-afera a.more {
+.jedna-afera-wrapper a.more {
 	display:block;
         font-size: x-small;
         font-weight: 400;
@@ -243,7 +260,7 @@ div#wprowadzenie p {
 	margin-top:10px; 
 }
 
-.jedna-afera a.more:hover { color: #4cb5ff; background-color: #29628b; }
+.jedna-afera-wrapper a.more:hover { color: #4cb5ff; background-color: #29628b; }
 
 .jedna-afera .wydarzenie-aktorzy {
 	font-weight: 400;
@@ -490,13 +507,28 @@ div#wprowadzenie p {
 /********** footer ************/
 
 #footer {
-	background-color:black;
-	color: white;
-	padding: 20px;
 	margin-top: 20px;
 	font-size: small;
+	padding: 20px;
+	background-color: #000;
+	color: #ccc;
+	height:120px;
+	display: table;
 }
 
+#footer, .push { height:200px; clear: both; }
+
+
+#footer p, #footer img {
+	display: block;
+	clear: both;
+	margin-bottom: 1em;
+}
+
+#footer p+img { border:1px solid #ccc; }
+
+#footer div { display: table-cell; }
+#footer div:first-child { padding-right: 10%; }
 
 /********** end footer ************/
 
@@ -617,10 +649,9 @@ div#wprowadzenie p {
         margin: 0 auto;
         text-align: center;
         background-color: #fff;
-        width: 40%;
+        width: 30%;
         padding: 3px 0px;
         box-shadow: 0px 0px 5px #888888;
-
 }
 
 #jedno-wydarzenie .ramka {
@@ -679,6 +710,7 @@ div#wprowadzenie p {
 #jedno-wydarzenie-nav-lewo .data, #jedno-wydarzenie-nav-prawo .data {
 	display: block;
 	clear: both;
+	font-weight: 600;
 }
 
 #jedno-wydarzenie-nav-lewo .data a, #jedno-wydarzenie-nav-prawo .data a { }

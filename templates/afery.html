@@ -39,8 +39,8 @@
             <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}
             </div>
             <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
-            <a href="{% url afera.views.case object_id=case.id %}" class="more">wiecej</a>
           </div><!-- koniec jedna-afera -->
+            <a href="{% url afera.views.case object_id=case.id %}" class="more">wiecej</a>
         </div><!-- koniec jedna-afera-wrapper -->{% endfor %}
 	</div><!--koniec "male-afery -->
 {% endblock content %}

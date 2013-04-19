@@ -1,4 +1,4 @@
-{% extends "body.html" %}{% block content %}
+{% extends "body.html" %}{% block content %}{% load polskadata %}
         <div id="jedna-afera">
           <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
           <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
@@ -8,7 +8,7 @@
           <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
           <div class="wydarzen">wydarzen: {{ num_events }}</div>
           <div id="ujawnienie">
-              <div class="data">{{ event_leak.0.1|date:"Y-m-d" }}</div>
+              <div class="data">{{ event_leak.0.1|polskadata }}</div>
               <div class="glowka">
                   <h4>Ujawnienie afery</h4>
               </div>
@@ -24,7 +24,7 @@
               </div><!-- koniec ramka -->
           </div><!-- koniec ujawnienie -->{% for event in events %}
           <div class="wydarzenie">
-              <div class="data">{{ event.0.1|date:"Y-m-d" }}</div>
+              <div class="data">{{ event.0.1|polskadata }}</div>
               <div class="glowka">
               <h4>{% if event.0.4 %}{{ event.0.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h4>
               </div>
