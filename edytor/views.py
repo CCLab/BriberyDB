@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect as HTTPResponseRedirect
 from django.template import Context, RequestContext, loader, Template
 from django.forms.extras.widgets import SelectDateWidget
 from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
+
 #from django.db import connections
 #  
   
@@ -143,32 +145,42 @@ def aktor(request, case_id, event_id):
     secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')])
     
   if request.method == "GET":
+ 
+   # todo uzupelnianie zaznaczen
   
    actor_form = EventActorForm()
    return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
       
   elif request.method == "POST":
 
-    event_form = EventForm(request.POST)
+    actor_form = EventActorForm(request.POST)
     
-    if event_form.is_valid():
-      data = [ [int(i) for i in event_form.cleaned_data[index]] if index in ['types', 'affiliations', 'secondary_affiliations']  else event_form.cleaned_data[index]
-        for index in ('actor', 'types', 'roles', 'affiliations', 'affiliations', 'secondary_affiliations')]
+    if actor_form.is_valid():
+      data = [ [int(i) for i in actor_form.cleaned_data[index]] if index in ['types', 'roles', 'affiliations', 'secondary_affiliations']  else actor_form.cleaned_data[index]
+        for index in ('actor', 'types', 'roles', 'affiliations', 'secondary_affiliations')]
+        
+      data = [event_id] + data
+      orm.query('assign_actor', data)
+      return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.wydarzenie', kwargs=dict(event_id=event_id, case_id=case_id)))
+    else: 
+      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
+            
+        
 
 
                       
           
-def roles(request, object_id):
-
-  all_roles = orm.query('roles')
-  role_choice = [ (i[0], i[1]) for i in all_roles]
-
+#def roles(request, object_id):
+#
+#  all_roles = orm.query('roles')
+#  role_choice = [ (i[0], i[1]) for i in all_roles]
+#
   
-  class RoleForm (forms.Form):
-    roles = forms.MultipleChoiceField (role_choice, 
-      label="Role w aferze", widget=forms.CheckboxSelectMultiple(attrs={'size': len(role_choice)}))
-    
-  role_form = RoleForm(initial ={'roles': {'10': 'checked',}})
+#  class RoleForm (forms.Form):
+#    roles = forms.MultipleChoiceField (role_choice, 
+#      label="Role w aferze", widget=forms.CheckboxSelectMultiple(attrs={'size': len(role_choice)}))
+#    
+#  role_form = RoleForm(initial ={'roles': {'10': 'checked',}})
   
-  return HTTPResponse(role_form)
+#  return HTTPResponse(role_form)
   
