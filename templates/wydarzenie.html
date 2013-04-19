@@ -1,12 +1,12 @@
-{% extends "body.html" %}{% block content %}
+{% extends "body.html" %}{% block content %}{% load polskadata %}
 	<div id="jedno-wydarzenie-paczka">
           <div id="jedno-wydarzenie-nav-lewo" style="visibility: {% if prev %}visible{% else %}hidden{% endif %};">
             {% if prev %}<a href="{% url afera.views.event object_id=prev.0 %}">{% endif %}poprzednie:
-	    <span class="data">{% if prev %}{{ prev.1|date:"Y-m-d" }}{% endif %}</span>{% if prev.2 %}{{ prev.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}{% if prev %}</a>{% endif %}
+	    <span class="data">{% if prev %}{{ prev.1|polskadata }}{% endif %}</span>{% if prev.2 %}{{ prev.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}{% if prev %}</a>{% endif %}
 	  </div>
           <div id="jedno-wydarzenie">
               <h2>{% if scandal_title %}{{ scandal_title }}{% else %}[ nazwa afery ]{% endif %}</h2>
-            <div class="data">{{ event.1|date:"Y-m-d" }}</div>
+            <div class="data">{{ event.1|polskadata }}</div>
 
             <div class="ramka">
               <h4>{% if event.4 %}{{ event.4 }}{% else %}[ kategoria wydarzenia ]{% endif %}</h4>
@@ -28,7 +28,7 @@
           </div><!-- koniec jedno-wydarzenie -->
           <div id="jedno-wydarzenie-nav-prawo" style="visibility: {% if next %}visible{% else %}hidden{% endif %};">
             {% if next %}<a href="{% url afera.views.event object_id=next.0 %}">{% endif %}nastepne:
-            <span class="data">{% if next %}<a href="{% url afera.views.event object_id=next.0 %}">{{ next.1|date:"Y-m-d" }}</a>{% endif %}</span>{% if next %}{% if next.2 %}
+            <span class="data">{% if next %}{{ next.1|polskadata }}{% endif %}</span>{% if next %}{% if next.2 %}
         {{ next.2 }}{% else %}[ tytuł wydarzenia ]{% endif %}{% endif %}{% if next %}</a>{% endif %}
 	</div>
 	</div><!-- koniec jedno-wydarzenie-paczka -->
