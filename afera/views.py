@@ -8,6 +8,8 @@ from django.template import Context, RequestContext, loader, Template
 
 from django.db import connections
 
+from templatetags.polskadata import polskadata
+
 # not views
 
 def get_scandal (scandal_id, db='afery'):
@@ -73,7 +75,7 @@ def case_actors (request, object_id):
   return HTTPResponse (template.render(Context(dict(case=result))))
 
 
-def cases (request, object_id=None):
+def cases (request, object_id=None, intro=False):
   'all cases view'
 
   if object_id:
@@ -100,7 +102,7 @@ def cases (request, object_id=None):
 
   template = loader.get_template ('afery.html')
 
-  return HTTPResponse (template.render(Context(dict(cases=result,
+  return HTTPResponse (template.render(Context(dict(cases=result,intro=intro,
 #    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields)))) rollup disabled for now
     tab=1, javascripts=['actors',], jquery=True, types=types, fields=fields))))
 
@@ -166,13 +168,16 @@ def api_case_json(request, object_id):
 
   result = {}
 
-  result['timeline'] = { 'headline': case[0][0][0], 'type': 'default', 'text': case[0][1], 'startDate': events[0][1].strftime('%Y,%m,%d') }
+  result['timeline'] = { 'headline': case[0][0][0], 'type': 'default', 'start_zoom_adjust': 40, 'start_at_slide': 1,
+    'text': case[0][1], 'startDate': events[0][1].strftime('%Y,%m,%d') }
 
 
   dates = []
 
   for event in events:
-    dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 'endDate': event[1].strftime('%Y-%m-%d'), 'headline':event[6], 'text': event[2]})
+    dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 
+      'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': event[2], 
+      'start_at_slide': 1, 'start_zoom_adjust': -15})
 
   result['timeline']['date']=dates
 

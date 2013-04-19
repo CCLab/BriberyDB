@@ -9,7 +9,8 @@ import settings
 
 urlpatterns = patterns('',
     # Example:
-    (r'^$', direct_to_template, dict(template='main.html', tab=1),'page_main'),
+#    (r'^$', direct_to_template, dict(template='main.html', tab=1),'page_main'),
+    (r'^$', 'afera.views.cases', dict(intro=True), 'page_main'),
     (r'^/o-serwisie/$', direct_to_template,
       dict(template='about.html', extra_context=dict(tab=4)), 'page_about'),
     (r'^/kontakt/$', direct_to_template,
@@ -40,6 +41,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
+    (r'^edit/((?P<case_id>\d+)/)?$','edytor.views.afera'),
+    (r'^edit/(?P<case_id>\d+)/event/((?P<event_id>\d+)/)?$','edytor.views.wydarzenie'),
 )
 
 
