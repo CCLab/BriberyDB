@@ -153,7 +153,8 @@ def timeline(request, object_id):
   result['all_actors'] = orm.query('case_actors', object_id)
   result['fields'] = orm.query('scandal_fields', object_id)
   result['types'] = orm.query('scandal_types', object_id)
-
+  result['case_id'] = object_id
+  
   template = loader.get_template ('linia.html')
 
   return HTTPResponse (template.render(Context(result))  )
