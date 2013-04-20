@@ -147,10 +147,10 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
     human = forms.BooleanField(label="Wazne", required=False)
     
   class EventActorForm(forms.Form):
-    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy")
-    roles = forms.ChoiceField(choices=orm.query('all_actor_roles'), label="Role")
-    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')], label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
-    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')], label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
+    roles = forms.ChoiceField(choices=orm.query('all_actor_roles'), label="Role", required=False)
+    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')], label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
+    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')], label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
     
   if request.method == "GET":
  
