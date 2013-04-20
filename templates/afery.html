@@ -33,7 +33,7 @@
         <div id="przycisk" style="display: none"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
         <div class="jedna-afera-wrapper">
           <div class="jedna-afera">
-            <h2><a href="{% url afera.views.case object_id=case.id %}">{{ case.title.0 }}</a></h2>
+            <h2><a href="{% url single_case object_id=case.id %}">{{ case.title.0 }}</a></h2>
             <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
             <p class="wydarzen"><a href="{% url afera.views.case object_id=case.id %}">wydarzen: {{ case.num_events }}</a></p>
             <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}

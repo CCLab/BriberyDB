@@ -3,12 +3,8 @@
 	  <h2>{{ actor.1 }}</h2>{% for role in roles %}{% for case in role.1 %}
           <h3>{{ role.0 }}</h3>
           <ul>
-            <li>
-              <ul>
                 <li><span>w związku z:</span> <a href="{% url afera.views.case  object_id=case.0.1 %}">{{ case.0.0 }}</a></li>{% if human %}
                 <li><span>pełniona funkcja:</span>{% for fun in case.1 %}{{ fun }}{% if not forloop.last %}, {% endif %}{% endfor %}
                 </li>{% endif %}
-              </ul>
-            </li>
           </ul>{% endfor %}{% endfor %}
         </div>{% endblock content %}

@@ -23,9 +23,9 @@ urlpatterns = patterns('',
 
     (r'^afery/(?P<object_id>\d+)/$', 'afera.views.cases' ),
 
-    (r'^afera/(?P<object_id>\d+)/$', 'afera.views.case' ),
-    (r'^afera/(?P<object_id>\d+)/timeline/$', 'afera.views.timeline' ),
-    (r'^afera/(?P<object_id>\d+)/os/$', 'afera.views.timeline' ),                       
+    (r'^afera/(?P<object_id>\d+)/$', 'afera.views.timeline', None, 'single_case' ),
+    (r'^afera/(?P<object_id>\d+)/vertical/$', 'afera.views.case' ),
+#    (r'^afera/(?P<object_id>\d+)/os/$', 'afera.views.timeline' ),                       
     (r'^afera/all/$', 'afera.views.cases' ),
     (r'^afera/(?P<object_id>\d+)/podmioty/$', 'afera.views.case_actors' ),
 
@@ -41,14 +41,23 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
-    (r'^edit/((?P<case_id>\d+)/)?$','edytor.views.afera'),
+
+
+    (r'^edit/$','edytor.views.afera'),
+    (r'^edit/(?P<case_id>\d+)/$','edytor.views.afera'),    
+    (r'^edit/(?P<case_id>\d+)/attr/$', 'edytor.views.atrybut', None, 'case_attr'),
     (r'^edit/(?P<case_id>\d+)/event/$','edytor.views.wydarzenie'),    
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/$','edytor.views.wydarzenie'),    
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/$','edytor.views.aktor'),
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/$','edytor.views.aktor', 
+      None, 'assign_actor'),
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/attr/$','edytor.views.atrybut', None, 'event_attr'),      
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/add$','edytor.views.aktor', 
       dict(add=True), 'add_actor'),    
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/$',
       'edytor.views.aktor'),    
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/attr/$',
+      'edytor.views.atrybut', None, 'actor_attr'),
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/refs/$','edytor.views.zrodlo'),        
 )
 
 

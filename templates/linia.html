@@ -2,10 +2,11 @@
         <div id="jedna-afera">
           <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
 	  <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
-          <div id="j-a-typ"><h4>Rodzaj korupcji: {% if types %}{% for t in types %}{{ t.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
-          <div id="j-a-sfera"><h4>Sfera dotknięta korupcją: {% if fields %}{% for f in fields %}{{ f.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
+          <div class="wydarzen"><a href="#timeline-embed">skocz do wydarzen ({{ num_events }})</a></div>
+          <div id="j-a-typ"><h4><span>Rodzaj korupcji:</span> {% if types %}{% for t in types %}{{ t.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4>
+	<h4><span>Sfera dotknięta korupcją:</span> {% if fields %}{% for f in fields %}{{ f.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
 	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
-          <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
+          <div id="j-a-kontekst"><p id="kontekst">{% if background %}<span>Kontekst</span> {{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
           <div id="timeline-embed"></div>
           <script type="text/javascript">
             var timeline_config = {
@@ -14,10 +15,10 @@
               source:             'http://polskieafery.pl/api/afera/{{ case_id }}/',
               embed_id:           'timeline-embed',               //OPTIONAL USE A DIFFERENT DIV ID FOR EMBED
               start_at_end:       false,                          //OPTIONAL START AT LATEST DATE
-              start_at_slide:     '0',                            //OPTIONAL START AT SPECIFIC SLIDE
-              start_zoom_adjust:  '3',                            //OPTIONAL TWEAK THE DEFAULT ZOOM LEVEL
+              start_at_slide:     '1',                            //OPTIONAL START AT SPECIFIC SLIDE
+              start_zoom_adjust:  '30',                            //OPTIONAL TWEAK THE DEFAULT ZOOM LEVEL
               hash_bookmark:      true,                           //OPTIONAL LOCATION BAR HASHES
-              font:               'BreeSerif-OpenSans',             //OPTIONAL FONT
+              font:               'BreeSerif-OpenSans',           //OPTIONAL FONT
               debug:              true,                           //OPTIONAL DEBUG TO CONSOLE
               lang:               'pl',                           //OPTIONAL LANGUAGE
               maptype:            'watercolor',                   //OPTIONAL MAP STYLE
