@@ -15,7 +15,7 @@ from templatetags.polskadata import polskadata
 def get_scandal (scandal_id, db='afery'):
 
   cursor = connections[db].cursor()
-  cursor.execute("SELECT name, description, background FROM scandals WHERE id=%s;", (scandal_id,))
+  cursor.execute("SELECT name, description, background, events FROM scandals WHERE id=%s;", (scandal_id,))
   return cursor.fetchall()
 
 def get_events (scandal_id, db='afery'):
@@ -154,7 +154,8 @@ def timeline(request, object_id):
   result['fields'] = orm.query('scandal_fields', object_id)
   result['types'] = orm.query('scandal_types', object_id)
   result['case_id'] = object_id
-  
+  result['num_events'] = len(scandal[0][3])
+    
   template = loader.get_template ('linia.html')
 
   return HTTPResponse (template.render(Context(result))  )
