@@ -182,6 +182,14 @@ Q = {
   'case_actor_events_metadata': '''select types, roles, affiliations, secondary_affiliations 
     from actors_events where event_id in (select unnest(events) from scandals where id=%s)
     AND actor_id=%s;''',
+
+  'event_refs': 'SELECT refs from events where id=%s;',
+  'create_ref': '''INSERT INTO refs (id, art_title, pub_title, url, pub_date, access_date)
+     VALUES (DEFAULT, %s, %s, %s, %s, %s) RETURNING id;''',
+   'update_event_refs': 'UPDATE events SET refs=%s WHERE id=%s;',
+
+  'create_attribute_human': 'INSERT INTO <table> (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
+  'create_attribute': 'INSERT INTO <table> (id, name) VALUES (DEFAULT, %s) RETURNING id;',  
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
@@ -191,12 +199,17 @@ Q = {
   
 #  #'SELECT * FROM (SELECT DISTINCT UNNEST(roles) FROM actors_events WHERE actor_id=%s ORDER BY unnest) AS u JOIN actor_roles AS ar ON u.unnest=ar.id;'  }
 
-def query (query_name, param=None, db='afery', connection=None):
+def query (query_name, param=None, db='afery', connection=None, special=None):
 
   '''Run the chosen query against the named database, return a sequence of
   rows.  If DJANGO_SETTINGS_MODULE environment variable is set, it uses the
   database connection specified in Django site settings module.  If there is
-  not, supply psycopg2's connection object as connection parameter.'''
+  not, supply psycopg2's connection object as connection parameter.
+  
+  when <special> is true, the first data element is parsed into the query as table name
+   
+  THIS IS INSECURE
+  '''
   
   if type(param) in (types.ListType, types.TupleType):
     param = tuple(param)
@@ -208,7 +221,11 @@ def query (query_name, param=None, db='afery', connection=None):
   else:
     cursor = connection.cursor()
 
-  cursor.execute(Q[query_name], param)
+  q = Q[query_name]
+  if special and '<table>' in q:
+    q = q.replace('<table>',param[0])
+    param = param[1:]
+  cursor.execute(q, param)
 
   if settings.DEBUG:
     print cursor.query

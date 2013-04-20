@@ -260,21 +260,21 @@ def atrybut(request, case_id=None, event_id=None, actor_id=None):
 
   case_attributes = {'scandal_types':'Typ', 'scandal_field': 'Sfera dotknięta korupcją'}
   class CaseForm(forms.Form):
-    attribute = forms.ChoiceField(choices=[(key, case_attributes[key]) for key in case_attributes.keys() ])
+    attribute = forms.ChoiceField(choices=[(key, case_attributes[key]) for key in case_attributes.keys()],
+      label="Wybierz atrybut")
     name = forms.CharField(label="Nazwa")
    
   event_attributes = {'event_types': 'Typ wydarzenia'}
   class EventForm(forms.Form):
-    attribute = forms.ChoiceField(choices=[(key, event_attributes[key]) for key in event_attributes.keys() ])
+    attribute = forms.ChoiceField(choices=[(key, event_attributes[key]) for key in event_attributes.keys()],label="Wybierz atrybut")
     name = forms.CharField(label="Nazwa")
     
   actor_attributes = {'secondary_affiliations': 'Afiliacja drugorzędna', 
     'actor_affiliations': 'Afiliacja','actor_roles':'Rola', 'actor_types': 'Typ'}
   class ActorForm(forms.Form):
-    attribute = forms.ChoiceField(choices=[(key, actor_attributes[key]) for key in actor_attributes.keys() ])          
+    attribute = forms.ChoiceField(choices=[(key, actor_attributes[key]) for key in actor_attributes.keys()],label="Wybierz atrybut")          
     name = forms.CharField(label="Nazwa")    
-    human = forms.BooleanField(label="Wazne", required=False)
-
+    human = forms.BooleanField(label="Osoba", required=False)
   
   if actor_id:
     form=ActorForm
@@ -295,15 +295,15 @@ def atrybut(request, case_id=None, event_id=None, actor_id=None):
 
     attribute_form = form(request.POST)
     if attribute_form.is_valid():
-      table = attribute_form['attribute']
-      name  = attribute_form['name']
+      table = attribute_form.cleaned_data['attribute']
+      name  = attribute_form.cleaned_data['name']
       
-      if isinstance(ActorForm, attribute_form):
-        data = (table, name,  attribute_form['human'])
+      if isinstance(attribute_form, ActorForm):
+        data = (table, name,  attribute_form.cleaned_data['human'])
+        orm.query('create_attribute_human', data, special=True)        
       else:
         data = (table, name)
-      
-      orm.query('create_attribute', data)
+        orm.query('create_attribute', data, special=True)      
 
       return HTTPResponseRedirect(back)
   return HTTPResponse(template.render(RequestContext(request, dict(form=attribute_form,

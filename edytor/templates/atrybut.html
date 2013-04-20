@@ -1,0 +1,17 @@
+<ul>
+{% if actor_id %}
+<li><a href="{% url edytor.views.aktor case_id=case_id event_id=event_id actor_id=actor_id%}">wroc do wydarzenia</a></li>
+{% endif %}{% if event_id %}
+<li><a href="{% url edytor.views.wydarzenie case_id=case_id event_id=event_id %}">wroc do wydarzenia</a></li>
+{% endif %}{% if case_id %}
+<li><a href="{% url edytor.views.afera case_id=case_id %}">wroc do afery</a></li>
+{% endif %}
+</ul>
+<hr>
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="zapisz">
+</form>
+

@@ -1,7 +1,7 @@
 {% if case_id %}
 <ul>
 <li> <a href="{% url edytor.views.wydarzenie case_id=case_id %}">dodaj wydarzenie</a></li>
-<li>dodaj pozycje bibliografii </li>
+<li> <a href="{% url case_attr case_id=case_id %}">dodaj atrybut</a>
 </ul>
 <hr>
 {% endif %}
