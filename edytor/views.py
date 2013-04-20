@@ -158,14 +158,15 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
    # mamy wybranego aktora
    # todo uzupelnianie zaznaczen TODO
    
-     metadata = orm.query('case_actor_events_metadata', (case_id, actor_id))
+#     metadata = orm.query('case_actor_events_metadata', (case_id, actor_id))
+     line = orm.query('case_actor_events_metadata', (case_id, actor_id))[-1]     
      cols = ('types','roles', 'affiliations', 'secondary_affiliations') 
      metadata_dict = {}
-     for line in metadata:
-       for item in cols:
-          workset = metadata_dict.get(item,set())
-          workset = workset.union(tuple(line[cols.index(item)]))
-          metadata_dict[item] = workset
+#    for line in metadata:
+     for item in cols:
+       workset = metadata_dict.get(item,set())
+       workset = workset.union(tuple(line[cols.index(item)]))
+       metadata_dict[item] = workset
               
      output = {}
      for item in cols:
