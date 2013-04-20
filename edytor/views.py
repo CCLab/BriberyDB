@@ -157,7 +157,25 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
    if actor_id:
    # mamy wybranego aktora
    # todo uzupelnianie zaznaczen TODO
-     actor_form = EventActorForm()
+   
+     metadata = orm.query('case_actor_events_metadata', (case_id, actor_id))
+     cols = ('types','roles', 'affiliations', 'secondary_affiliations') 
+     metadata_dict = {}
+     for line in metadata:
+       for item in cols:
+          workset = metadata_dict.get(item,set())
+          workset = workset.union(tuple(line[cols.index(item)]))
+          metadata_dict[item] = workset
+              
+     output = {}
+     for item in cols:
+       workdict = {}
+       workset = metadata_dict.get(item,set())
+       for val in workset:
+         workdict[val]  =' checked'
+       output[item] = workdict
+                          
+     actor_form = EventActorForm(initial=output)
      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, event_id=event_id, case_id=case_id))))
    else:
      if add:

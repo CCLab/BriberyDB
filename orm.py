@@ -157,6 +157,13 @@ Q = {
   'case_events_list': 'SELECT events FROM scandals WHERE id=%s;',
 
   'case_update_events': 'UPDATE scandals SET events=%s WHERE id=%s;',
+
+  'all_actors': 'SELECT id, name FROM actors;',
+
+  'all_actor_types': 'SELECT id,name FROM actor_types;',
+  'all_actor_roles': 'SELECT id,name FROM actor_roles;',
+  'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations;',  
+  'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations;',    
   
   'letters': '''SELECT ARRAY
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
@@ -167,6 +174,14 @@ Q = {
   
   'update_event': 'UPDATE events SET title=%s, types=%s, description=%s, publication_date=%s, event_date=%s, major=%s where id=%s;',
 
+  'create_actor': 'INSERT INTO actors (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
+
+  'assign_actor': '''INSERT INTO actors_events (event_id, actor_id, types, roles, affiliations, secondary_affiliations)
+     VALUES (%s, %s, %s, %s, %s, %s);''', 
+
+  'case_actor_events_metadata': '''select types, roles, affiliations, secondary_affiliations 
+    from actors_events where event_id in (select unnest(events) from scandals where id=%s)
+    AND actor_id=%s;''',
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
