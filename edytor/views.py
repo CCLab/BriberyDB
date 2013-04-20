@@ -32,9 +32,9 @@ def afera(request, case_id=None):
   
     name = forms.CharField(label=u'Tytuly (oddzielone przecinkami)')
     description = forms.CharField(label='Opis', widget=forms.Textarea())
-    background = forms.CharField(label='Opis', widget=forms.Textarea())
-    types = forms.MultipleChoiceField(orm.query('case_types'), widget=forms.CheckboxSelectMultiple(attrs={'size': len(orm.query('case_types'))}))
-    fields = forms.MultipleChoiceField(orm.query('case_fields'), widget=forms.CheckboxSelectMultiple(attrs={'size': len(orm.query('case_fields'))}))
+    background = forms.CharField(label='Tło', widget=forms.Textarea())
+    types = forms.MultipleChoiceField(orm.query('case_types'), widget=forms.CheckboxSelectMultiple(attrs={'size': len(orm.query('case_types'))}),label="Typ")
+    fields = forms.MultipleChoiceField(orm.query('case_fields'), widget=forms.CheckboxSelectMultiple(attrs={'size': len(orm.query('case_fields'))}), label="Sfera")
   
   if request.method == "GET":
   
@@ -126,6 +126,8 @@ def wydarzenie (request, case_id, event_id=None):
       else:
         event_id = orm.query('create_event', data)[0][0]
         events = orm.query('case_events_list',int(case_id))[0][0]        
+        if not events:
+          events = []
         events.append(int(event_id))        
         status = orm.query('case_update_events', (events, case_id))
                 
@@ -144,7 +146,7 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
 
   class AddActorForm(forms.Form):
     name = forms.CharField(label='Nazwa/nazwisko')
-    human = forms.BooleanField(label="Wazne", required=False)
+    human = forms.BooleanField(label="Osoba", required=False)
     
   class EventActorForm(forms.Form):
     types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
