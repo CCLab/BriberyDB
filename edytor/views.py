@@ -156,7 +156,7 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
  
    if actor_id:
    # mamy wybranego aktora
-   # todo uzupelnianie zaznaczen
+   # todo uzupelnianie zaznaczen TODO
      actor_form = EventActorForm()
      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, event_id=event_id, case_id=case_id))))
    else:
@@ -182,16 +182,25 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
           kwargs=dict(event_id=event_id, case_id=case_id)))
       else: 
         #cos nie pasuje, pokazujemy form jeszcze raz TODO
-        pass
+        return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, event_id=event_id, case_id=case_id, actor_id=actor_id))))   
     else: 
-      actor_form = ActorForm(request.POST)
-      if actor_form.is_valid():
-      # nie mamy actor_id, albo pokazujemy formatke, albo przekierowujemy do actor_id
-        actor_id = actor_form.cleaned_data["actor"]
-        return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktor', 
-          kwargs=dict(event_id=event_id, case_id=case_id, actor_id=actor_id)))        
+      if add == True:
+        add_actor_form=AddActorForm(request.POST)
+        if add_actor_form.is_valid():
+          actor_id = orm.query('create_actor', (add_actor_form.cleaned_data['name'], add_actor_form.cleaned_data['human']))[0][0]
+          return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktor', 
+            kwargs=dict(event_id=event_id, case_id=case_id, actor_id=actor_id)))        
+        else:
+          return HTTPResponse(template.render(RequestContext(request, dict(form=add_actor_form, event_id=event_id, case_id=case_id))))          
       else:
-        return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
+        actor_form = ActorForm(request.POST)
+        if actor_form.is_valid():
+        # nie mamy actor_id, albo pokazujemy formatke, albo przekierowujemy do actor_id
+          actor_id = actor_form.cleaned_data["actor"]
+          return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktor', 
+            kwargs=dict(event_id=event_id, case_id=case_id, actor_id=actor_id)))        
+        else:
+          return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
             
         
 

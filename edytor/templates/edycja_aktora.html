@@ -1,4 +1,13 @@
-
+{% if event_id %}
+<ul>
+<li><a href="{% url edytor.views.aktor case_id=case_id event_id=event_id %}">przypisz aktora</a>
+<li><a href="{% url edytor.views.wydarzenie case_id=case_id event_id=event_id %}">wroc do wydarzenia</a></li>
+<li< a href="{% url edytor.views.wydarzenie case_id=case_id %}">nastepne wydarzenie</a></li>
+<li><a href="{% url add_actor case_id=case_id event_id=event_id %}">dodaj
+aktora</a></li>
+</ul>
+<hr>
+{% endif %}
 
 <form method="POST" action="">
 {% csrf_token %}
@@ -6,10 +15,3 @@
 <input type="submit" value="zapisz">
 </form>
 
-{% if event_id %}
-dodaj aktora
-
-<a href="{% url edytor.views.aktor case_id=case_id event_id=event_id %}">przypisz aktora</a>
-dodaj pozycje bibliografii 
-
-{% endif %}
