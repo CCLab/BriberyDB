@@ -89,7 +89,7 @@ def wydarzenie (request, case_id, event_id=None):
 #    initial=event[2] if object_id else None)
     publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)))
     event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2014)))
-    location = forms.MultipleChoiceField(locations, required=False, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
+#    location = forms.MultipleChoiceField(locations, required=False, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
     major = forms.BooleanField(label="Wazne", required=False)
 
   if request.method == "GET":
