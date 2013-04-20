@@ -225,15 +225,88 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
 
 def zrodlo(request, case_id, event_id):
 
+  template = loader.get_template("edycja_zrodla.html")
+  
   class RefForm (forms.Form):
-    art_title = forms.CharField(label=u'Tytul artykulu')
-    pub_title = forms.CharField(label=u'Tytul publikacji')
+    art_title = forms.CharField(label=u'Tytul artykulu', required=False)
+    pub_title = forms.CharField(label=u'Tytul publikacji', required=False)
     url = forms.CharField(label=u'URL', required=False)
     pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
-    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
+    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2014)))
 
-                      
-          
+  if request.method == 'GET':
+    ref_form=RefForm()
+      
+  elif request.method == 'POST':
+    ref_form = RefForm(request.POST)
+    if ref_form.is_valid():
+      data = [ ref_form.cleaned_data[item] for item in ('art_title', 'pub_title', 'url', 'pub_date', 'access_date') ]
+      try:
+        event_refs=list(orm.query('event_refs', event_id)[0][0][0])
+      except (TypeError, IndexError):
+        event_refs=[]
+      ref_id=orm.query('create_ref', data)[0]
+      event_refs.append(ref_id)
+      orm.query('update_event_refs', (event_refs, event_id))
+      return HTTPResponseRedirect(reverse('edytor.views.wydarzenie', kwargs=dict(event_id=event_id, case_id=case_id)))
+
+  return HTTPResponse(template.render(RequestContext(request, dict(form=ref_form)))) 
+                
+def atrybut(request, case_id=None, event_id=None, actor_id=None):
+
+  case_attributes = {'scandal_types':'Typ', 'scandal_field': 'Sfera dotknięta korupcją'}
+  class CaseForm(forms.Form):
+    attribute = forms.ChoiceField(choices=[(key, case_attributes[key]) for key in case_attributes.keys() ])
+    name = forms.CharField(label="Nazwa")
+   
+  event_attributes = {'event_types': 'Typ wydarzenia'}
+  class EventForm(forms.Form):
+    attribute = forms.ChoiceField(choices=[(key, event_attributes[key]) for key in event_attributes.keys() ])
+    name = forms.CharField(label="Nazwa")
+    
+  actor_attributes = {'secondary_affiliations': 'Afiliacja drugorzędna', 
+    'actor_affiliations': 'Afiliacja','actor_roles':'Rola', 'actor_types': 'Typ'}
+  class ActorForm(forms.Form):
+    attribute = forms.ChoiceField(choices=[(key, actor_attributes[key]) for key in actor_attributes.keys() ])          
+    name = forms.CharField(label="Nazwa")    
+    human = forms.BooleanField(label="Wazne", required=False)
+
+  
+  if actor_id:
+    form=ActorForm
+    back = reverse('edytor.views.aktor', kwargs=dict(case_id=case_id, event_id=event_id, actor_id=actor_id))
+  elif event_id:
+    form=EventForm
+    back = reverse('edytor.views.wydarzenie', kwargs=dict(case_id=case_id, event_id=event_id)    )
+  elif case_id:
+    form=CaseForm           
+    back = reverse('edytor.views.afera', kwargs=dict(case_id=case_id))
+
+  template=loader.get_template("atrybut.html")
+
+  if request.method=='GET':
+    attribute_form = form()  
+
+  elif request.method == 'POST':
+
+    attribute_form = form(request.POST)
+    if attribute_form.is_valid():
+      table = attribute_form['attribute']
+      name  = attribute_form['name']
+      
+      if isinstance(ActorForm, attribute_form):
+        data = (table, name,  attribute_form['human'])
+      else:
+        data = (table, name)
+      
+      orm.query('create_attribute', data)
+
+      return HTTPResponseRedirect(back)
+  return HTTPResponse(template.render(RequestContext(request, dict(form=attribute_form,
+    event_id=event_id, actor_id=actor_id, case_id=case_id))))
+      
+
+  
 #def roles(request, object_id):
 #
 #  all_roles = orm.query('roles')
