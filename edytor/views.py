@@ -1,6 +1,7 @@
-# Create your views here.
-
+#! /usr/bin/python
 # -*- coding: utf-8 -*-
+
+# Create your views here.
 
 import datetime
 from skandale import orm
@@ -133,40 +134,75 @@ def wydarzenie (request, case_id, event_id=None):
       template = loader.get_template('edycja_wydarzenia.html')
       return HTTPResponse(template.render(RequestContext(request, dict(form=event_form))))
           
-def aktor(request, case_id, event_id):
+def aktor(request, case_id, event_id, actor_id=None, add=False):
 
   template = loader.get_template('edycja_aktora.html')
+  
+  class ActorForm(forms.Form):
+    actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ], 
+      label="Nazwa", widget=forms.RadioSelect())    
+
+  class AddActorForm(forms.Form):
+    name = forms.CharField(label='Nazwa/nazwisko')
+    human = forms.BooleanField(label="Wazne", required=False)
     
   class EventActorForm(forms.Form):
-    actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ] )
-    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
-    roles = forms.ChoiceField(choices=orm.query('all_actor_roles'))
-    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')])
-    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')])
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy")
+    roles = forms.ChoiceField(choices=orm.query('all_actor_roles'), label="Role")
+    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')], label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
+    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')], label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}))
     
   if request.method == "GET":
  
+   if actor_id:
+   # mamy wybranego aktora
    # todo uzupelnianie zaznaczen
-  
-   actor_form = EventActorForm()
-   return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
-      
+     actor_form = EventActorForm()
+     return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, event_id=event_id, case_id=case_id))))
+   else:
+     if add:
+       # dodajemy aktora
+       return HTTPResponse(template.render(RequestContext(request, dict(form=AddActorForm(), event_id=event_id, case_id=case_id))))
+     else:
+       # wybieramy aktora
+       return HTTPResponse(template.render(RequestContext(request, dict(form=ActorForm(), event_id=event_id, case_id=case_id))))
   elif request.method == "POST":
-
-    actor_form = EventActorForm(request.POST)
+    if actor_id: 
+    # wybralismy aktora i albo pokazujemy formatke albo go przypisujemy
+      actor_form = EventActorForm(request.POST)
     
-    if actor_form.is_valid():
-      data = [ [int(i) for i in actor_form.cleaned_data[index]] if index in ['types', 'roles', 'affiliations', 'secondary_affiliations']  else actor_form.cleaned_data[index]
-        for index in ('actor', 'types', 'roles', 'affiliations', 'secondary_affiliations')]
+      if actor_form.is_valid():
+        data = [ [int(i) for i in actor_form.cleaned_data[index]] if index in ['types', 'roles', 'affiliations', 'secondary_affiliations']  else actor_form.cleaned_data[index]
+          for index in ('types', 'roles', 'affiliations', 'secondary_affiliations')]
         
-      data = [event_id] + data
-      orm.query('assign_actor', data)
-      return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.wydarzenie', kwargs=dict(event_id=event_id, case_id=case_id)))
+        data = [event_id, actor_id] + data
+        orm.query('assign_actor', data)
+        
+        return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.wydarzenie', 
+          kwargs=dict(event_id=event_id, case_id=case_id)))
+      else: 
+        #cos nie pasuje, pokazujemy form jeszcze raz TODO
+        pass
     else: 
-      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
+      actor_form = ActorForm(request.POST)
+      if actor_form.is_valid():
+      # nie mamy actor_id, albo pokazujemy formatke, albo przekierowujemy do actor_id
+        actor_id = actor_form.cleaned_data["actor"]
+        return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktor', 
+          kwargs=dict(event_id=event_id, case_id=case_id, actor_id=actor_id)))        
+      else:
+        return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
             
         
 
+def zrodlo(request, case_id, event_id):
+
+  class RefForm (forms.Form):
+    art_title = forms.CharField(label=u'Tytul artykulu')
+    pub_title = forms.CharField(label=u'Tytul publikacji')
+    url = forms.CharField(label=u'URL', required=False)
+    pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
+    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
 
                       
           

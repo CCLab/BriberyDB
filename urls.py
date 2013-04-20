@@ -42,7 +42,13 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
     (r'^edit/((?P<case_id>\d+)/)?$','edytor.views.afera'),
-    (r'^edit/(?P<case_id>\d+)/event/((?P<event_id>\d+)/)?$','edytor.views.wydarzenie'),
+    (r'^edit/(?P<case_id>\d+)/event/$','edytor.views.wydarzenie'),    
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/$','edytor.views.wydarzenie'),    
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/$','edytor.views.aktor'),
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/add$','edytor.views.aktor', 
+      dict(add=True), 'add_actor'),    
+    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/$',
+      'edytor.views.aktor'),    
 )
 
 
