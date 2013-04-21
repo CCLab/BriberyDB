@@ -1,3 +1,5 @@
+#! python
+# -*- coding: utf-8 -*-
 # Create your views here.
 
 from skandale import orm
@@ -178,8 +180,26 @@ def api_case_json(request, object_id):
   dates = []
 
   for event in events:
+    actors = orm.query('event_actors', event[0])
+    refs = orm.query('full_event_refs', event[0])
+    text = ''
+    for t in event[2].split('\n'):
+      text = text + '<p>' + t + '</p>'
+    if actors: 
+      text = text + '<p class="timeline-aktorzy">Aktorzy wydarzenia:<ul>'
+      for actor in actors:
+        text = text + '<li><a href="/podmiot/%s/">%s</a></li>' % (actor[0], actor[1])
+      text = text + '</ul>'
+    if refs: 
+      text = text + '<p class="timeline-refs">Bibliografia:<ul>'
+      for ref in refs:
+        if ref[4]:
+          text = text + '<li><a href="%s" target="_blank">%s: %s</a></li>' % (ref[4], ref[1], ref[0])
+        else:
+          text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
+      text = text + '</ul>'
     dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 
-      'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': event[2], 
+      'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': text, 
       'start_at_slide': 1, 'start_zoom_adjust': -15})
 
   result['timeline']['date']=dates
