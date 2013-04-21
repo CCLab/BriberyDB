@@ -99,7 +99,8 @@ Q = {
       FROM scandals) AS s LEFT JOIN events AS e ON s.event_id=e.id ORDER BY s.id,event_date) as scandals ORDER BY event_date DESC;''',
 
   'cases_type': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(types);',
-
+  'cases_field': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(fields);',
+  'cases_type_field': 'SELECT id, name, description, background, consequences, types, fields, events FROM scandals WHERE %s=ANY(types) AND %s=ANY(fields);',
   'case_actors':  '''SELECT DISTINCT actor_id, name, count(actor_id) AS count
     FROM (actors_events JOIN events ON event_id=events.id)
     JOIN actors ON actor_id=actors.id
@@ -198,6 +199,11 @@ Q = {
 
   'create_attribute_human': 'INSERT INTO <table> (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
   'create_attribute': 'INSERT INTO <table> (id, name) VALUES (DEFAULT, %s) RETURNING id;',  
+
+  'full_event_refs': '''select art_title,pub_title,pub_date,access_date,url 
+    from refs where id=any(select unnest(refs) from events where id=%s);''',
+
+  'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM

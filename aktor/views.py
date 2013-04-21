@@ -65,7 +65,13 @@ def actor (request, object_id):
   roles = [ ( role, [ ((case, roles_dict[role]['id']), roles_dict[role][case]) for case in roles_dict[role].keys() if not case=='id' ] ) for role in roles_dict.keys() ]
   
   human = actor[2]
-  result = dict(actor=actor, roles=roles, tab=2 if human else 3, human=human)
+  
+  if human:
+    related = []
+  else:
+    related = orm.query('related_actors', (object_id, object_id))
+    
+  result = dict(actor=actor, roles=roles, tab=2 if human else 3, human=human, related=related)
 
   template = loader.get_template("aktor.html")
 
