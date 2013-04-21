@@ -312,7 +312,11 @@ def atrybut(request, case_id=None, event_id=None, actor_id=None):
   return HTTPResponse(template.render(RequestContext(request, dict(form=attribute_form,
     event_id=event_id, actor_id=actor_id, case_id=case_id))))
       
-
+def lista(request):
+  template=loader.get_template("lista_afer.html")
+  cases = orm.query("cases")
+  return HTTPResponse(template.render(RequestContext(request, dict(cases=cases))))  
+  
   
 #def roles(request, object_id):
 #

@@ -1,0 +1,10 @@
+<html>
+ <head></head>
+ <body>
+   <h1>afery</h1>
+   <p><a href="{% url new_case %}">dodaj aferę</a>
+   <ul>{% for case in cases %}
+     <li><a href="../{{ case.0 }}">{{ case.1.0 }}</a>{% endfor %}
+   </ul>
+ </body>
+</html>

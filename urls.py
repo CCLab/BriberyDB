@@ -44,7 +44,8 @@ urlpatterns = patterns('',
     # (r'^admin/', include(admin.site.urls)),
 
 
-    (r'^edit/$','edytor.views.afera'),
+    (r'^edit/$','edytor.views.afera', None, 'new_case'),
+    (r'^edit/lista/$','edytor.views.lista'),
     (r'^edit/(?P<case_id>\d+)/$','edytor.views.afera'),    
     (r'^edit/(?P<case_id>\d+)/attr/$', 'edytor.views.atrybut', None, 'case_attr'),
     (r'^edit/(?P<case_id>\d+)/event/$','edytor.views.wydarzenie'),    
