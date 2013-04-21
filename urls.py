@@ -11,9 +11,9 @@ urlpatterns = patterns('',
     # Example:
 #    (r'^$', direct_to_template, dict(template='main.html', tab=1),'page_main'),
     (r'^$', 'afera.views.cases', dict(intro=True), 'page_main'),
-    (r'^/o-serwisie/$', direct_to_template,
+    (r'^o-serwisie/$', direct_to_template,
       dict(template='about.html', extra_context=dict(tab=4)), 'page_about'),
-    (r'^/kontakt/$', direct_to_template,
+    (r'^kontakt/$', direct_to_template,
      dict(template='contact.html', extra_context=dict(tab=5)), 'page_contact'),
      
     (r'^wydarzenie/(?P<object_id>\d+)/$', 'afera.views.event'),
