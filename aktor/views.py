@@ -64,7 +64,8 @@ def actor (request, object_id):
     
   roles = [ ( role, [ ((case, roles_dict[role]['id']), roles_dict[role][case]) for case in roles_dict[role].keys() if not case=='id' ] ) for role in roles_dict.keys() ]
   
-  result = dict(actor=actor, roles=roles, tab=2, human=actor[2])
+  human = actor[2]
+  result = dict(actor=actor, roles=roles, tab=2 if human else 3, human=human)
 
   template = loader.get_template("aktor.html")
 
