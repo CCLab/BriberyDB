@@ -84,13 +84,11 @@ def wydarzenie (request, case_id, event_id=None):
   class EventForm (forms.Form):
     types = forms.ChoiceField(orm.query('events_types'))
     title = forms.CharField(label=u'Tytul')
-    #initial=event[6] if object_id else None)
     description = forms.CharField(label='Opis', widget=forms.Textarea())
-#    initial=event[2] if object_id else None)
-    publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)))
+#    publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)), required=False)
     event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2014)))
-#    location = forms.MultipleChoiceField(locations, required=False, widget=forms.CheckboxSelectMultiple(attrs={'size': len(locations)}))
     major = forms.BooleanField(label="Wazne", required=False)
+    descriptive_date = forms.CharField(label='Data opisowa', required=False)
 
   if request.method == "GET":
 
@@ -101,7 +99,7 @@ def wydarzenie (request, case_id, event_id=None):
         if event[0][0]:
           event=event[0]
           event_form = EventForm (initial=dict(title=event[6], description=event[2], 
-            event_date=event[1], publication_date=event[3]))
+            event_date=event[1], descriptive_date=event[8]))
         else:
           event_form = EventForm()
       except IndexError:
@@ -118,7 +116,7 @@ def wydarzenie (request, case_id, event_id=None):
 
     if event_form.is_valid():
       data = [ [int(event_form.cleaned_data[index])] if index=='types' else event_form.cleaned_data[index] 
-        for index in ('title', 'types', 'description', 'publication_date', 'event_date', 'major')]
+        for index in ('title', 'types', 'description', 'event_date', 'major', 'descriptive_date')]
 
       if event_id:      
         data.append(str(event_id))
@@ -280,7 +278,10 @@ def atrybut(request, case_id=None, event_id=None, actor_id=None):
   
   if actor_id:
     form=ActorForm
-    back = reverse('edytor.views.aktor', kwargs=dict(case_id=case_id, event_id=event_id, actor_id=actor_id))
+    if actor_id=='0':
+      back = reverse('edytor.views.wydarzenie', kwargs=dict(case_id=case_id, event_id=event_id)    )
+    else:  
+      back = reverse('edytor.views.aktor', kwargs=dict(case_id=case_id, event_id=event_id, actor_id=actor_id))
   elif event_id:
     form=EventForm
     back = reverse('edytor.views.wydarzenie', kwargs=dict(case_id=case_id, event_id=event_id)    )

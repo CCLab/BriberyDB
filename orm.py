@@ -60,12 +60,20 @@ Q = {
       LEFT JOIN actor_types ON actor_type_id=actor_types.id) AS event
   JOIN scandals AS s on event_id=ANY(s.events);''',
 
-  'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
-    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
-      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id
-        FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
-        LEFT JOIN locations ON e.location_id=locations.id
-        WHERE e.id=%s;''',
+  'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name, descriptive_date  AS location
+      FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type, descriptive_date
+            FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id, descriptive_date
+                    FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
+                            LEFT JOIN locations ON e.location_id=locations.id
+                                    WHERE e.id=%s;''',
+  
+  
+#  SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
+#    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
+#      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id
+#        FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
+#        LEFT JOIN locations ON e.location_id=locations.id
+#        WHERE e.id=%s;''',
 
   'event_count': 'SELECT count(id) FROM events WHERE scandal_id=%s;',
 
@@ -169,10 +177,10 @@ Q = {
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
       AS l WHERE LENGTH(letter)=1 ORDER BY letter) AS letters;''',
 
-  'create_event': '''insert into events (id, title, types, description, publication_date, event_date, major) 
+  'create_event': '''insert into events (id, title, types, description, event_date, major, descriptive_date) 
      VALUES (DEFAULT, %s,%s,%s,%s,%s,%s) RETURNING id;''', 
   
-  'update_event': 'UPDATE events SET title=%s, types=%s, description=%s, publication_date=%s, event_date=%s, major=%s where id=%s;',
+  'update_event': 'UPDATE events SET title=%s, types=%s, description=%s, event_date=%s, major=%s, descriptive_date=%s where id=%s;',
 
   'create_actor': 'INSERT INTO actors (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
 
