@@ -77,11 +77,15 @@ def case_actors (request, object_id):
   return HTTPResponse (template.render(Context(dict(case=result))))
 
 
-def cases (request, object_id=None, intro=False):
+def cases (request, type_id=None, field_id=None, intro=False):
   'all cases view'
 
-  if object_id:
-    cases = orm.query('cases_type', object_id)
+  if type_id and field_id:
+    cases = orm.query('cases_type_field', (type_id, field_id))
+  elif type_id:
+    cases = orm.query('cases_type', type_id)
+  elif field_id:
+    cases = orm.query('cases_field', field_id)
   else:
     cases = orm.query('cases')
 
@@ -97,16 +101,21 @@ def cases (request, object_id=None, intro=False):
     actors = orm.query('case_actors', c[0])
     case['events'] = orm.query('event_count', c[0])[0][0]
     case['actors'] = actors[:5]
-    case['num_actors'] = len(actors)
-    case['num_events'] = len(c[7])
-    
+    if actors:
+      case['num_actors'] = len(actors)
+    else: 
+      case['num_actors'] = 0
+    try:
+      case['num_events'] = len(c[7])
+    except (TypeError, IndexError):
+      case['num_events'] = 0
     result.append(case)
 
   template = loader.get_template ('afery.html')
 
   return HTTPResponse (template.render(Context(dict(cases=result,intro=intro,
 #    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields)))) rollup disabled for now
-    tab=1, javascripts=['actors',], jquery=True, types=types, fields=fields))))
+    tab=1, javascripts=['actors',], jquery=True, types=types, fields=fields, type_id=type_id, field_id=field_id))))
 
 def event (request, object_id):
   'single event view'

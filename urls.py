@@ -21,8 +21,9 @@ urlpatterns = patterns('',
 
     (r'^afery/$', 'afera.views.cases' ),
 
-    (r'^afery/(?P<object_id>\d+)/$', 'afera.views.cases' ),
-
+    (r'^afery/(?P<type_id>\d+)/$', 'afera.views.cases' ),
+    (r'^afery/(?P<type_id>\d+)/(?P<field_id>\d+)/$', 'afera.views.cases' ),
+    (r'^afery//(?P<field_id>\d+)/$', 'afera.views.cases' ),    
     (r'^afera/(?P<object_id>\d+)/$', 'afera.views.timeline', None, 'single_case' ),
     (r'^afera/(?P<object_id>\d+)/vertical/$', 'afera.views.case' ),
 #    (r'^afera/(?P<object_id>\d+)/os/$', 'afera.views.timeline' ),                       
