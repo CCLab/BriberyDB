@@ -167,7 +167,7 @@ Q = {
 
   'case_update_events': 'UPDATE scandals SET events=%s WHERE id=%s;',
 
-  'all_actors': 'SELECT id, name FROM actors;',
+  'all_actors': 'SELECT id, name FROM actors ORDER BY human, name;',
 
   'all_actor_types': 'SELECT id,name FROM actor_types;',
   'all_actor_roles': 'SELECT id,name FROM actor_roles;',
