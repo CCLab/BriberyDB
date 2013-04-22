@@ -21,12 +21,12 @@
         </div>{% endif %}
 	<div id="typysfery">
         <ul id="afery-nav">
-          <li>Wybierz typ afery:</li>{% for t in types %} 
-          <li><a href="{% url afera.views.cases object_id=t.0 %}">{% for phrase in t.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
+          <li>Wybierz typ afery:</li>{% for t in types %}
+          <li><a href="{% url afera.views.cases type_id=t.0 %}">{% for phrase in t.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
         </ul>
         <ul id="afery-nav">
           <li>Wybierz sferę dotkniętą korupcją:</li>{% for f in fields %} 
-          <li><a href="{% url afera.views.cases object_id=f.0 %}">{% for phrase in f.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
+          <li><a href="{% url afera.views.cases field_id=f.0 %}">{% for phrase in f.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
         </ul>
 	</div>
 	<div id="male-afery">

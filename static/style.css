@@ -832,7 +832,7 @@ div#wprowadzenie p {
 
 /********** end jeden-aktor ************/
 
-/* jedynka */
+/* jedynka 
 
 div#jedynka-kolumna{ display: table; width: 50%; }
 div.wiersz { display: table-row; }
@@ -849,3 +849,18 @@ div.zajawka {
 	background: #fff;
 	margin: 2ex;
 }
+
+*/
+
+#podstrona {
+	margin-left: 20px;
+        width:70%;
+        background-color: #fff;
+        padding: 20px 30px;
+        margin-bottom: 20px;
+}
+
+#podstrona p { margin-top: 10px; }
+#podstrona h2 { font-weight: 200; text-transform: none; }
+#podstrona h3 { font-weight: 400; text-transform: none; margin-top: 20px;}
+
