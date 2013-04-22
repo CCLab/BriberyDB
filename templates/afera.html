@@ -6,7 +6,7 @@
           <div id="j-a-sfera"><h4>Sfera dotknięta korupcją: {% if fields %}{% for f in fields %}{{ f.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
           <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
           <div id="j-a-kontekst"><p id="kontekst">{% if background %}{{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
-          <div class="wydarzen">wydarzen: {{ num_events }}</div>
+          <div class="wydarzen">wydarzeń: {{ num_events }}</div>
           <div id="ujawnienie">
               <div class="data">{{ event_leak.0.1|polskadata }}</div>
               <div class="glowka">

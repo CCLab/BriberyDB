@@ -35,12 +35,12 @@
           <div class="jedna-afera">
             <h2><a href="{% url single_case object_id=case.id %}">{{ case.title.0 }}</a></h2>
             <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-            <p class="wydarzen"><a href="{% url single_case object_id=case.id %}">wydarzen: {{ case.num_events }}</a></p>
+            <p class="wydarzen"><a href="{% url single_case object_id=case.id %}">wydarzeń: {{ case.num_events }}</a></p>
             <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}
             </div>
             <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
           </div><!-- koniec jedna-afera -->
-            <a href="{% url afera.views.case object_id=case.id %}" class="more">wiecej</a>
+            <a href="{% url afera.views.case object_id=case.id %}" class="more">więcej</a>
         </div><!-- koniec jedna-afera-wrapper -->{% endfor %}
 	</div><!--koniec "male-afery -->
 {% endblock content %}

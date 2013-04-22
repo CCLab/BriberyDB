@@ -2,7 +2,7 @@
         <div id="jedna-afera">
           <div id="j-a-nazwa"><h2>{{ name }}</h2></div>
 	  <div id="j-a-inne"><h3>{% for n in names %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3></div>
-          <div class="wydarzen"><a href="#timeline-embed">skocz do wydarzen ({{ num_events }})</a></div>
+          <div class="wydarzen"><a href="#timeline-embed">skocz do wydarzeń ({{ num_events }})</a></div>
           <div id="j-a-typ"><h4><span>Rodzaj korupcji:</span> {% if types %}{% for t in types %}{{ t.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4>
 	<h4><span>Sfera dotknięta korupcją:</span> {% if fields %}{% for f in fields %}{{ f.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
 	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
