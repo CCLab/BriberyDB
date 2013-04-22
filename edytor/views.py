@@ -167,7 +167,9 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
 #    for line in metadata:
        for item in cols:
          workset = metadata_dict.get(item,set())
-         workset = workset.union(tuple(line[cols.index(item)]))
+         l = line[cols.index(item)]
+         if l:
+           workset = workset.union(tuple(l))
          metadata_dict[item] = workset
               
        output = {}
@@ -177,7 +179,7 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
          for val in workset:
            workdict[val] = 'checked'
          output[item] = workdict
-         actor_form = EventActorForm(initial=output)
+       actor_form = EventActorForm(initial=output)
      else:
        actor_form = EventActorForm()
 
