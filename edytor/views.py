@@ -177,8 +177,12 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
          workdict = {}
          workset = metadata_dict.get(item,set())
          for val in workset:
-           workdict[val] = 'checked'
-         output[item] = workdict
+           if item == 'roles':
+             output[item] = str(val)
+           else:
+             workdict[val] = 'checked'
+             output[item] = workdict
+#       'abc'[10]
        actor_form = EventActorForm(initial=output)
      else:
        actor_form = EventActorForm()
