@@ -8,7 +8,7 @@
                 </li>{% endif %}
           </ul>{% endfor %}{% endfor %}{% if not human %}
           <h4>Aktorzy powiązani</h4>
-          <ul>{% for r in related %}
+          <ul id="powiazani" class="group">{% for r in related %}
             <li><a href="{% url aktor.views.actor object_id=r.0 %}">{{ r.1 }}</a></li>{% endfor %}
           </ul>{% endif %}
         </div>{% endblock content %}
