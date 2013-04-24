@@ -60,8 +60,8 @@ Q = {
       LEFT JOIN actor_types ON actor_type_id=actor_types.id) AS event
   JOIN scandals AS s on event_id=ANY(s.events);''',
 
-  'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name, descriptive_date  AS location
-      FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type, descriptive_date
+  'event': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name, descriptive_date  AS location, type_id
+      FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type, descriptive_date, type_id
             FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id, descriptive_date
                     FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
                             LEFT JOIN locations ON e.location_id=locations.id
