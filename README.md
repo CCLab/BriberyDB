@@ -20,3 +20,10 @@ stored called from orm.py module.
 
 The default database is not used in the moment, it is meant to store
 CMS-related information - the static pages and the front page content.
+
+
+Third party software
+--------------------
+
+The timeline display utilizes the TimelineJS software by VeriteCo, from
+<https://github.com/VeriteCo/TimelineJS>. 
