@@ -91,6 +91,10 @@ Q = {
 #  plain cases
 #  'cases': 'SELECT id, name, description, background, consequences, types, fields, events  FROM scandals;',
 
+  'case_id': '''SELECT id, name, description, background, consequences, types, fields, events 
+    FROM scandals 
+    WHERE id=%s;''',
+
   # cases sorted by earlier events
   
   'cases': '''SELECT * FROM (SELECT DISTINCT ON (s.id)
