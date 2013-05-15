@@ -1,0 +1,9 @@
+<html>
+ <head></head>
+ <body>
+   <h1>edycja istniejacego aktora</h1>
+   <ul>{% for actor in actors %}
+     <li><a href="{% url edytor.views.edycja_aktora object_id=actor.0 %}">{{ actor.1 }}</a>{% endfor %}
+   </ul>
+ </body>
+</html>

@@ -147,10 +147,13 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
     human = forms.BooleanField(label="Osoba", required=False)
     
   class EventActorForm(forms.Form):
-    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],
+      widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
     roles = forms.ChoiceField(choices=orm.query('all_actor_roles'), label="Role", required=False)
-    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')], label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
-    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')], label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
+    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
+      label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
+    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')],
+      label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
     
   if request.method == "GET":
  
@@ -323,6 +326,42 @@ def lista(request):
   cases = orm.query("cases")
   return HTTPResponse(template.render(RequestContext(request, dict(cases=cases))))  
   
+def aktorzy(request):
+
+  template = loader.get_template('aktorzy.html')
+  
+  actors = orm.query('all_actors')
+
+  return HTTPResponse(template.render(RequestContext(request, dict(actors=actors))))
+  
+def edycja_aktora(request, object_id):
+
+  template = loader.get_template('edycja_aktora.html')
+
+  class ActorForm(forms.Form):
+    id = forms.IntegerField(label='id', widget=forms.HiddenInput)
+    name = forms.CharField(label='Nazwa/nazwisko', widget=forms.TextInput(attrs=dict(size='64')))
+    human = forms.BooleanField(label="Osoba", required=False)
+
+  if request.method == 'POST':
+  
+    actor_form=ActorForm(request.POST)
+    if actor_form.is_valid():
+      orm.query('update_actor', (actor_form.cleaned_data['name'], actor_form.cleaned_data['human'], object_id))
+      return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktorzy'))
+    else:
+      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, object_id=object_id))))          
+
+  elif request.method == 'GET':
+    actor = orm.query('actor', object_id)[0]
+    initial = dict(id=actor[0], name=actor[1], human=actor[2])
+    form = ActorForm(initial=initial)
+    
+    return HTTPResponse (template.render(RequestContext(request, dict(form=form))))
+    
+    
+ 
+ 
   
 #def roles(request, object_id):
 #
