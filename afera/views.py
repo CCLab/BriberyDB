@@ -203,9 +203,15 @@ def api_case_json(request, object_id):
       text = text + '<p class="timeline-refs">Bibliografia:<ul>'
       for ref in refs:
         if ref[4]:
-          text = text + '<li><a href="%s" target="_blank">%s: %s</a></li>' % (ref[4], ref[1], ref[0])
+          if ref[2]:
+            text = text + '<li><a href="%s" target="_blank">%s %s.%s.%s: %s</a>&nbsp;&rarr;</li>' % (ref[4], ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])                    
+          else:
+            text = text + '<li><a href="%s" target="_blank">%s: %s</a>&nbsp;&rarr;</li>' % (ref[4], ref[1], ref[0])
         else:
-          text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
+          if ref[2]:
+            text = text + '<li>%s %s.%s.%s: %s</li>' % (ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])          
+          else:
+            text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
       text = text + '</ul>'
     dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 
       'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': text, 
