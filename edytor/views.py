@@ -86,7 +86,7 @@ def wydarzenie (request, case_id, event_id=None):
     title = forms.CharField(label=u'Tytul')
     description = forms.CharField(label='Opis', widget=forms.Textarea())
 #    publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)), required=False)
-    event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2014)))
+    event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2020)))
     major = forms.BooleanField(label="Wazne", required=False)
     descriptive_date = forms.CharField(label='Data opisowa', required=False)
 
@@ -244,8 +244,8 @@ def zrodlo(request, case_id, event_id):
     art_title = forms.CharField(label=u'Tytul artykulu', required=False)
     pub_title = forms.CharField(label=u'Tytul publikacji', required=False)
     url = forms.CharField(label=u'URL', required=False)
-    pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
-    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2014)))
+    pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2020)),required=False)
+    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2020)))
 
   if request.method == 'GET':
     ref_form=RefForm()
