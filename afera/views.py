@@ -113,15 +113,8 @@ def cases (request, type_id=None, field_id=None, intro=False):
 
   template = loader.get_template ('afery.html')
 
-<<<<<<< HEAD
   return HTTPResponse (template.render(Context(dict(cases=result,intro=intro,
-#    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields)))) rollup disabled for now
-    tab=1, javascripts=['actors',], jquery=True, types=types, fields=fields, type_id=type_id, field_id=field_id))))
-=======
-  return HTTPResponse (template.render(Context(dict(cases=result,
-    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields))))
-
->>>>>>> 1080169... hide/show button on cases list
+    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields, type_id=type_id, field_id=field_id))))
 
 def event (request, object_id):
   'single event view'
