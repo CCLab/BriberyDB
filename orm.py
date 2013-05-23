@@ -169,10 +169,10 @@ Q = {
 
   'all_actors': 'SELECT id, name FROM actors ORDER BY human, name;',
 
-  'all_actor_types': 'SELECT id,name FROM actor_types;',
-  'all_actor_roles': 'SELECT id,name FROM actor_roles;',
-  'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations;',  
-  'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations;',    
+  'all_actor_types': 'SELECT id,name FROM actor_types ORDER BY name, human;',
+  'all_actor_roles': 'SELECT id,name FROM actor_roles ORDER BY name, human;',
+  'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations ORDER BY name, human;',  
+  'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations ORDER BY name, human;',    
   
   'letters': '''SELECT ARRAY
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)
@@ -185,8 +185,10 @@ Q = {
 
   'create_actor': 'INSERT INTO actors (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
 
-  'assign_actor': '''INSERT INTO actors_events (event_id, actor_id, types, roles, affiliations, secondary_affiliations)
-     VALUES (%s, %s, %s, %s, %s, %s);''', 
+  'update_actor': 'UPDATE actors set name=%s, human=%s WHERE id=%s;',  
+
+  'assign_actor': '''INSERT INTO actors_events (event_id, actor_id, types, roles, affiliations, secondary_affiliations, primary, secondary)
+     VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''', 
 
   'case_actor_events_metadata': '''select types, roles, affiliations, secondary_affiliations 
     from actors_events where event_id in (select unnest(events) from scandals where id=%s)
