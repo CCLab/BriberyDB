@@ -35,7 +35,8 @@ urlpatterns = patterns('',
     (r'^podmiot/ludzie/?$', 'aktor.views.actors', dict(human=True),'page_actors_human'),
     (r'^podmiot/instytucje/?$', 'aktor.views.actors', dict(human=False), 'page_actors_organizational'),
 
-
+    (r'^api/afera/(?P<object_id>\d+)/(?P<major>major)/?$', 'afera.views.api_case_json' ),
+    
     (r'^api/afera/(?P<object_id>\d+)/?$', 'afera.views.api_case_json' ),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
