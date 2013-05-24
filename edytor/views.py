@@ -362,7 +362,21 @@ def edycja_aktora(request, object_id):
     return HTTPResponse (template.render(RequestContext(request, dict(form=form))))
     
     
- 
+def powiazane (request,actor_id=None):
+
+  template = loader.get_template ("powiazane.html")
+  
+  class RelatedForm(forms.Form):
+    actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ],
+      label="Nazwa", widget=forms.RadioSelect())
+    affiliations = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
+      label="Afiliacje",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
+    secondary_affiliations = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')],
+      label="Afiliacje drugorzedne",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
+
+  if request.method == "GET":
+    return HTTPResponse (template.render(RequestContext(request, dict(form=RelatedForm()))))
+    
  
   
 #def roles(request, object_id):
