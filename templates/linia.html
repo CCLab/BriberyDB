@@ -7,6 +7,7 @@
 	<h4><span>Sfera dotknięta korupcją:</span> {% if fields %}{% for f in fields %}{{ f.1 }}{% if not forloop.last %}, {% endif %}{% endfor %}{% else %}[ brak ]{% endif %}</h4></div>
 	  <div id="j-a-opis"><p id="opis">{% if description %}{{ description }}{% else %}[ opis afery ]{% endif %}</p></div>
           <div id="j-a-kontekst"><p id="kontekst">{% if background %}<span>Kontekst</span> {{ background }}{% else %}[ kontekst afery ]{% endif %}</p></div>
+          <h4>Kalendarium wydarzeń</h4>
           <div id="timeline-embed"></div>
           <script type="text/javascript">
             var timeline_config = {

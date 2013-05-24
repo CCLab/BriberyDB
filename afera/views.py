@@ -206,7 +206,7 @@ def api_case_json(request, object_id, major=False):
             if ref[2]:
               text = text + '<li><a href="%s" target="_blank">%s %s.%s.%s: %s</a>&nbsp;&rarr;</li>' % (ref[4], ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])                    
             else:
-              text = text + '<li><a href="%s" target="_blank">%s: %s</a>&nbsp;&rarr;</li>' % (ref[4], ref[1], ref[0])
+              text = text + '<li><a href="%s" target="_blank">%s: %s</a></li>' % (ref[4], ref[1], ref[0])
           else:
             if ref[2]:
               text = text + '<li>%s %s.%s.%s: %s</li>' % (ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])          
