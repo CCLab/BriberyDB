@@ -43,11 +43,11 @@ Q = {
   'actors_human_like': 'SELECT * FROM v_actors WHERE surname LIKE %s OR surname LIKE %s ORDER BY surname ASC;',
 
   'case_events': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
-    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
-      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id
+    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type, major
+      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id, major
         FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
         LEFT JOIN locations ON e.location_id=locations.id
-        WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) ORDER BY event_date;''',
+        WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) AND major=%s ORDER BY event_date;''',
 
   'case_num_events': '''select array_length(events,1) from scandals where id=%s;''',
 
