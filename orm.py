@@ -173,10 +173,10 @@ Q = {
 
   'all_actors': 'SELECT id, name FROM actors ORDER BY human, name;',
 
-  'all_actor_types': 'SELECT id,name FROM actor_types;',
-  'all_actor_roles': 'SELECT id,name FROM actor_roles;',
-  'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations;',  
-  'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations;',    
+  'all_actor_types': 'SELECT id,name FROM actor_types ORDER BY name, human;',
+  'all_actor_roles': 'SELECT id,name FROM actor_roles; ORDER BY name, human;',
+  'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations ORDER BY name, human;',  
+  'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations ORDER BY name, human;',    
   
   'letters': '''SELECT ARRAY
     (SELECT * FROM (SELECT DISTINCT LEFT(surname,1) AS letter FROM v_actors)

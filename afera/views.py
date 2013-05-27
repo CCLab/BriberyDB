@@ -203,7 +203,7 @@ def api_case_json(request, object_id):
       text = text + '<p class="timeline-refs">Bibliografia:<ul>'
       for ref in refs:
         if ref[4]:
-          text = text + '<li><a href="%s" target="_blank">%s: %s</a></li>' % (ref[4], ref[1], ref[0])
+          text = text + '<li><a href="%s" target="_blank">%s %s.%s.%s: %s</a></li>' % (ref[4], ref[2].day, ref[2].month, ref[2].year, ref[1], ref[0])
         else:
           text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
       text = text + '</ul>'
