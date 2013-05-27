@@ -3,7 +3,6 @@ BriberyDB
 
 Database and webapplication for storing and display of bribery cases in Poland.
 
-
 Remarks
 -------
 
@@ -20,6 +19,11 @@ stored called from orm.py module.
 
 The default database is not used in the moment, it is meant to store
 CMS-related information - the static pages and the front page content.
+
+Tools
+-----
+
+export.py is a script for dumping a single case or all cases to a text (UTF8) file.
 
 
 Third party software
