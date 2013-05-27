@@ -369,15 +369,20 @@ def powiazane (request,actor_id=None):
   class RelatedForm(forms.Form):
     actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ],
       label="Nazwa", widget=forms.RadioSelect())
-    affiliations = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
+    affiliation = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
       label="Afiliacje",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
     secondary_affiliations = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')],
       label="Afiliacje drugorzedne",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
 
   if request.method == "GET":
     return HTTPResponse (template.render(RequestContext(request, dict(form=RelatedForm()))))
-    
- 
+  elif request.method == "POST":
+  
+    form = RelatedForm(request.POST)
+    if form.is_valid():
+      orm.query('create_related', (form.cleaned_data["actor"],form.cleaned_data.get("affiliation", None), form.cleaned_data.get("secondary", None)))
+    else:
+      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
   
 #def roles(request, object_id):
 #

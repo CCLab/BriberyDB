@@ -205,6 +205,8 @@ Q = {
   'full_event_refs': '''select art_title,pub_title,pub_date,access_date,url 
     from refs where id=any(select unnest(refs) from events where id=%s);''',
 
+  'create_related' : 'INSERT INTO related_actors (actor, affiliation, secondary) VALUES (%s, %s, %s);', 
+  
   'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
   }
 

@@ -63,6 +63,7 @@ urlpatterns = patterns('',
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/refs/$','edytor.views.zrodlo'),        
     (r'^edit/actor/(?P<object_id>\d+)/?$', 'edytor.views.edycja_aktora'),
     (r'^edit/actors/$', 'edytor.views.aktorzy'),    
+    (r'^edit/related/$', 'edytor.views.powiazane'),        
 )
 
 
