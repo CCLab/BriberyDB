@@ -207,7 +207,13 @@ Q = {
 
   'create_related' : 'INSERT INTO related_actors (actor, affiliation, secondary) VALUES (%s, %s, %s);', 
   
-  'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
+#  'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
+
+  'related_human_actors': '''select distinct actor_id as id, name from 
+    (select actor_id from actors_events where 
+      (select affiliation from related_actors where actor=%s)=any(affiliations)) 
+    as ae left join actors on actor_id=actors.id where human=true order by name;''',
+  
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM

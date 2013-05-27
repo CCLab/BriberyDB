@@ -69,7 +69,7 @@ def actor (request, object_id):
   if human:
     related = []
   else:
-    related = orm.query('related_actors', (object_id, object_id))
+    related = orm.query('related_human_actors', object_id)
     
   result = dict(actor=actor, roles=roles, tab=2 if human else 3, human=human, related=related)
 
