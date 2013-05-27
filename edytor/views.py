@@ -86,7 +86,7 @@ def wydarzenie (request, case_id, event_id=None):
     title = forms.CharField(label=u'Tytul')
     description = forms.CharField(label='Opis', widget=forms.Textarea())
 #    publication_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)), required=False)
-    event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2014)))
+    event_date = forms.DateField(label='Data wydarzenia', widget=SelectDateWidget(years=range(1989,2020)))
     major = forms.BooleanField(label="Wazne", required=False)
     descriptive_date = forms.CharField(label='Data opisowa', required=False)
 
@@ -147,10 +147,15 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
     human = forms.BooleanField(label="Osoba", required=False)
     
   class EventActorForm(forms.Form):
-    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],  widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
+    types = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_types') ],
+      widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), label="Typy", required=False)
     roles = forms.ChoiceField(choices=orm.query('all_actor_roles'), label="Role", required=False)
-    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')], label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
-    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')], label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
+    primary = forms.BooleanField(default=True)
+    affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
+      label="Afiliacje",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
+    secondary = forms.BooleanField(default=True)
+    secondary_affiliations = forms.MultipleChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')],
+      label="Afiliacje drugorzedne",widget=forms.CheckboxSelectMultiple(attrs={'size': 24}), required=False)
     
   if request.method == "GET":
  
@@ -202,7 +207,7 @@ def aktor(request, case_id, event_id, actor_id=None, add=False):
     
       if actor_form.is_valid():
         data = [ [int(i) for i in actor_form.cleaned_data[index]] if index in ['types', 'roles', 'affiliations', 'secondary_affiliations']  else actor_form.cleaned_data[index]
-          for index in ('types', 'roles', 'affiliations', 'secondary_affiliations')]
+          for index in ('types', 'roles', 'affiliations', 'secondary_affiliations', 'primary', 'secondary')]
         
         data = [event_id, actor_id] + data
         orm.query('assign_actor', data)
@@ -241,8 +246,8 @@ def zrodlo(request, case_id, event_id):
     art_title = forms.CharField(label=u'Tytul artykulu', required=False)
     pub_title = forms.CharField(label=u'Tytul publikacji', required=False)
     url = forms.CharField(label=u'URL', required=False)
-    pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2014)),required=False)
-    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2014)))
+    pub_date = forms.DateField(label='Data publikacji', widget=SelectDateWidget(years=range(1989, 2020)),required=False)
+    access_date = forms.DateField(label='Data dostepu', widget=SelectDateWidget(years=range(1989, 2020)))
 
   if request.method == 'GET':
     ref_form=RefForm()
@@ -323,6 +328,61 @@ def lista(request):
   cases = orm.query("cases")
   return HTTPResponse(template.render(RequestContext(request, dict(cases=cases))))  
   
+def aktorzy(request):
+
+  template = loader.get_template('aktorzy.html')
+  
+  actors = orm.query('all_actors')
+
+  return HTTPResponse(template.render(RequestContext(request, dict(actors=actors))))
+  
+def edycja_aktora(request, object_id):
+
+  template = loader.get_template('edycja_aktora.html')
+
+  class ActorForm(forms.Form):
+    id = forms.IntegerField(label='id', widget=forms.HiddenInput)
+    name = forms.CharField(label='Nazwa/nazwisko', widget=forms.TextInput(attrs=dict(size='64')))
+    human = forms.BooleanField(label="Osoba", required=False)
+
+  if request.method == 'POST':
+  
+    actor_form=ActorForm(request.POST)
+    if actor_form.is_valid():
+      orm.query('update_actor', (actor_form.cleaned_data['name'], actor_form.cleaned_data['human'], object_id))
+      return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.aktorzy'))
+    else:
+      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form, object_id=object_id))))          
+
+  elif request.method == 'GET':
+    actor = orm.query('actor', object_id)[0]
+    initial = dict(id=actor[0], name=actor[1], human=actor[2])
+    form = ActorForm(initial=initial)
+    
+    return HTTPResponse (template.render(RequestContext(request, dict(form=form))))
+    
+    
+def powiazane (request,actor_id=None):
+
+  template = loader.get_template ("powiazane.html")
+  
+  class RelatedForm(forms.Form):
+    actor = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actors') ],
+      label="Nazwa", widget=forms.RadioSelect())
+    affiliation = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_affiliations')],
+      label="Afiliacje",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
+    secondary_affiliations = forms.ChoiceField(choices=[ list(i) for i in orm.query('all_actor_secondary_affiliations')],
+      label="Afiliacje drugorzedne",widget=forms.RadioSelect(attrs={'size': 24}), required=False)
+
+  if request.method == "GET":
+    return HTTPResponse (template.render(RequestContext(request, dict(form=RelatedForm()))))
+  elif request.method == "POST":
+  
+    form = RelatedForm(request.POST)
+    if form.is_valid():
+      orm.query('create_related', (form.cleaned_data["actor"],form.cleaned_data.get("affiliation", None), form.cleaned_data.get("secondary", None)))
+    else:
+      return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
   
 #def roles(request, object_id):
 #

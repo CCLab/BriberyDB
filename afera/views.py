@@ -114,8 +114,7 @@ def cases (request, type_id=None, field_id=None, intro=False):
   template = loader.get_template ('afery.html')
 
   return HTTPResponse (template.render(Context(dict(cases=result,intro=intro,
-#    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields)))) rollup disabled for now
-    tab=1, javascripts=['actors',], jquery=True, types=types, fields=fields, type_id=type_id, field_id=field_id))))
+    tab=1, javascripts=['actors', 'jquery-1.9.1.min', 'hide'], jquery=True, types=types, fields=fields, type_id=type_id, field_id=field_id))))
 
 def event (request, object_id):
   'single event view'
@@ -173,43 +172,50 @@ def timeline(request, object_id):
   return HTTPResponse (template.render(Context(result))  )
 
 
-def api_case_json(request, object_id):
+def api_case_json(request, object_id, major=False):
 
   import json
 
   case = get_scandal(object_id)
-  events = orm.query('case_events', object_id)
-
+  events = orm.query('case_events', (object_id, True if major else False))
+  
   result = {}
 
   result['timeline'] = { 'headline': case[0][0][0], 'type': 'default', 'start_zoom_adjust': 40, 'start_at_slide': 1,
-    'text': case[0][1], 'startDate': events[0][1].strftime('%Y,%m,%d') }
+    'text': case[0][1], 'startDate': events[0][1].strftime('%Y,%m,%d') if events else '1970,01,01' }
 
 
   dates = []
 
-  for event in events:
-    actors = orm.query('event_actors', event[0])
-    refs = orm.query('full_event_refs', event[0])
-    text = ''
-    for t in event[2].split('\n'):
-      text = text + '<p>' + t + '</p>'
-    if actors: 
-      text = text + '<p class="timeline-aktorzy">Aktorzy wydarzenia:<ul>'
-      for actor in actors:
-        text = text + '<li><a href="/podmiot/%s/">%s</a></li>' % (actor[0], actor[1])
-      text = text + '</ul>'
-    if refs: 
-      text = text + '<p class="timeline-refs">Bibliografia:<ul>'
-      for ref in refs:
-        if ref[4]:
-          text = text + '<li><a href="%s" target="_blank">%s %s.%s.%s: %s</a></li>' % (ref[4], ref[2].day, ref[2].month, ref[2].year, ref[1], ref[0])
-        else:
-          text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
-      text = text + '</ul>'
-    dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 
-      'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': text, 
-      'start_at_slide': 1, 'start_zoom_adjust': -15})
+  if events:
+    for event in events:
+      actors = orm.query('event_actors', event[0])
+      refs = orm.query('full_event_refs', event[0])
+      text = ''
+      for t in event[2].split('\n'):
+        text = text + '<p>' + t + '</p>'
+      if actors: 
+        text = text + '<p class="timeline-aktorzy">Aktorzy wydarzenia:<ul>'
+        for actor in actors:
+          text = text + '<li><a href="/podmiot/%s/">%s</a></li>' % (actor[0], actor[1])
+        text = text + '</ul>'
+      if refs: 
+        text = text + '<p class="timeline-refs">Bibliografia:<ul>'
+        for ref in refs:
+          if ref[4]:
+            if ref[2]:
+              text = text + '<li><a href="%s" target="_blank">%s %s.%s.%s: %s</a></li>' % (ref[4], ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])                    
+            else:
+              text = text + '<li><a href="%s" target="_blank">%s: %s</a></li>' % (ref[4], ref[1], ref[0])
+          else:
+            if ref[2]:
+              text = text + '<li>%s %s.%s.%s: %s</li>' % (ref[1], ref[2].day, ref[2].month, ref[2].year, ref[0])          
+            else:
+              text = text + '<li>%s: %s</li>' % (ref[1], ref[0])
+        text = text + '</ul>'
+      dates.append({'startDate': event[1].strftime('%Y,%m,%d'), 
+        'endDate': event[1].strftime('%Y,%m,%d'), 'headline':event[6], 'text': text, 
+        'start_at_slide': 1, 'start_zoom_adjust': -15})
 
   result['timeline']['date']=dates
 

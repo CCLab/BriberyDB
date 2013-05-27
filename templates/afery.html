@@ -20,27 +20,26 @@
           kontrolne”</a> czy <a href="{% url page_actors_organizational %}#skorowidz-Media">„Media”</a>.</p>
         </div>{% endif %}
 	<div id="typysfery">
-        <ul id="afery-nav">
-          <li>Wybierz typ afery:</li>{% for t in types %}
-          <li><a href="{% url afera.views.cases type_id=t.0 %}">{% for phrase in t.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
-        </ul>
-        <ul id="afery-nav">
-          <li>Wybierz sferę dotkniętą korupcją:</li>{% for f in fields %} 
-          <li><a href="{% url afera.views.cases field_id=f.0 %}">{% for phrase in f.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
-        </ul>
+          <ul id="afery-nav">
+            <li>Wybierz rodzaj korupcji:</li>{% for t in types %}
+            <li><a href="{% url afera.views.cases type_id=t.0 %}">{% for phrase in t.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
+          </ul>
+          <ul id="afery-nav">
+            <li>Wybierz sferę dotkniętą korupcją:</li>{% for f in fields %} 
+            <li><a href="{% url afera.views.cases field_id=f.0 %}">{% for phrase in f.1 %}{{ phrase }}{% if not forloop.last %} / {% endif %}{% endfor %}</a></li>{% endfor %}
+          </ul>
 	</div>
 	<div id="male-afery">
-        <div id="przycisk" style="display: none"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
-        <div class="jedna-afera-wrapper">
-          <div class="jedna-afera">
-            <h2><a href="{% url single_case object_id=case.id %}">{{ case.title.0 }}</a></h2>
-            <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
-            <p class="wydarzen"><a href="{% url single_case object_id=case.id %}">wydarzeń: {{ case.num_events }}</a></p>
-            <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}
-            </div>
-            <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
-          </div><!-- koniec jedna-afera -->
-            <a href="{% url afera.views.case object_id=case.id %}" class="more">więcej</a>
-        </div><!-- koniec jedna-afera-wrapper -->{% endfor %}
+          <div id="przycisk"><button type="button" id="hide" value="Szczegóły">Szczegóły</button></div>{% for case in cases %} 
+          <div class="jedna-afera-wrapper">
+            <div class="jedna-afera">
+              <h2><a href="{% url single_case object_id=case.id %}">{{ case.title.0 }}</a></h2>
+              <h3>{% for n in case.title|slice:"1:" %}{{ n }}{% if not forloop.last %}, {% endif %}{% endfor %}</h3>
+              <p class="wydarzen"><a href="{% url single_case object_id=case.id %}#timeline-embed">wydarzeń: {{ case.num_events }}</a></p>
+              <div class="wydarzenie-aktorzy" id="wydarzenie-aktorzy-{{ case.id }}">{% include "aktorzy.inc" %}</div>
+              <p class="opis">{% if case.description %}{{ case.description|truncatewords_html:50 }}{% else %}[ opis afery ]{% endif %}</p>
+            </div><!-- koniec jedna-afera -->
+            <a href="{% url single_case object_id=case.id %}" class="more">więcej</a>
+          </div><!-- koniec jedna-afera-wrapper -->{% endfor %}
 	</div><!--koniec "male-afery -->
 {% endblock content %}

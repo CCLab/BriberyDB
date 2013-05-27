@@ -35,7 +35,8 @@ urlpatterns = patterns('',
     (r'^podmiot/ludzie/?$', 'aktor.views.actors', dict(human=True),'page_actors_human'),
     (r'^podmiot/instytucje/?$', 'aktor.views.actors', dict(human=False), 'page_actors_organizational'),
 
-
+    (r'^api/afera/(?P<object_id>\d+)/(?P<major>major)/?$', 'afera.views.api_case_json' ),
+    
     (r'^api/afera/(?P<object_id>\d+)/?$', 'afera.views.api_case_json' ),
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -60,6 +61,9 @@ urlpatterns = patterns('',
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/attr/$',
       'edytor.views.atrybut', None, 'actor_attr'),
     (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/refs/$','edytor.views.zrodlo'),        
+    (r'^edit/actor/(?P<object_id>\d+)/?$', 'edytor.views.edycja_aktora'),
+    (r'^edit/actors/$', 'edytor.views.aktorzy'),    
+    (r'^edit/related/$', 'edytor.views.powiazane'),        
 )
 
 

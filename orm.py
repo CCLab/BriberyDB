@@ -43,11 +43,11 @@ Q = {
   'actors_human_like': 'SELECT * FROM v_actors WHERE surname LIKE %s OR surname LIKE %s ORDER BY surname ASC;',
 
   'case_events': '''SELECT e.id, event_date, description, publication_date, type, refs, title, name AS location
-    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type
-      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id
+    FROM (SELECT q.id AS id, event_date, description, publication_date, title, refs, location_id, name AS type, major
+      FROM (SELECT id, event_date, description, publication_date, title, refs, location_id, UNNEST(types) AS type_id, major
         FROM events) AS q LEFT JOIN event_types ON q.type_id=event_types.id) AS e
         LEFT JOIN locations ON e.location_id=locations.id
-        WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) ORDER BY event_date;''',
+        WHERE e.id=ANY(SELECT UNNEST(events) FROM scandals where id=%s) AND major=%s ORDER BY event_date;''',
 
   'case_num_events': '''select array_length(events,1) from scandals where id=%s;''',
 
@@ -174,7 +174,11 @@ Q = {
   'all_actors': 'SELECT id, name FROM actors ORDER BY human, name;',
 
   'all_actor_types': 'SELECT id,name FROM actor_types ORDER BY name, human;',
+<<<<<<< HEAD
   'all_actor_roles': 'SELECT id,name FROM actor_roles; ORDER BY name, human;',
+=======
+  'all_actor_roles': 'SELECT id,name FROM actor_roles ORDER BY name, human;',
+>>>>>>> 5f57df52f2340db02ca575b31a111aaf1648bb27
   'all_actor_affiliations': 'SELECT id,name FROM actor_affiliations ORDER BY name, human;',  
   'all_actor_secondary_affiliations': 'SELECT id,name FROM secondary_affiliations ORDER BY name, human;',    
   
@@ -189,8 +193,10 @@ Q = {
 
   'create_actor': 'INSERT INTO actors (id, name, human) VALUES (DEFAULT, %s, %s) RETURNING id;',
 
-  'assign_actor': '''INSERT INTO actors_events (event_id, actor_id, types, roles, affiliations, secondary_affiliations)
-     VALUES (%s, %s, %s, %s, %s, %s);''', 
+  'update_actor': 'UPDATE actors set name=%s, human=%s WHERE id=%s;',  
+
+  'assign_actor': '''INSERT INTO actors_events (event_id, actor_id, types, roles, affiliations, secondary_affiliations, primary, secondary)
+     VALUES (%s, %s, %s, %s, %s, %s, %s, %s);''', 
 
   'case_actor_events_metadata': '''select types, roles, affiliations, secondary_affiliations 
     from actors_events where event_id in (select unnest(events) from scandals where id=%s)
@@ -207,6 +213,8 @@ Q = {
   'full_event_refs': '''select art_title,pub_title,pub_date,access_date,url 
     from refs where id=any(select unnest(refs) from events where id=%s);''',
 
+  'create_related' : 'INSERT INTO related_actors (actor, affiliation, secondary) VALUES (%s, %s, %s);', 
+  
   'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
   }
 

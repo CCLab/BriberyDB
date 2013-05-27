@@ -117,7 +117,7 @@ img#logo-bak {
 /********** wszystkie afery ************/
 
 #wprowadzenie {
-	width:70%; 
+	width:90%; 
 	background-color: #fefefe;
 	margin-left: 20px;
 	padding: 20px 30px;
@@ -149,6 +149,24 @@ div#wprowadzenie p {
 #przycisk button:hover {
 	background-color: #235477;
 }
+
+#male-afery #przycisk {
+        margin-left:0px;
+        background-color: #71b9e9;
+}
+
+#male-afery #przycisk button {
+	text-transform:uppercase;
+	font-size:11px;
+        color: #000;
+}
+
+#male-afery #przycisk button:hover {
+        color: #fff;
+}
+
+
+
 
 #typysfery {
 	float:left;
@@ -559,8 +577,12 @@ div#wprowadzenie p {
 	margin-bottom:20px;
 }
 
-#footer div { display: table-cell; padding-right: 40px; }
-#footer div:first-child { width: 70%;}
+#footer div {
+	display: table-cell;
+	padding-right: 40px;
+	width: 20%;
+}
+#footer div:first-child { width: 50%;}
 
 /********** end footer ************/
 
