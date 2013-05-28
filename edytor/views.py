@@ -380,7 +380,10 @@ def powiazane (request,actor_id=None):
   
     form = RelatedForm(request.POST)
     if form.is_valid():
-      orm.query('create_related', (form.cleaned_data["actor"],form.cleaned_data.get("affiliation", None), form.cleaned_data.get("secondary", None)))
+      affiliation = form.cleaned_data.get("affiliation", None)
+      secondary = form.cleaned_data.get("secondary_affiliations", None)
+      orm.query('create_related', (form.cleaned_data["actor"], int(affiliation) if affiliation else None, int(secondary) if secondary else None))
+      return  HTTPResponseRedirect(redirect_to=reverse('edytor.views.powiazane'))      
     else:
       return HTTPResponse(template.render(RequestContext(request, dict(form=actor_form))))
   
