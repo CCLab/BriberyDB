@@ -211,8 +211,13 @@ Q = {
 
   'related_human_actors': '''select distinct actor_id as id, name from 
     (select actor_id from actors_events where 
-      (select affiliation from related_actors where actor=%s)=any(affiliations)) 
+      (select affiliation from related_actors where affiliation is not null and actor=%s)=any(affiliations)) 
     as ae left join actors on actor_id=actors.id where human=true order by name;''',
+
+  'related_nonhuman_actors': '''select distinct actor_id as id, name from 
+    (select actor_id from actors_events where 
+      (select secondary from related_actors where secondary is not null and actor=%s)=any(secondary_affiliations)) 
+    as ae left join actors on actor_id=actors.id where human=false order by name;''',
   
   }
 
