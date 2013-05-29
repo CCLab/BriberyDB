@@ -1,0 +1,25 @@
+from django.conf.urls.defaults import *
+
+urlpatterns = patterns('',
+
+    (r'^$','edytor.views.afera', None, 'new_case'),
+    (r'^lista/$','edytor.views.lista'),
+    (r'^(?P<case_id>\d+)/$','edytor.views.afera'),
+    (r'^(?P<case_id>\d+)/attr/$', 'edytor.views.atrybut', None, 'case_attr'),
+    (r'^(?P<case_id>\d+)/event/$','edytor.views.wydarzenie'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/$','edytor.views.wydarzenie'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/$','edytor.views.aktor',
+      None, 'assign_actor'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/attr/$','edytor.views.atrybut',
+      None, 'event_attr'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/add$','edytor.views.aktor',
+      dict(add=True), 'add_actor'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/$',
+      'edytor.views.aktor'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/attr/$',
+      'edytor.views.atrybut', None, 'actor_attr'),
+    (r'^(?P<case_id>\d+)/event/(?P<event_id>\d+)/refs/$','edytor.views.zrodlo'),
+    (r'^actor/(?P<object_id>\d+)/?$', 'edytor.views.edycja_aktora'),
+    (r'^actors/$', 'edytor.views.aktorzy'),
+    (r'^related/$', 'edytor.views.powiazane'),
+)

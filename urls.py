@@ -35,37 +35,18 @@ urlpatterns = patterns('',
     (r'^podmiot/ludzie/?$', 'aktor.views.actors', dict(human=True),'page_actors_human'),
     (r'^podmiot/instytucje/?$', 'aktor.views.actors', dict(human=False), 'page_actors_organizational'),
 
-    (r'^api/afera/(?P<object_id>\d+)/(?P<major>major)/?$', 'afera.views.api_case_json' ),
-    
+    (r'^api/afera/(?P<object_id>\d+)/(?P<major>major)/?$', 'afera.views.api_case_json' ),    
     (r'^api/afera/(?P<object_id>\d+)/?$', 'afera.views.api_case_json' ),
+    
+    (r'^edit/', include('edytor.urls')),   
+    (r'^search/', include('szukanie.urls')),    
+    
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
 
-
-    (r'^edit/$','edytor.views.afera', None, 'new_case'),
-    (r'^edit/lista/$','edytor.views.lista'),
-    (r'^edit/(?P<case_id>\d+)/$','edytor.views.afera'),    
-    (r'^edit/(?P<case_id>\d+)/attr/$', 'edytor.views.atrybut', None, 'case_attr'),
-    (r'^edit/(?P<case_id>\d+)/event/$','edytor.views.wydarzenie'),    
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/$','edytor.views.wydarzenie'),    
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/$','edytor.views.aktor', 
-      None, 'assign_actor'),
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/attr/$','edytor.views.atrybut', None, 'event_attr'),      
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/add$','edytor.views.aktor', 
-      dict(add=True), 'add_actor'),    
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/$',
-      'edytor.views.aktor'),    
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/actor/(?P<actor_id>\d+)/attr/$',
-      'edytor.views.atrybut', None, 'actor_attr'),
-    (r'^edit/(?P<case_id>\d+)/event/(?P<event_id>\d+)/refs/$','edytor.views.zrodlo'),        
-    (r'^edit/actor/(?P<object_id>\d+)/?$', 'edytor.views.edycja_aktora'),
-    (r'^edit/actors/$', 'edytor.views.aktorzy'),    
-    (r'^edit/related/$', 'edytor.views.powiazane'),        
-    
-    (r'^search/', include('szukanie.urls')),    
 )
 
 
