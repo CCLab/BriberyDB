@@ -23,10 +23,10 @@ def szukaj (request):
       term = form.cleaned_data.get('term', '').strip()
       
       if term:
-      
-        result['cases'] = orm.query('search_cases', term)
-        result['events'] = orm.query('search_events', term)
-        result['actors'] = orm.query('search_actors', term)
+        t = '%' + term + '%'
+        result['cases'] = orm.query('search_cases', (t, t))
+        result['events'] = orm.query('search_events', (t, t))
+        result['actors'] = orm.query('search_actors', t)
         result['form'] = form
 
   template = loader.get_template("wyniki.html")      

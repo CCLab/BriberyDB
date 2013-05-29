@@ -218,7 +218,16 @@ Q = {
     (select actor_id from actors_events where 
       (select secondary from related_actors where secondary is not null and actor=%s)=any(secondary_affiliations)) 
     as ae left join actors on actor_id=actors.id where human=false order by name;''',
+
+  'search_cases': '''SELECT id, name FROM 
+    (SELECT id, UNNEST(name) AS name, description FROM scandals) 
+    AS cases WHERE name ILIKE %s OR description ILIKE %s;
+  ''',    
   
+  'search_events': '''SELECT id, title FROM events WHERE title ILIKE %s or description ILIKE %s;''',
+  
+  'search_actors': '''SELECT id, name from actors where name ILIKE %s;''',
+
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM
