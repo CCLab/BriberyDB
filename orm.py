@@ -215,7 +215,27 @@ Q = {
 
   'create_related' : 'INSERT INTO related_actors (actor, affiliation, secondary) VALUES (%s, %s, %s);', 
   
-  'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
+#  'related_actors': '''select distinct id,name from (select actor_id from (select distinct unnest(affiliations) as af_id from actors_events where actor_id=%s) as af left join actors_events as ae on af_id = any(ae.affiliations)) as ai left join actors on actor_id=actors.id where id!=%s;''',
+
+  'related_human_actors': '''select distinct actor_id as id, name from 
+    (select actor_id from actors_events where 
+      (select affiliation from related_actors where affiliation is not null and actor=%s)=any(affiliations)) 
+    as ae left join actors on actor_id=actors.id where human=true order by name;''',
+
+  'related_nonhuman_actors': '''select distinct actor_id as id, name from 
+    (select actor_id from actors_events where 
+      (select secondary from related_actors where secondary is not null and actor=%s)=any(secondary_affiliations)) 
+    as ae left join actors on actor_id=actors.id where human=false order by name;''',
+
+  'search_cases': '''SELECT id, name FROM 
+    (SELECT id, UNNEST(name) AS name, description FROM scandals) 
+    AS cases WHERE name ILIKE %s OR description ILIKE %s;
+  ''',    
+  
+  'search_events': '''SELECT id, title FROM events WHERE title ILIKE %s or description ILIKE %s;''',
+  
+  'search_actors': '''SELECT id, name from actors where name ILIKE %s;''',
+
   }
 
 #  SELECT scandal_id,ar.id,ar.name FROM

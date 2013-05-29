@@ -6,9 +6,13 @@
                 <li><span>w związku z:</span> <a href="{% url single_case object_id=case.0.1 %}">{{ case.0.0 }}</a></li>{% if human %}
                 <li><span>pełniona funkcja:</span>{% for fun in case.1 %}{{ fun }}{% if not forloop.last %}, {% endif %}{% endfor %}
                 </li>{% endif %}
-          </ul>{% endfor %}{% endfor %}{% if not human %}
-          <h4>Aktorzy powiązani</h4>
+          </ul>{% endfor %}{% endfor %}{% if not human %}{% if related %}
+          <h4>Osoby powiązane</h4>
           <ul id="powiazani" class="group">{% for r in related %}
             <li><a href="{% url aktor.views.actor object_id=r.0 %}">{{ r.1 }}</a></li>{% endfor %}
-          </ul>{% endif %}
+          </ul>{% endif %}{% if related_nonhuman %} 
+          <h4>Instytucje powiązane</h4>
+          <ul id="powiazani" class="group">{% for r in related_nonhuman %}
+            <li><a href="{% url aktor.views.actor object_id=r.0 %}">{{ r.1 }}</a></li>{% endfor %}
+          </ul>{% endif %}{% endif %}
         </div>{% endblock content %}
