@@ -64,6 +64,8 @@ urlpatterns = patterns('',
     (r'^edit/actor/(?P<object_id>\d+)/?$', 'edytor.views.edycja_aktora'),
     (r'^edit/actors/$', 'edytor.views.aktorzy'),    
     (r'^edit/related/$', 'edytor.views.powiazane'),        
+    
+    (r'^search/', include('szukanie.urls')),    
 )
 
 

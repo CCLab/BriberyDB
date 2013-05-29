@@ -1,0 +1,20 @@
+{% extends "body.html" %}{% block content %}
+        <div id="wyszukiwarka">
+          <form method="POST" action="">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Szukaj!">
+          </form>
+          {% if cases %}<h3>Afery</h3>
+          <ul>{% for c in cases %}
+            <li> mnkhj </li>{% endfor %}
+          </ul>{% endif %} 
+          {% if events %}<h3>Wydarzenia</h3>
+          <ul>{% for e in events %}
+            <li> hkjhk </li>{% endfor %}
+          </ul>{% endif %}
+          {% if actors %}<h3>Aktorzy</h3>
+          <ul>{% for a in actors %}
+            <li> hfkjdshfjds </li>{% endfor %}
+          </ul>{% endif %}
+        </div>{% endblock content %}
